@@ -1,0 +1,41 @@
+:root {
+    background: #424242 url("https://i.imgur.com/vrTHo44.png") repeat-x center top;
+    background-size: auto 100%;
+    background-attachment: fixed;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40rem;
+}
+
+.manga_card {
+    display: flex;
+    background-color: white;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.manga_card>img {
+    width: 6rem;
+    height: 8.4rem;
+    object-fit: contain;
+    background-color: black;
+    border-radius: 0.25rem;
+}
+
+.manga_card>a {
+    display: inline-block;
+    padding: 1rem;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #039be5;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
