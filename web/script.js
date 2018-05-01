@@ -63,7 +63,6 @@ const parse = e => {
       link: paginationLinks[i]
     });
   }
-  console.log(paginationData);
   const prevPage = prevPageParser(e);
   const nextPage = nextPageParser(e);
   return {
