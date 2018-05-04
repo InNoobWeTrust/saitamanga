@@ -4,7 +4,7 @@ class Source {
 	List<String> origins;
 
 	Source(this.name, this.lang) {
-		assert(this.name != null && this.name.isNotEmpty);
-		assert(this.lang != null && this.lang.isNotEmpty);
+		assert(this.name is String && this.name.isNotEmpty);
+		assert(this.lang is String && this.lang.isNotEmpty);
 	}
 }
