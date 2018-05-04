@@ -1,6 +1,6 @@
-import '../source.dart';
-import 'manga_info.dart';
-import 'manga_segment.dart';
+import '../source.dart' show Source;
+import 'manga_info.dart' show MangaInfo;
+import 'manga_segment.dart' show MangaSegment;
 
 class Manga {
   final Source source;

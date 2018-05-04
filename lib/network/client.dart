@@ -6,7 +6,7 @@ class UserAgentClient extends BaseClient {
   final String userAgent;
   final Client _inner = new Client();
 
-  UserAgentClient([this.userAgent=_defaultUserAgent]);
+  UserAgentClient([this.userAgent = _defaultUserAgent]);
 
   void processHeader(Request request) {
     request.headers['user-agent'] = userAgent;
@@ -21,12 +21,14 @@ class UserAgentClient extends BaseClient {
 class MangaReaderClient extends UserAgentClient {
   Map<String, dynamic> cookies = <String, dynamic>{};
 
-  MangaReaderClient([userAgent=UserAgentClient._defaultUserAgent, this.cookies]):super(userAgent);
+  MangaReaderClient(
+      [userAgent = UserAgentClient._defaultUserAgent, this.cookies])
+      : super(userAgent);
 
   @override
   void processHeader(Request request) {
     super.processHeader(request);
-    if(cookies.containsKey(request.url.host))
+    if (cookies.containsKey(request.url.host))
       request.headers['Cookie'] = cookies[request.url.host];
   }
 }

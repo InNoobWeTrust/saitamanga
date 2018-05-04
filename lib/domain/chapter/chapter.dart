@@ -1,6 +1,6 @@
-import '../manga/manga.dart';
-import 'chapter_info.dart';
-import 'chapter_segment.dart';
+import '../manga/manga.dart' show Manga;
+import 'chapter_info.dart' show ChapterInfo;
+import 'chapter_segment.dart' show ChapterSegment;
 
 class Chapter {
   final Manga manga;
