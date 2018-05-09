@@ -1,2 +1,5 @@
 name: prototype
 description: A new cross-platform project
+
+dependencies:
+  html: any

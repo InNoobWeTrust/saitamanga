@@ -1,4 +1,4 @@
-import '../source.dart' show Source;
+import '../source/source.dart' show Source;
 import 'manga_info.dart' show MangaInfo;
 import 'manga_segment.dart' show MangaSegment;
 
