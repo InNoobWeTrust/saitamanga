@@ -5,8 +5,7 @@ class ChapterInfo {
   List<String> descriptions;
   String date;
 
-  ChapterInfo(this.uri,
-      {this.index, this.title, this.descriptions, this.date}) {}
+  ChapterInfo(this.uri, {this.index, this.title, this.descriptions, this.date});
 
   ChapterInfo setIndex(int index) => this..index = index;
 

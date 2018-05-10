@@ -5,7 +5,7 @@ class Source {
   SourceInfo info;
   List<Category> categories;
 
-  Source({this.info, this.categories}) {}
+  Source({this.info, this.categories});
 
   Source setInfo(SourceInfo info) => this..info = info;
 

@@ -4,7 +4,7 @@ class CategorySegment {
   final Uri uri;
   List<Manga> mangas;
 
-  CategorySegment(this.uri, {this.mangas}) {}
+  CategorySegment(this.uri, {this.mangas});
 
   CategorySegment setMangas(List<Manga> mangas) => this..mangas = mangas;
 

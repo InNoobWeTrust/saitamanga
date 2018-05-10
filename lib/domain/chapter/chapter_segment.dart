@@ -6,7 +6,7 @@ class ChapterSegment {
   String id;
   List<Page> pages;
 
-  ChapterSegment(this.uri, {this.index, this.id, this.pages}) {}
+  ChapterSegment(this.uri, {this.index, this.id, this.pages});
 
   ChapterSegment setIndex(int index) => this..index = index;
 

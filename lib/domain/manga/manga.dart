@@ -7,7 +7,7 @@ class Manga {
   MangaInfo info;
   List<MangaSegment> segments;
 
-  Manga({this.source, this.info, this.segments}) {}
+  Manga({this.source, this.info, this.segments});
 
   Manga setSource(Source source) => this..source = source;
 

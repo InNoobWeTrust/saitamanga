@@ -13,11 +13,7 @@ class SelectParser extends Parser with DomCreator, Selector {
   String baseUri;
 
   SelectParser(this.selector, this.attribute,
-      {this.encoding = 'utf-8', this.baseUri}) {
-    assert(this.selector is String);
-    assert(this.attribute is String);
-    assert(this.encoding.isNotEmpty);
-  }
+      {this.encoding = 'utf-8', this.baseUri});
 
   @override
   Future<String> findIn(String data) async {

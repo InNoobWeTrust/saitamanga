@@ -5,7 +5,7 @@ class Category {
   CategoryInfo info;
   List<CategorySegment> segments;
 
-  Category({this.info, this.segments}) {}
+  Category({this.info, this.segments});
 
   Category setInfo(CategoryInfo info) => this..info = info;
 

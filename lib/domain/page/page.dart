@@ -5,7 +5,7 @@ class Page {
   Chapter chapter;
   int index;
 
-  Page(this.uri, {this.chapter, this.index}) {}
+  Page(this.uri, {this.chapter, this.index});
 
   Page setChapter(Chapter chapter) => this..chapter = chapter;
 

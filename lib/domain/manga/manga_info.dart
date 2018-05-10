@@ -28,7 +28,7 @@ class MangaInfo {
       this.genres,
       this.descriptions,
       this.warnings,
-      this.ageRating}) {}
+      this.ageRating});
 
   MangaInfo setTitle(String title) => this..title = title;
 

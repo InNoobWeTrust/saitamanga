@@ -7,7 +7,7 @@ class Chapter {
   ChapterInfo info;
   List<ChapterSegment> segments;
 
-  Chapter({this.manga, this.info, this.segments}) {}
+  Chapter({this.manga, this.info, this.segments});
 
   Chapter setManga(Manga manga) => this..manga = manga;
 

@@ -4,7 +4,7 @@ class SourceInfo {
   List<String> origins;
   bool hasCookies;
 
-  SourceInfo(this.name, this.lang, {this.origins, this.hasCookies}) {}
+  SourceInfo(this.name, this.lang, {this.origins, this.hasCookies});
 
   SourceInfo setOrigins(List<String> origins) => this..origins = origins;
 
