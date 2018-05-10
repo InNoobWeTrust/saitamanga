@@ -1,13 +1,26 @@
 import '../chapter/chapter.dart' show Chapter;
 
 class MangaSegment {
-  final int index;
   final Uri uri;
+  int index;
   String id;
   List<Chapter> chapters;
 
-  MangaSegment(this.index, this.uri, {this.id, this.chapters}) {
-    assert(this.index is int);
-    assert(this.uri is Uri);
+  MangaSegment(this.uri, {this.index, this.id, this.chapters}) {}
+
+  MangaSegment setIndex(int index) => this..index = index;
+
+  MangaSegment setId(String id) => this..id = id;
+
+  MangaSegment setChapters(List<Chapter> chapters) => this..chapters = chapters;
+
+  MangaSegment addChapters(List<Chapter> chapters) {
+    if (this.chapters == null) return setChapters(chapters);
+    return this..chapters.addAll(chapters);
+  }
+
+  MangaSegment addChapter(Chapter chapter) {
+    if (this.chapters == null) this.chapters = new List<Chapter>();
+    return this..chapters.add(chapter);
   }
 }

@@ -1,9 +1,13 @@
-class Page {
-  final int index;
-  final Uri uri;
+import '../chapter/chapter.dart' show Chapter;
 
-  Page(this.index, this.uri) {
-    assert(this.index is int);
-    assert(this.uri is Uri);
-  }
+class Page {
+  final Uri uri;
+  Chapter chapter;
+  int index;
+
+  Page(this.uri, {this.chapter, this.index}) {}
+
+  Page setChapter(Chapter chapter) => this..chapter = chapter;
+
+  Page setIndex(int index) => this..index = index;
 }
