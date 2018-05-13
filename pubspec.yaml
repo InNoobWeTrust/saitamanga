@@ -3,3 +3,8 @@ description: A new cross-platform project
 
 dependencies:
   html: any
+  resource: any
+  yaml: any
+
+dev_dependencies:
+  test: any
