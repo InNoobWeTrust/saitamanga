@@ -2,7 +2,7 @@ import 'dart:async';
 
 import '../../parser/parser.dart' show Parser;
 
-class Extractor {
+abstract class Extractor {
   Map<String, Parser> parsers;
 
   Extractor setParsers(Map<String, Parser> parsers) => this..parsers = parsers;
@@ -12,11 +12,11 @@ class Extractor {
     return this..parsers[name] = parser;
   }
 
-  Future<String> transform(String parserName, String data) {
-    return this.parsers[parserName].findIn(data);
-  }
-
-  Future<List<String>> transformAll(String parserName, String data) {
-    return this.parsers[parserName].findAllIn(data);
+  Stream<dynamic> transform(String data) async* {
+    if (parsers == null)
+      throw StateError("Trying to transform data without setting any parser!");
+    for (String name in this.parsers.keys) {
+      yield await parsers[name].findIn(data);
+    }
   }
 }

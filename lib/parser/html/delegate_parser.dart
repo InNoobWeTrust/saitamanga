@@ -1,25 +1,12 @@
-
 import 'dart:async';
 
 import '../parser.dart' show Parser;
 
-abstract class DelegateSelectParser extends Object implements Parser {
+abstract class DelegateParser extends Parser {
   String instruction;
 
-  Future<String> delegateProcess(String data);
-
-  Future<Iterable<String>> delegateProcessAll(String data) async {
-    final String processed = await delegateProcess(data);
-    return processed.split('\n');
-  }
+  Future<dynamic> delegateProcess(String data);
 
   @override
-  Future<String> findIn(String data) async {
-    return delegateProcess(data);
-  }
-
-  @override
-  Future<Iterable<String>> findAllIn(String data) async {
-    return delegateProcessAll(data);
-  }
+  Future<dynamic> findIn(String data) async => delegateProcess(data);
 }
