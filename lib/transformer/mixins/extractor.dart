@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../parser/parser.dart' show Parser;
+import '../../parser/parser.dart' show Parser;
 
 class Extractor {
   Map<String, Parser> parsers;
