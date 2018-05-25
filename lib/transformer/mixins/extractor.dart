@@ -12,9 +12,9 @@ abstract class Extractor {
     return this..parsers[name] = parser;
   }
 
-  Stream<dynamic> transform(String data) async* {
-    if (parsers == null)
-      throw StateError("Trying to transform data without setting any parser!");
+  Stream<dynamic> extract(String data) async* {
+    if (parsers == null || parsers.isEmpty)
+      throw StateError("Trying to extract data without setting any parser!");
     for (String name in this.parsers.keys) {
       yield await parsers[name].findIn(data);
     }

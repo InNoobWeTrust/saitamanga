@@ -25,8 +25,8 @@ class SelectParser extends Parser with DomCreator, Selector {
   Future<dynamic> findIn(String data) async {
     final Document dom = await generateDOM(data);
     if (type == ParserType.SINGLE)
-      return await extract(dom);
+      return await select(dom);
     else
-      return await extractAll(dom);
+      return await selectAll(dom);
   }
 }

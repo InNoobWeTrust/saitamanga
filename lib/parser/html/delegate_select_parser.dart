@@ -10,7 +10,7 @@ abstract class DelegateSelectParser extends DelegateParser
     with DomCreator, Selector {
   Future<String> _preprocessData(String data) async {
     final Document dom = await generateDOM(data);
-    return await extract(dom);
+    return await select(dom);
   }
 
   @override
