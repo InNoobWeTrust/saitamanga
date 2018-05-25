@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:async' show Future;
 
 import 'package:html/dom.dart' show Document, Element;
 

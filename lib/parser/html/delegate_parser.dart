@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:async' show Future;
 
 import '../parser.dart' show Parser;
 

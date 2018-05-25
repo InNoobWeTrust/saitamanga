@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'dart:async' show Future;
 import 'package:http/http.dart';
 
 class UserAgentClient extends BaseClient {
