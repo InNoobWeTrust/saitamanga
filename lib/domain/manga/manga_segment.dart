@@ -2,15 +2,9 @@ import '../chapter/chapter.dart' show Chapter;
 
 class MangaSegment {
   final Uri uri;
-  int index;
-  String id;
   List<Chapter> chapters;
 
-  MangaSegment(this.uri, {this.index, this.id, this.chapters});
-
-  MangaSegment setIndex(int index) => this..index = index;
-
-  MangaSegment setId(String id) => this..id = id;
+  MangaSegment(this.uri, {this.chapters});
 
   MangaSegment setChapters(List<Chapter> chapters) => this..chapters = chapters;
 

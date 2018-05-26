@@ -1,13 +1,12 @@
-import 'category_info.dart' show CategoryInfo;
 import 'category_segment.dart' show CategorySegment;
 
 class Category {
-  CategoryInfo info;
+  Map<String, Iterable<String>> info;
   List<CategorySegment> segments;
 
   Category({this.info, this.segments});
 
-  Category setInfo(CategoryInfo info) => this..info = info;
+  Category setInfo(Map<String, Iterable<String>> info) => this..info = info;
 
   Category setSegments(List<CategorySegment> segments) =>
       this..segments = segments;

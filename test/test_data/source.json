@@ -22,45 +22,38 @@
       }]
     },
     "parsers": {
-      "uri": {
+      "_uri": {
+        "linkSelector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+        "linkAttribute": "href",
+        "linkPostProcess": ""
+      },
+      "_pagination": {
+        "selector": ".pagination.no-margin>li>a",
+        "attribute": "",
+        "postProcess": "",
+        "linkSelector": ".pagination.no-margin>li>a",
+        "linkAttribute": "href",
+        "linkPostProcess": ""
+      },
+      "_prev": {
+        "linkSelector": ".pagination.no-margin>li>a[rel=prev]",
+        "linkAttribute": "href",
+        "linkPostProcess": ""
+      },
+      "_next": {
+        "linkSelector": ".pagination.no-margin>li>a[rel=next]",
+        "linkAttribute": "href",
+        "linkPostProcess": ""
+      },
+      "title": {
         "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-        "attribute": "href",
+        "attribute": "title",
         "postProcess": ""
       },
-      "companion": {
-        "title": {
-          "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-          "attribute": "title",
-          "postProcess": ""
-        },
-        "cover": {
-          "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-          "attribute": "data-thumbnail",
-          "postProcess": ""
-        }
-      },
-      "pagination": {
-        "label": {
-          "selector": ".pagination.no-margin>li>a",
-          "attribute": "",
-          "postProcess": ""
-        },
-        "uri": {
-          "selector": ".pagination.no-margin>li>a",
-          "attribute": "href",
-          "postProcess": ""
-        }
-      },
-      "prev": {
-        "selector": ".pagination.no-margin>li>a[rel=prev]",
-        "attribute": "href",
-        "postProcess": ""
-      },
-      "next": {
-        "id": "nextPage",
-        "selector": ".pagination.no-margin>li>a[rel=next]",
-        "attribute": "href",
-        "postProcess": ""
+      "cover": {
+        "linkSelector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+        "linkAttribute": "data-thumbnail",
+        "linkPostProcess": ""
       }
     }
   }]

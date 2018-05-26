@@ -1,15 +1,9 @@
 import 'dart:async' show Future;
 
-enum ParserType { SINGLE, MULTIPLE }
+import 'parser_type.dart' show ParserType;
 
 abstract class Parser {
   ParserType type;
 
-  /// Parse and return the parsed result
-  /// 
-  /// Returns:
-  ///   - [Future<String>]      for [ParserType.SINGLE]
-  ///   - [Iterable<String>]    for [ParserType.MULTIPLE]
-  ///   - [Stream<String>]      for [ParserType.MULTIPLE]
-  Future<dynamic> findIn(String data);
+  Future<Iterable<String>> findIn(String data);
 }

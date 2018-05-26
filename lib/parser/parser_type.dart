@@ -1,0 +1,1 @@
+enum ParserType { SINGLE, MULTIPLE }

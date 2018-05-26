@@ -2,15 +2,9 @@ import '../page/page.dart' show Page;
 
 class ChapterSegment {
   final Uri uri;
-  int index;
-  String id;
   List<Page> pages;
 
-  ChapterSegment(this.uri, {this.index, this.id, this.pages});
-
-  ChapterSegment setIndex(int index) => this..index = index;
-
-  ChapterSegment setId(String id) => this..id = id;
+  ChapterSegment(this.uri, {this.pages});
 
   ChapterSegment setPages(List<Page> pages) => this..pages = pages;
 
