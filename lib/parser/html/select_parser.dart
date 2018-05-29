@@ -11,16 +11,16 @@ class SelectParser extends Parser with DomCreator, Selector {
   @override
   ParserType type;
   @override
-  String selector;
+  Map<String, String> configs;
   @override
-  String attribute;
+  final List<String> requiredConfigKeys = Selector.CONFIG_KEYS;
   @override
   String encoding;
   @override
   String baseUri;
 
-  SelectParser(this.type, this.selector, this.attribute,
-      {this.encoding = 'utf-8', this.baseUri});
+  SelectParser(this.type,
+      {this.configs, this.encoding = 'utf-8', this.baseUri});
 
   @override
   Future<Iterable<String>> findIn(String data) async {
