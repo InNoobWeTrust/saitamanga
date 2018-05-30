@@ -8,7 +8,9 @@ abstract class Selector {
 
   Future<String> select(Document dom) async {
     final Element el = dom?.querySelector(configs['selector']);
-    return configs['attribute'].isNotEmpty ? el?.attributes[configs['attribute']] : el?.text;
+    return configs['attribute'].isNotEmpty
+        ? el?.attributes[configs['attribute']]
+        : el?.text;
   }
 
   Future<List<String>> selectAll(Document dom) async {

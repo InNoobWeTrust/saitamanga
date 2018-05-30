@@ -12,7 +12,8 @@ abstract class Parser extends Object with ConfigHelper {
 
   Parser loadConfig(Map<String, String> configs) {
     final Set<dynamic> checkResult = checkConfig(configs);
-    if (!(checkResult.first as bool)) throw ArgumentError(checkResult.last as String);
+    if (!(checkResult.first as bool))
+      throw ArgumentError(checkResult.last as String);
     return this..configs = checkResult.last as Map<String, String>;
   }
 

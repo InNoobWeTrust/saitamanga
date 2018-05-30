@@ -3,14 +3,15 @@ import 'chapter_segment.dart' show ChapterSegment;
 
 class Chapter {
   Manga manga;
-  Map<String, Iterable<String>> info;
+  Map<String, Map<String, Iterable<String>>> info;
   List<ChapterSegment> segments;
 
   Chapter({this.manga, this.info, this.segments});
 
   Chapter setManga(Manga manga) => this..manga = manga;
 
-  Chapter setInfo(Map<String, Iterable<String>> info) => this..info = info;
+  Chapter setInfo(Map<String, Map<String, Iterable<String>>> info) =>
+      this..info = info;
 
   Chapter setSegments(List<ChapterSegment> segments) =>
       this..segments = segments;
