@@ -17,5 +17,9 @@ abstract class Parser extends Object with ConfigHelper {
     return this..configs = checkResult.last as Map<String, String>;
   }
 
-  Future<Iterable<String>> findIn(String data);
+  /// The type of [data] varies in different sources
+  ///
+  ///   - [Document]      for HTML sources
+  ///   - [String]        for other sources
+  Future<Iterable<String>> findIn(dynamic data);
 }

@@ -1,10 +1,13 @@
+import 'source_type.dart' show SourceType;
+
 class SourceInfo {
   final String name;
   final String lang;
+  final SourceType type;
   List<String> origins;
-  bool hasCookies;
+  Map<String, String> metaData;
 
-  SourceInfo(this.name, this.lang, {this.origins, this.hasCookies});
+  SourceInfo(this.name, this.lang, this.type, {this.origins, this.metaData});
 
   SourceInfo setOrigins(List<String> origins) => this..origins = origins;
 
@@ -18,5 +21,6 @@ class SourceInfo {
     return this..origins.add(origin);
   }
 
-  SourceInfo setHasCookies(bool hasCookies) => this..hasCookies = hasCookies;
+  SourceInfo setMetaData(Map<String, String> metaData) =>
+      this..metaData = metaData;
 }

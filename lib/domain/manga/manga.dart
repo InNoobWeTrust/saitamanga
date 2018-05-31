@@ -1,17 +1,17 @@
 import '../source/source.dart' show Source;
 import 'manga_segment.dart' show MangaSegment;
+import '../info/info_item.dart' show InfoItem;
 
 class Manga {
   Source source;
-  Map<String, Map<String, Iterable<String>>> info;
+  Map<String, InfoItem> info;
   List<MangaSegment> segments;
 
   Manga({this.source, this.info, this.segments});
 
   Manga setSource(Source source) => this..source = source;
 
-  Manga setInfo(Map<String, Map<String, Iterable<String>>> info) =>
-      this..info = info;
+  Manga setInfo(Map<String, InfoItem> info) => this..info = info;
 
   Manga setSegments(List<MangaSegment> mangas) => this..segments = segments;
 

@@ -3,22 +3,24 @@ import '../category/category.dart' show Category;
 
 class Source {
   SourceInfo info;
-  List<Category> categories;
+  List<Category> defaultCategories;
 
-  Source({this.info, this.categories});
+  Source({this.info, this.defaultCategories});
 
   Source setInfo(SourceInfo info) => this..info = info;
 
-  Source setCategories(List<Category> categories) =>
-      this..categories = categories;
+  Source setDefaultCategories(List<Category> defaultCategories) =>
+      this..defaultCategories = defaultCategories;
 
-  Source addCategories(List<Category> categories) {
-    if (this.categories == null) return setCategories(categories);
-    return this..categories.addAll(categories);
+  Source addDefaultCategories(List<Category> defaultCategories) {
+    if (this.defaultCategories == null)
+      return setDefaultCategories(defaultCategories);
+    return this..defaultCategories.addAll(defaultCategories);
   }
 
-  Source addCategory(Category category) {
-    if (this.categories == null) this.categories = new List<Category>();
-    return this..categories.add(category);
+  Source addDefaultCategory(Category defaultCategory) {
+    if (this.defaultCategories == null)
+      this.defaultCategories = new List<Category>();
+    return this..defaultCategories.add(defaultCategory);
   }
 }
