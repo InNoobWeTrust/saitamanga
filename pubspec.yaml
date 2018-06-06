@@ -3,6 +3,7 @@ description: A new cross-platform project
 
 dependencies:
   html: any
+  tuple: any
   resource: any
   yaml: any
 

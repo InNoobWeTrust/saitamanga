@@ -23,37 +23,72 @@
     },
     "parsers": {
       "_uri": {
-        "linkSelector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-        "linkAttribute": "href",
-        "linkPostProcess": ""
+        "link": {
+          "use": "selector",
+          "type": "multiple",
+          "config":{
+            "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+            "attribute": "href"
+          }
+        }
       },
       "_pagination": {
-        "selector": ".pagination.no-margin>li>a",
-        "attribute": "",
-        "postProcess": "",
-        "linkSelector": ".pagination.no-margin>li>a",
-        "linkAttribute": "href",
-        "linkPostProcess": ""
+        "primary": {
+          "use": "selector",
+          "type": "multiple",
+          "config": {
+            "selector": ".pagination.no-margin>li>a",
+            "attribute": ""
+          }
+        },
+        "link": {
+          "use": "selector",
+          "type":"multiple",
+          "config":{
+            "selector": ".pagination.no-margin>li>a",
+            "attribute": "href"
+          }
+        }
       },
       "_prev": {
-        "linkSelector": ".pagination.no-margin>li>a[rel=prev]",
-        "linkAttribute": "href",
-        "linkPostProcess": ""
+        "link": {
+          "use": "selector",
+          "type":"single",
+          "config":{
+            "selector": ".pagination.no-margin>li>a[rel=prev]",
+            "attribute": "href"
+          }
+        }
       },
       "_next": {
-        "linkSelector": ".pagination.no-margin>li>a[rel=next]",
-        "linkAttribute": "href",
-        "linkPostProcess": ""
+        "link": {
+          "use": "selector",
+          "type":"single",
+          "config":{
+            "selector": ".pagination.no-margin>li>a[rel=next]",
+            "attribute": "href"
+          }
+        }
       },
       "title": {
-        "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-        "attribute": "title",
-        "postProcess": ""
+        "primary": {
+          "use": "selector",
+          "type":"single",
+          "config":{
+            "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+            "attribute": "title"
+          }
+        }
       },
       "cover": {
-        "linkSelector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-        "linkAttribute": "data-thumbnail",
-        "linkPostProcess": ""
+        "link":{
+          "use": "selector",
+          "type":"single",
+          "config": {
+            "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+            "attribute": "data-thumbnail"
+          }
+        }
       }
     }
   }]
