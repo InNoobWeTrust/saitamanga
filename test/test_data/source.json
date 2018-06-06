@@ -24,7 +24,7 @@
     "parsers": {
       "_uri": {
         "link": {
-          "use": "selector",
+          "use": "html/select_parser",
           "type": "multiple",
           "config":{
             "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
@@ -34,7 +34,7 @@
       },
       "_pagination": {
         "primary": {
-          "use": "selector",
+          "use": "html/select_parser",
           "type": "multiple",
           "config": {
             "selector": ".pagination.no-margin>li>a",
@@ -42,7 +42,7 @@
           }
         },
         "link": {
-          "use": "selector",
+          "use": "html/select_parser",
           "type":"multiple",
           "config":{
             "selector": ".pagination.no-margin>li>a",
@@ -52,7 +52,7 @@
       },
       "_prev": {
         "link": {
-          "use": "selector",
+          "use": "html/select_parser",
           "type":"single",
           "config":{
             "selector": ".pagination.no-margin>li>a[rel=prev]",
@@ -62,7 +62,7 @@
       },
       "_next": {
         "link": {
-          "use": "selector",
+          "use": "html/select_parser",
           "type":"single",
           "config":{
             "selector": ".pagination.no-margin>li>a[rel=next]",
@@ -72,7 +72,7 @@
       },
       "title": {
         "primary": {
-          "use": "selector",
+          "use": "html/select_parser",
           "type":"single",
           "config":{
             "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
@@ -82,7 +82,7 @@
       },
       "cover": {
         "link":{
-          "use": "selector",
+          "use": "html/select_parser",
           "type":"single",
           "config": {
             "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",

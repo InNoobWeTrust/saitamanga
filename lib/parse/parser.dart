@@ -2,11 +2,11 @@ import 'dart:async' show Future;
 
 import 'package:tuple/tuple.dart' show Tuple2;
 
-import 'parser_type.dart' show ParserType;
+import 'parse_type.dart' show ParseType;
 import 'mixins/config_helper.dart' show ConfigHelper;
 
 abstract class Parser extends Object with ConfigHelper {
-  ParserType type;
+  ParseType parseType;
 
   Map<String, String> configs;
 
