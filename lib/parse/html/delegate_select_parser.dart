@@ -1,4 +1,4 @@
-import 'dart:async' show Future;
+import 'dart:async' show Stream;
 
 import 'package:html/dom.dart' show Document;
 
@@ -13,7 +13,7 @@ class DelegateSelectParser extends Parser with Selector {
   @override
   Map<String, String> configs;
   @override
-  final List<String> requiredConfigKeys = Selector.CONFIG_KEYS;
+  static List<String> requiredConfigKeys = Selector.CONFIG_KEYS;
   DelegateParseProcessor processor;
 
   DelegateSelectParser(this.parseType, {this.configs, this.processor});
@@ -25,8 +25,8 @@ class DelegateSelectParser extends Parser with Selector {
   ///
   /// Note: Will return null if the [processor] of this object is null
   @override
-  Future<Iterable<String>> findIn(dynamic data) async {
-    final preprocessed = await select(data as Document);
-    return processor?.process(preprocessed);
+  Stream<String> findIn(dynamic data) {
+    final Stream<String> selected = select(data as Document);
+    return processor?.process(selected);
   }
 }

@@ -1,19 +1,29 @@
-import 'dart:async' show Future;
+import 'dart:async' show Future, Stream;
 
 import '../../domain/info/info_item.dart' show InfoItem;
 
 abstract class Converter {
-  Future<InfoItem> convertEntry(Map<String, Iterable<String>> rawInfo) async {
-    Iterable<String> primary =
-        rawInfo.entries.firstWhere((entry) => entry.key == 'primary').value;
-    Iterable<Uri> extLinks = rawInfo.entries
-        .where((entry) => entry.key == 'extLinks')
-        .map((entry) => new MapEntry<String, Iterable<Uri>>(
-            entry.key, entry.value.map((raw) => Uri.tryParse(raw))))
-        .first
-        .value;
-    Map<String, Iterable<String>> meta = rawInfo
-      ..removeWhere((key, value) => key == 'primary' || key == 'extLink');
+  Future<InfoItem> convertEntry(
+      Stream<MapEntry<String, Stream<String>>> rawStream) async {
+    Iterable<String> primary;
+    Iterable<Uri> extLinks;
+    Map<String, Iterable<String>> meta = new Map<String, Iterable<String>>();
+    await for (MapEntry<String, Stream<String>> raw in rawStream) {
+      switch (raw.key) {
+        case 'primary':
+          if (primary == null) primary = await raw.value.toList();
+          break;
+        case 'link':
+          if (extLinks == null)
+            extLinks = await raw.value
+                .asyncMap<Uri>((str) => Uri.tryParse(str))
+                .toList();
+          break;
+        default:
+          meta[raw.key] = await raw.value.toList();
+          break;
+      }
+    }
     return new InfoItem(primary: primary, extLinks: extLinks, metaData: meta);
   }
 }

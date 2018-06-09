@@ -1,4 +1,4 @@
-import 'dart:async' show Stream;
+import 'dart:async' show Future, Stream;
 
 import '../parse/parser_group.dart' show ParserGroup;
 import '../domain/info/info_item.dart' show InfoItem;
@@ -16,8 +16,8 @@ class Transformer extends Object with Extractor, Converter {
 
   /// Remember to preprocess the data with [PreProcessor]
   /// before feeding into this
-  Stream<MapEntry<String, InfoItem>> transform(dynamic preprocessedData) =>
-      extract(preprocessedData).asyncMap<MapEntry<String, InfoItem>>(
-          (entry) async =>
-              new MapEntry(entry.key, await convertEntry(entry.value)));
+  Stream<MapEntry<String, Future<InfoItem>>> transform(
+          dynamic preprocessedData) =>
+      extract(preprocessedData).asyncMap<MapEntry<String, Future<InfoItem>>>(
+          (entry) => new MapEntry(entry.key, convertEntry(entry.value)));
 }

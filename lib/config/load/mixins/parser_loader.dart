@@ -1,5 +1,8 @@
 import '../../constant/parser_constant.dart' show ParserConstant;
-import '../../../parse/html/delegate_select_parser.dart' show DelegateSelectParser;
+import '../../../parse/html/delegate_select_parser.dart'
+    show DelegateSelectParser;
+import '../../../parse/delegate_parse_processor.dart'
+    show DelegateParseProcessor;
 import '../../../parse/parse_type.dart' show ParseType;
 import '../../../parse/parser_group.dart' show ParserGroup;
 import '../../../parse/html/select_parser.dart' show SelectParser;
@@ -9,17 +12,18 @@ abstract class ParserLoader {
   ///
   /// Will throw Exception if the config is not in the right format
   ///
-  /// Note: In case of [DelegateSelectParser], must manually inject
-  /// the [DelegateProcessor] before parsing, or else will get null result
-  ParserGroup loadParserGroup(Map<String, dynamic> config) {
+  /// Note: In case of [DelegateSelectParser], must specify
+  /// the [DelegateProcessor] or the parsing will get null result
+  ParserGroup loadParserGroup(Map<String, dynamic> config,
+      {DelegateParseProcessor processor}) {
     ParserGroup parserGroup = new ParserGroup();
     for (MapEntry<String, dynamic> entry in config.entries) {
       Map<String, dynamic> parserConfig = entry.value;
       ParseType parseType = ParserConstant
-          .parseTypeMap[(parserConfig['type'] as String).toLowerCase()];
-      Type parserType = ParserConstant
-          .parserTypeMap[(parserConfig['use'] as String).toLowerCase()];
-      switch (parserType) {
+          .parseTypes[(parserConfig['type'] as String).toLowerCase()];
+      Type parser = ParserConstant
+          .parsers[(parserConfig['use'] as String).toLowerCase()];
+      switch (parser) {
         case SelectParser:
           SelectParser selectParser =
               new SelectParser(parseType, configs: parserConfig['config']);

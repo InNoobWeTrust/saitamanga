@@ -1,4 +1,4 @@
-import 'dart:async' show Future;
+import 'dart:async' show Stream;
 
 import 'package:html/dom.dart' show Document;
 
@@ -12,16 +12,16 @@ class SelectParser extends Parser with Selector {
   @override
   Map<String, String> configs;
   @override
-  final List<String> requiredConfigKeys = Selector.CONFIG_KEYS;
+  static List<String> requiredConfigKeys = Selector.CONFIG_KEYS;
 
   SelectParser(this.parseType, {this.configs});
 
   /// The type of [data] here is [Document]
   @override
-  Future<Iterable<String>> findIn(dynamic data) async {
+  Stream<String> findIn(dynamic data) {
     if (parseType == ParseType.SINGLE)
-      return new List<String>()..add(await select(data as Document));
+      return select(data as Document);
     else
-      return await selectAll(data as Document);
+      return selectAll(data as Document);
   }
 }

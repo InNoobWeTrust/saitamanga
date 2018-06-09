@@ -1,6 +1,6 @@
-import 'dart:async' show Future;
+import 'dart:async' show Stream;
 
 abstract class DelegateParseProcessor {
-  Future<Iterable<String>> process(String preprocessed,
+  Stream<String> process(Stream<String> preprocessed,
       {Map<String, String> configs});
 }

@@ -23,11 +23,11 @@ class ParserGroup {
   /// The type of [data] varies in different sources
   ///
   /// Refer to [Parser.findIn()] for more information
-  Stream<MapEntry<String, Iterable<String>>> parse(dynamic data) async* {
+  Stream<MapEntry<String, Stream<String>>> parse(dynamic data) async* {
     assert(this.parsers != null && this.parsers.isNotEmpty);
     for (MapEntry<String, Parser> entry in this.parsers.entries) {
-      yield new MapEntry<String, Iterable<String>>(
-          entry.key, await entry.value.findIn(data));
+      yield new MapEntry<String, Stream<String>>(
+          entry.key, entry.value.findIn(data));
     }
   }
 }
