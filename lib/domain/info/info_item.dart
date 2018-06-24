@@ -11,4 +11,11 @@ class InfoItem {
 
   InfoItem setMetaData(Map<String, Iterable<String>> metaData) =>
       this..metaData = metaData;
+
+  @override
+  String toString() {
+    return "primary: ${this.primary},"
+        " extLinks: ${this.extLinks},"
+        " metaData: ${this.metaData}";
+  }
 }

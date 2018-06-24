@@ -8,14 +8,18 @@ abstract class Selector {
 
   Stream<String> select(Document dom) async* {
     final Element el = dom?.querySelector(configs['selector']);
+    if (el == null) {
+      yield "";
+      return;
+    }
     yield configs['attribute'].isNotEmpty
-        ? el?.attributes[configs['attribute']]
-        : el?.text;
+        ? el.attributes[configs['attribute']]
+        : el.text;
   }
 
   Stream<String> selectAll(Document dom) async* {
     final List<Element> elems = dom?.querySelectorAll(configs['selector']);
-    List<String> raw = configs['attribute'].isNotEmpty
+    Iterable<String> raw = configs['attribute'].isNotEmpty
         ? elems?.map((e) => e.attributes[configs['attribute']])
         : elems?.map((e) => e.text);
     for (String str in raw) yield str;

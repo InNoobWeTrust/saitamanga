@@ -30,4 +30,9 @@ class ParserGroup {
           entry.key, entry.value.findIn(data));
     }
   }
+
+  @override
+  String toString() {
+    return parsers.toString();
+  }
 }

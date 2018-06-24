@@ -14,4 +14,9 @@ abstract class Parser {
   ///   - [Document]      for HTML sources
   ///   - [String]        for other sources
   Stream<String> findIn(dynamic data);
+
+  @override
+  String toString() {
+    return "{parseType: ${this.parseType}, configs: ${this.configs}}";
+  }
 }
