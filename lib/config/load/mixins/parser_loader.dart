@@ -21,18 +21,18 @@ abstract class ParserLoader {
       Map<String, dynamic> parserConfig = entry.value;
       ParseType parseType = ParserConstant
           .parseTypes[(parserConfig['type'] as String).toLowerCase()];
-      Type parser = ParserConstant
-          .parsers[(parserConfig['use'] as String).toLowerCase()];
+      Type parser =
+          ParserConstant.parsers[(parserConfig['use'] as String).toLowerCase()];
       switch (parser) {
         case SelectParser:
-          SelectParser selectParser =
-              new SelectParser(parseType, configs: parserConfig['config']);
+          SelectParser selectParser = new SelectParser(parseType,
+              configs: parserConfig['config'].cast<String, String>());
           parserGroup.addParser(entry.key, selectParser);
           break;
         case DelegateSelectParser:
           DelegateSelectParser delegateSelectParser = new DelegateSelectParser(
               parseType,
-              configs: parserConfig['config']);
+              configs: parserConfig['config'].cast<String, String>());
           parserGroup.addParser(entry.key, delegateSelectParser);
           break;
         default:
