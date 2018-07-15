@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:resource/resource.dart';
 import 'package:html/dom.dart' show Document;
 
+import 'package:prototype/domain/info/info_item.dart' show InfoItem;
 import 'package:prototype/parse/parser_group.dart' show ParserGroup;
 import 'package:prototype/config/load/mixins/parser_loader.dart'
     show ParserLoader;
@@ -51,7 +52,7 @@ void main() {
     await for (var item in transformer.transform(dom)) {
       final MapEntry entry = new MapEntry(item.key, await item.value);
       print("${entry}\n");
-      expect(entry, isNotNull);
+      expect(entry.value.runtimeType, InfoItem);
     }
   });
 }
