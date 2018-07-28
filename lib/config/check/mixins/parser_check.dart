@@ -1,9 +1,6 @@
 import 'package:tuple/tuple.dart' show Tuple2;
 
-import '../../constant/parser_constant.dart' show ParserConstant;
-import '../../../parse/html/delegate_select_parser.dart'
-    show DelegateSelectParser;
-import '../../../parse/html/select_parser.dart' show SelectParser;
+import '../../../parse/parser_constant.dart' show ParserConstant;
 
 abstract class ParserCheck {
   /// Prefer fail-first approach
@@ -71,33 +68,14 @@ abstract class ParserCheck {
           '(${config['use']}) is not available\n');
 
   Tuple2<bool, String> _checkConfigConfigs(Map<String, dynamic> config) {
-    Type parser = ParserConstant.parsers[config['type']];
+    List<String> requiredKeys =
+        ParserConstant.requiredConfigKeys[config['use']];
     Map<String, String> configConfigs = config['config'] as Map<String, String>;
-    switch (parser) {
-      case DelegateSelectParser:
-        if (configConfigs.keys
-                .where((key) =>
-                    DelegateSelectParser.requiredConfigKeys.contains(key))
-                .length !=
-            DelegateSelectParser.requiredConfigKeys.length)
-          return Tuple2<bool, String>(
-              false,
-              'The configs for ${parser} does not contains '
-              'all the required keys!\nConfig:\n${config.toString()}');
-        break;
-      case SelectParser:
-        if (configConfigs.keys
-                .where((key) => SelectParser.requiredConfigKeys.contains(key))
-                .length !=
-            SelectParser.requiredConfigKeys.length)
-          return Tuple2<bool, String>(
-              false,
-              'The configs for ${parser} does not contains '
-              'all the required keys!\nConfig:\n${config.toString()}');
-        break;
-      default:
-        break;
-    }
-    return Tuple2<bool, String>(true, null);
+    if (requiredKeys.every((key) => configConfigs.keys.contains(key)))
+      return Tuple2<bool, String>(true, null);
+    return Tuple2<bool, String>(
+        false,
+        'The configs for ${requiredKeys} does not contains '
+        'all the required keys!\nConfig:\n${config.toString()}');
   }
 }

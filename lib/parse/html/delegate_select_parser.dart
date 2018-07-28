@@ -12,8 +12,6 @@ class DelegateSelectParser extends Parser with Selector {
   ParseType parseType;
   @override
   Map<String, String> configs;
-  @override
-  static List<String> requiredConfigKeys = Selector.CONFIG_KEYS;
   DelegateParseProcessor processor;
 
   DelegateSelectParser(this.parseType, {this.configs, this.processor});

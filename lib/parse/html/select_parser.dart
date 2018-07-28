@@ -11,8 +11,6 @@ class SelectParser extends Parser with Selector {
   ParseType parseType;
   @override
   Map<String, String> configs;
-  @override
-  static List<String> requiredConfigKeys = Selector.CONFIG_KEYS;
 
   SelectParser(this.parseType, {this.configs});
 

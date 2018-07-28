@@ -7,8 +7,6 @@ abstract class Parser {
 
   Map<String, String> configs;
 
-  static List<String> requiredConfigKeys;
-
   /// The type of [data] varies in different sources
   ///
   ///   - [Document]      for HTML sources

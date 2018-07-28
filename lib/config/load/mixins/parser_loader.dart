@@ -1,4 +1,4 @@
-import '../../constant/parser_constant.dart' show ParserConstant;
+import '../../../parse/parser_constant.dart' show ParserConstant;
 import '../../../parse/html/delegate_select_parser.dart'
     show DelegateSelectParser;
 import '../../../parse/delegate_parse_processor.dart'
