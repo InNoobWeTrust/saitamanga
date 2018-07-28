@@ -13,9 +13,7 @@ class InfoItem {
       this..metaData = metaData;
 
   @override
-  String toString() {
-    return "primary: ${this.primary},"
-        " extLinks: ${this.extLinks},"
-        " metaData: ${this.metaData}";
-  }
+  String toString() => "primary: ${this.primary},"
+      " extLinks: ${this.extLinks},"
+      " metaData: ${this.metaData}";
 }
