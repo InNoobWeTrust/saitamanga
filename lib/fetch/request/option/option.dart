@@ -1,14 +1,26 @@
 class Option {
   final Set<String> inputLabels;
-  final Map<String, Map<String, String>> singleOptions;
-  final Map<String, Map<String, String>> multipleOptions;
 
-  Map<String, String> _inputs = new Map<String, String>();
+  /// For each named options there are pairs of {label: value}
+  final Map<String, List<MapEntry<String, String>>> singleOptions;
+
+  /// For each named options there are pairs of {label: value}
+  final Map<String, List<MapEntry<String, String>>> multipleOptions;
+
+  Map<String, String> _inputs = <String, String>{};
   Map<String, String> get inputs => _inputs;
-  Map<String, int> _singleChoices = new Map<String, int>();
+  Map<String, int> _singleChoices = <String, int>{};
   Map<String, int> get singleChoices => _singleChoices;
-  Map<String, Set<int>> _multipleChoices = new Map<String, Set<int>>();
+  Map<String, Set<int>> _multipleChoices = <String, Set<int>>{};
   Map<String, Set<int>> get multipleChoices => _multipleChoices;
+
+  /// The value of this [Map] is either [String] or [Iterable<String>]
+  Map<String, dynamic> get queryParams => <String, dynamic>{}
+    ..addAll(inputs.map((key, value) => MapEntry(key, value)))
+    ..addAll(singleChoices
+        .map((key, index) => MapEntry(key, singleOptions[key][index].value)))
+    ..addAll(multipleChoices.map((key, indexSet) => MapEntry(
+        key, indexSet.map((index) => multipleOptions[key][index].value))));
 
   Option({this.inputLabels, this.singleOptions, this.multipleOptions});
 
@@ -26,7 +38,8 @@ class Option {
     }
   }
 
-  void _checkChoices(Map<String, Map> optionMap, Map<String, dynamic> choices) {
+  void _checkChoices(Map<String, List<MapEntry<String, String>>> optionMap,
+      Map<String, dynamic> choices) {
     switch (choices.values.first.runtimeType) {
       case int:
         MapEntry firstNegative = choices.entries.firstWhere(

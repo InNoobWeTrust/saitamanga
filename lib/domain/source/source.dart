@@ -3,7 +3,7 @@ import '../category/category.dart' show Category;
 
 class Source {
   SourceInfo info;
-  List<Category> defaultCategories;
+  List<Category> defaultCategories = <Category>[];
 
   Source({this.info, this.defaultCategories});
 

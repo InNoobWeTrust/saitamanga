@@ -4,8 +4,8 @@ class SourceInfo {
   final String name;
   final String lang;
   final SourceType type;
-  List<String> origins;
-  Map<String, String> metadata;
+  List<String> origins = <String>[];
+  Map<String, String> metadata = <String, String>{};
 
   SourceInfo(this.name, this.lang, this.type, {this.origins, this.metadata});
 

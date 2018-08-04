@@ -27,7 +27,7 @@ void main() {
         (sourceMap["categories"][0]["parsers"] as Map).entries;
     expect(groupConfigs, isNotEmpty);
     final loader = new ParserLoaderImpl();
-    final Map<String, ParserGroup> groups = new Map<String, ParserGroup>();
+    final Map<String, ParserGroup> groups = <String, ParserGroup>{};
     for (MapEntry config in groupConfigs) {
       final ParserGroup group = loader.loadParserGroup(config.value);
       groups[config.key] = group;

@@ -23,7 +23,6 @@ void main() {
       expect(response.headers, isNotEmpty);
       print("After autofill: ${request.headers}");
       print("Response headers: ${response.headers}");
-      print(response.headers.toString().substring(0, 5));
     }
   });
 }

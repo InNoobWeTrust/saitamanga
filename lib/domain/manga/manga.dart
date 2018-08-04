@@ -4,8 +4,8 @@ import '../info/info_item.dart' show InfoItem;
 
 class Manga {
   Source source;
-  Map<String, InfoItem> info;
-  List<MangaSegment> segments;
+  Map<String, InfoItem> info = <String, InfoItem>{};
+  List<MangaSegment> segments = <MangaSegment>[];
 
   Manga({this.source, this.info, this.segments});
 

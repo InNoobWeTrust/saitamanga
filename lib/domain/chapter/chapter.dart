@@ -5,8 +5,8 @@ import '../info/info_item.dart' show InfoItem;
 
 class Chapter {
   Manga manga;
-  Map<String, InfoItem> info;
-  List<ChapterSegment> segments;
+  Map<String, InfoItem> info = <String, InfoItem>{};
+  List<ChapterSegment> segments = <ChapterSegment>[];
 
   Chapter({this.manga, this.info, this.segments});
 

@@ -2,7 +2,7 @@ import '../page/page.dart' show Page;
 
 class ChapterSegment {
   final Uri uri;
-  List<Page> pages;
+  List<Page> pages = <Page>[];
 
   ChapterSegment(this.uri, {this.pages});
 

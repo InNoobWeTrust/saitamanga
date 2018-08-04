@@ -3,7 +3,7 @@ import '../info/info_item.dart' show InfoItem;
 
 class Category {
   Map<String, InfoItem> info;
-  List<CategorySegment> segments;
+  List<CategorySegment> segments = <CategorySegment>[];
 
   Category();
 

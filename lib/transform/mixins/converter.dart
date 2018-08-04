@@ -5,9 +5,9 @@ import '../../domain/info/info_item.dart' show InfoItem;
 abstract class Converter {
   Future<InfoItem> convertEntry(
       Stream<MapEntry<String, Stream<String>>> rawStream) async {
-    Iterable<String> primary;
-    Iterable<Uri> extLinks;
-    Map<String, Iterable<String>> meta = new Map<String, Iterable<String>>();
+    List<String> primary = <String>[];
+    List<Uri> extLinks = <Uri>[];
+    Map<String, Iterable<String>> meta = <String, Iterable<String>>{};
     await for (MapEntry<String, Stream<String>> raw in rawStream) {
       switch (raw.key) {
         case 'primary':

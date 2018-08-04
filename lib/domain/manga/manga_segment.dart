@@ -2,7 +2,7 @@ import '../chapter/chapter.dart' show Chapter;
 
 class MangaSegment {
   final Uri uri;
-  List<Chapter> chapters;
+  List<Chapter> chapters = <Chapter>[];
 
   MangaSegment(this.uri, {this.chapters});
 

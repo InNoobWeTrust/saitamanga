@@ -11,12 +11,12 @@ class ParserGroup {
       this..parsers = parsers;
 
   ParserGroup addParsers(Map<String, Parser> parsers) {
-    if (this.parsers == null) this.parsers = new Map<String, Parser>();
+    if (this.parsers == null) this.parsers = <String, Parser>{};
     return this..parsers.addAll(parsers);
   }
 
   ParserGroup addParser(String name, Parser parser) {
-    if (this.parsers == null) this.parsers = new Map<String, Parser>();
+    if (this.parsers == null) this.parsers = <String, Parser>{};
     return this..parsers[name] = parser;
   }
 

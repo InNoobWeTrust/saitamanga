@@ -3,13 +3,26 @@ import 'dart:async' show Stream;
 import './option/option.dart' show Option;
 
 class Request {
-  final Uri link;
-  Map<String, String> headers;
+  final Uri rawLink;
+
+  /// Generate the query parameters for [rawLink] using [option] field
+  /// to get this
+  Uri get link => rawLink == null
+      ? rawLink
+      : new Uri(
+          scheme: rawLink.scheme,
+          userInfo: rawLink.userInfo,
+          host: rawLink.host,
+          port: rawLink.port,
+          pathSegments: rawLink.pathSegments,
+          queryParameters: option?.queryParams,
+          fragment: rawLink.fragment);
+  Map<String, String> headers = <String, String>{};
   Option option;
   Stream<List<int>> data;
-  Map<String, dynamic> metadata;
+  Map<String, dynamic> metadata = <String, dynamic>{};
 
-  Request(this.link, {this.headers, this.option, this.data, this.metadata});
+  Request(this.rawLink, {this.headers, this.option, this.data, this.metadata});
 
   Request setHeaders(Map<String, String> headers) => this..headers = headers;
 

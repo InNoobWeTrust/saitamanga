@@ -1,4 +1,4 @@
-import 'dart:async' show Future;
+import 'dart:async' show Future, Stream;
 
 import 'package:http/http.dart' as http
     show
@@ -34,11 +34,11 @@ class NetFetcher extends http.BaseClient {
   }
 
   http.BaseRequest _netRequestFromRequest(Request request) {
-    if (request.metadata["method"] == "POST" && request.data != null) {
+    if (request.metadata["method"] == "POST") {
       final http.StreamedRequest streamedRequest =
-          new http.StreamedRequest("POST", request.link)
+          new http.StreamedRequest("POST", request.rawLink)
             ..headers.addAll(request.headers);
-      request.data
+      (request.data ?? Stream.fromIterable<List<int>>([request.link.query.codeUnits]))
           .listen(streamedRequest.sink.add, onDone: streamedRequest.sink.close);
       return streamedRequest;
     }
@@ -47,10 +47,9 @@ class NetFetcher extends http.BaseClient {
   }
 
   Response _responseFromStream(
-      Request request, http.StreamedResponse streamedResponse) {
-    return new Response(request, streamedResponse.stream,
-        headers: streamedResponse.headers);
-  }
+          Request request, http.StreamedResponse streamedResponse) =>
+      new Response(request, streamedResponse.stream,
+          headers: streamedResponse.headers);
 
   Future<Response> fetch(Request request) async {
     _checkHeaders(request);
