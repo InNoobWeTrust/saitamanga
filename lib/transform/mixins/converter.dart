@@ -24,6 +24,6 @@ abstract class Converter {
           break;
       }
     }
-    return new InfoItem(primary: primary, extLinks: extLinks, metaData: meta);
+    return new InfoItem(primary: primary, extLinks: extLinks, metadata: meta);
   }
 }

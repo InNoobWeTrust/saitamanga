@@ -3,16 +3,17 @@ import 'dart:convert' show json, utf8;
 import 'package:test/test.dart';
 import 'package:resource/resource.dart';
 
-import 'package:prototype/parse/parser_group.dart' show ParserGroup;
-import 'package:prototype/config/load/mixins/parser_loader.dart'
-    show ParserLoader;
+import '../../../lib/parse/parser_group.dart' show ParserGroup;
+import '../../../lib/config/load/mixins/parser_loader.dart' show ParserLoader;
 
 class ParserLoaderImpl extends ParserLoader {
   ParserLoaderImpl();
 }
 
 void main() {
-  test("Test loading parsers", () async {
+  test(
+      "[Unit - config/load/mixins/parserloader.dart] "
+      "Test loading parsers", () async {
     final String source = await (new Resource('./test/test_data/source.json'))
         .readAsString(encoding: utf8);
     final Map sourceMap = json.decode(source);

@@ -5,6 +5,4 @@ class Page {
   Chapter chapter;
 
   Page(this.uri, {this.chapter});
-
-  Page setChapter(Chapter chapter) => this..chapter = chapter;
 }

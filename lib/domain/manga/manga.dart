@@ -9,19 +9,22 @@ class Manga {
 
   Manga({this.source, this.info, this.segments});
 
-  Manga setSource(Source source) => this..source = source;
+  Manga addAllInfo(Map<String, InfoItem> info) => this
+    ..info ??= <String, InfoItem>{}
+    ..info.addAll(info);
 
-  Manga setInfo(Map<String, InfoItem> info) => this..info = info;
+  Manga addInfoEntry(MapEntry<String, InfoItem> infoEntry) => this
+    ..info ??= <String, InfoItem>{}
+    ..info.addEntries([infoEntry]);
 
-  Manga setSegments(List<MangaSegment> mangas) => this..segments = segments;
+  Manga addInfo(String name, InfoItem infoItem) =>
+      this..addInfoEntry(new MapEntry(name, infoItem));
 
-  Manga addSegments(List<MangaSegment> mangas) {
-    if (this.segments == null) return setSegments(mangas);
-    return this..segments.addAll(mangas);
-  }
+  Manga addSegments(List<MangaSegment> mangas) => this
+    ..segments ??= <MangaSegment>[]
+    ..segments.addAll(segments);
 
-  Manga addSegment(MangaSegment segment) {
-    if (this.segments == null) this.segments = new List<MangaSegment>();
-    return this..segments.add(segment);
-  }
+  Manga addSegment(MangaSegment segment) => this
+    ..segments ??= <MangaSegment>[]
+    ..segments.add(segment);
 }

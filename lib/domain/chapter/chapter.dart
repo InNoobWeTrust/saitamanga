@@ -14,16 +14,11 @@ class Chapter {
 
   Chapter setInfo(Map<String, InfoItem> info) => this..info = info;
 
-  Chapter setSegments(List<ChapterSegment> segments) =>
-      this..segments = segments;
+  Chapter addSegments(List<ChapterSegment> segments) => this
+    ..segments ??= <ChapterSegment>[]
+    ..segments.addAll(segments);
 
-  Chapter addSegments(List<ChapterSegment> segments) {
-    if (this.segments == null) return setSegments(segments);
-    return this..segments.addAll(segments);
-  }
-
-  Chapter addSegment(ChapterSegment segment) {
-    if (this.segments == null) this.segments = new List<ChapterSegment>();
-    return this..segments.add(segment);
-  }
+  Chapter addSegment(ChapterSegment segment) => this
+    ..segments ??= <ChapterSegment>[]
+    ..segments.add(segment);
 }

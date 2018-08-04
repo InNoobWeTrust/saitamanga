@@ -5,19 +5,20 @@ import 'package:http/http.dart';
 import 'package:resource/resource.dart';
 import 'package:html/dom.dart' show Document;
 
-import 'package:prototype/domain/info/info_item.dart' show InfoItem;
-import 'package:prototype/parse/parser_group.dart' show ParserGroup;
-import 'package:prototype/config/load/mixins/parser_loader.dart'
-    show ParserLoader;
-import 'package:prototype/preprocess/helper/dom_creator.dart' show DomCreator;
-import 'package:prototype/transform/transformer.dart' show Transformer;
+import '../../../lib/domain/info/info_item.dart' show InfoItem;
+import '../../../lib/parse/parser_group.dart' show ParserGroup;
+import '../../../lib/config/load/mixins/parser_loader.dart' show ParserLoader;
+import '../../../lib/preprocess/helper/dom_creator.dart' show DomCreator;
+import '../../../lib/transform/transformer.dart' show Transformer;
 
 class ParserLoaderImpl extends ParserLoader {
   ParserLoaderImpl();
 }
 
 void main() {
-  test("Test parsing real data", () async {
+  test(
+      "[Integration - config/load/mixins/parserloader.dart] "
+      "Test parsing real data", () async {
     // First create the loader
     final String source = await (new Resource('./test/test_data/source.json'))
         .readAsString(encoding: utf8);

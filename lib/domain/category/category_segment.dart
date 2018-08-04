@@ -4,17 +4,16 @@ class CategorySegment {
   final Uri uri;
   List<Manga> mangas;
 
-  CategorySegment(this.uri, {this.mangas});
+  CategorySegment(this.uri);
 
-  CategorySegment setMangas(List<Manga> mangas) => this..mangas = mangas;
+  CategorySegment addMangas(List<Manga> mangas) => this
+    ..mangas ??= <Manga>[]
+    ..mangas.addAll(mangas);
 
-  CategorySegment addMangas(List<Manga> mangas) {
-    if (this.mangas == null) return setMangas(mangas);
-    return this..mangas.addAll(mangas);
-  }
+  CategorySegment addManga(Manga manga) => this
+    ..mangas ??= <Manga>[]
+    ..mangas.add(manga);
 
-  CategorySegment addManga(Manga manga) {
-    if (this.mangas == null) this.mangas = new List<Manga>();
-    return this..mangas.add(manga);
-  }
+  CategorySegment removeMangas(bool condition(Manga manga)) =>
+      this..mangas.removeWhere(condition);
 }

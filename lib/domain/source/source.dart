@@ -7,20 +7,11 @@ class Source {
 
   Source({this.info, this.defaultCategories});
 
-  Source setInfo(SourceInfo info) => this..info = info;
+  Source addDefaultCategories(List<Category> defaultCategories) => this
+    ..defaultCategories ??= <Category>[]
+    ..defaultCategories.addAll(defaultCategories);
 
-  Source setDefaultCategories(List<Category> defaultCategories) =>
-      this..defaultCategories = defaultCategories;
-
-  Source addDefaultCategories(List<Category> defaultCategories) {
-    if (this.defaultCategories == null)
-      return setDefaultCategories(defaultCategories);
-    return this..defaultCategories.addAll(defaultCategories);
-  }
-
-  Source addDefaultCategory(Category defaultCategory) {
-    if (this.defaultCategories == null)
-      this.defaultCategories = new List<Category>();
-    return this..defaultCategories.add(defaultCategory);
-  }
+  Source addDefaultCategory(Category defaultCategory) => this
+    ..defaultCategories ??= <Category>[]
+    ..defaultCategories.add(defaultCategory);
 }

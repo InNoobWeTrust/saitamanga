@@ -1,4 +1,4 @@
-import 'dart:async' show FutureOr;
+import 'dart:async' show Future;
 
 import '../domain/source/source.dart' show Source;
 import '../domain/source/source_type.dart' show SourceType;
@@ -8,19 +8,16 @@ class PreProcessor {
   Source source;
 
   /// Preprocess the [data] to the desired type before transforming
-  ///
-  /// Remember to enable strong mode when running the program to
-  /// spot any misuse of the return value (due to the nature of
-  /// [FutureOr], when run in non-strong mode, it is interpreted
-  /// as [dynamic], which is the intended type wrapped by it)
-  FutureOr<dynamic> preprocess(String data, {String baseUri}) async {
+  Future<dynamic> preprocess(String data, {String baseUri}) async {
+    if (source.info?.metadata == null)
+      throw Exception("Source info not set properly!");
     switch (source.info.type) {
       case SourceType.HTML:
-        String encoding = source.info.metaData['encoding'];
+        String encoding = source.info.metadata["encoding"];
         DomCreator domCreator = encoding == null
             ? DomCreator(baseUri: baseUri)
             : DomCreator(encoding: encoding, baseUri: baseUri);
-        return domCreator.generateDOM(data);
+        return await domCreator.generateDOM(data);
         break;
       default:
         return data;
