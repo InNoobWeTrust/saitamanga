@@ -10,9 +10,9 @@ class SelectParser extends Parser with Selector {
   @override
   ParseType parseType;
   @override
-  Map<String, String> configs;
+  Map<String, String> instructions;
 
-  SelectParser(this.parseType, {this.configs});
+  SelectParser(this.parseType, {this.instructions});
 
   /// The type of [data] here is [Document]
   @override

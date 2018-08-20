@@ -26,13 +26,13 @@ abstract class ParserLoader {
       switch (parser) {
         case SelectParser:
           SelectParser selectParser = new SelectParser(parseType,
-              configs: parserConfig['config'].cast<String, String>());
+              instructions: parserConfig['config'].cast<String, String>());
           parserGroup.addParser(entry.key, selectParser);
           break;
         case DelegateSelectParser:
           DelegateSelectParser delegateSelectParser = new DelegateSelectParser(
               parseType,
-              configs: parserConfig['config'].cast<String, String>());
+              instructions: parserConfig['config'].cast<String, String>());
           parserGroup.addParser(entry.key, delegateSelectParser);
           break;
         default:

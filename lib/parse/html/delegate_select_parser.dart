@@ -11,10 +11,10 @@ class DelegateSelectParser extends Parser with Selector {
   @override
   ParseType parseType;
   @override
-  Map<String, String> configs;
+  Map<String, String> instructions;
   DelegateParseProcessor processor;
 
-  DelegateSelectParser(this.parseType, {this.configs, this.processor});
+  DelegateSelectParser(this.parseType, {this.instructions, this.processor});
 
   DelegateSelectParser setProcessor(DelegateParseProcessor processor) =>
       this..processor = processor;

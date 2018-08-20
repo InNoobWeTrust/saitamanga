@@ -3,9 +3,9 @@ import 'dart:async' show Stream;
 import 'parse_type.dart' show ParseType;
 
 abstract class Parser {
-  ParseType parseType;
+  ParseType get parseType;
 
-  Map<String, String> configs;
+  Map<String, String> get instructions;
 
   /// The type of [data] varies in different sources
   ///
@@ -15,6 +15,6 @@ abstract class Parser {
 
   @override
   String toString() {
-    return "{parseType: ${this.parseType}, configs: ${this.configs}}";
+    return "{parseType: ${this.parseType}, configs: ${this.instructions}}";
   }
 }

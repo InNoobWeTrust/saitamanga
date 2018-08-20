@@ -1,95 +1,110 @@
 {
-  "apiVersion": 1,
+  "apiVersion": "0.0.1",
   "info": {
-    "ECMAScriptVersion": "ECMAScript 5",
     "name": "Hoc Vien Truyen Tranh",
+    "shortname": "HVTT",
+    "icon": "http://hocvientruyentranh.net/favicon.ico",
     "lang": "Vietnamese",
     "origins": [
       "http://hocvientruyentranh.com"
     ],
-    "cookies": true
+    "loginRequired": false,
+    "headers": {
+      "user-agent": "Mozilla/5.0 (Windows NT 6.3; WOW64)"
+    }
   },
   "categories": [{
     "info": {
-      "name": "All Manga",
-      "originIndex": "0",
+      "name": "Manga List",
       "path": "/manga/all",
-      "type": "plain",
-      "params": [{
+      "queryParams": [{
         "name": "page",
         "options": [],
         "default": "1"
       }]
-    },
-    "parsers": {
-      "_uri": {
-        "link": {
+    },  
+    "parsers": [
+      {
+        "codename": "uri",
+        "conf": [{
+          "role": "link",
           "use": "html/select_parser",
           "type": "multiple",
-          "config":{
+          "instruction":{
             "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
             "attribute": "href"
           }
-        }
+        }]
       },
-      "_pagination": {
-        "primary": {
+      {
+        "codename": "pagination",
+        "conf":[{
+          "role": "primary",
           "use": "html/select_parser",
           "type": "multiple",
-          "config": {
+          "instruction": {
             "selector": ".pagination.no-margin>li>a",
             "attribute": ""
           }
         },
-        "link": {
+        {
+          "role": "link",
           "use": "html/select_parser",
           "type":"multiple",
-          "config":{
+          "instruction":{
             "selector": ".pagination.no-margin>li>a",
             "attribute": "href"
           }
-        }
+        }]
       },
-      "_prev": {
-        "link": {
+      {
+        "codename": "prev",
+        "conf": [{
+          "role": "link",
           "use": "html/select_parser",
           "type":"single",
-          "config":{
+          "instruction":{
             "selector": ".pagination.no-margin>li>a[rel=prev]",
             "attribute": "href"
           }
-        }
+        }]
       },
-      "_next": {
-        "link": {
+      {
+        "codename": "next",
+        "conf": [{
+          "role": "link",
           "use": "html/select_parser",
           "type":"single",
-          "config":{
+          "instruction":{
             "selector": ".pagination.no-margin>li>a[rel=next]",
             "attribute": "href"
           }
-        }
+        }]
       },
-      "title": {
-        "primary": {
+      {
+        "codename": "img",
+        "conf": [{
+          "role": "link",
           "use": "html/select_parser",
           "type":"single",
-          "config":{
-            "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-            "attribute": "title"
-          }
-        }
-      },
-      "cover": {
-        "link":{
-          "use": "html/select_parser",
-          "type":"single",
-          "config": {
+          "instruction": {
             "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
             "attribute": "data-thumbnail"
           }
-        }
+        }]
+      },
+      {
+        "name": "title",
+        "conf": [{
+          "role": "primary",
+          "use": "html/select_parser",
+          "type":"single",
+          "instruction":{
+            "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+            "attribute": "title"
+          }
+        }]
       }
-    }
+    ]
   }]
 }
