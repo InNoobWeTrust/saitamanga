@@ -3,7 +3,7 @@ import "package:json_annotation/json_annotation.dart" show JsonSerializable;
 part "parser_group_model.g.dart";
 
 @JsonSerializable()
-class ParserGroupModel extends Object with _$ParserGroupModelSerializerMixin {
+class ParserGroupModel {
   final String codename;
   final String name;
   final String icon;
@@ -17,4 +17,6 @@ class ParserGroupModel extends Object with _$ParserGroupModelSerializerMixin {
 
   factory ParserGroupModel.fromJson(Map<String, dynamic> json) =>
       _$ParserGroupModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ParserGroupModelToJson(this);
 }
