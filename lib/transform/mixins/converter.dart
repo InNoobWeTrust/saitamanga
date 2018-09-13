@@ -1,29 +1,29 @@
 import 'dart:async' show Future, Stream;
 
 import '../../domain/info/info_item.dart' show InfoItem;
+import '../../parse/const/role.dart' show Role;
 
 abstract class Converter {
   Future<InfoItem> convertEntry(
-      Stream<MapEntry<String, Stream<String>>> rawStream) async {
+      Stream<MapEntry<Role, Stream<String>>> rawStream) async {
     List<String> primary = <String>[];
-    List<Uri> extLinks = <Uri>[];
-    Map<String, Iterable<String>> meta = <String, Iterable<String>>{};
-    await for (MapEntry<String, Stream<String>> raw in rawStream) {
+    List<Uri> link = <Uri>[];
+    List<String> meta = <String>[];
+    await for (MapEntry<Role, Stream<String>> raw in rawStream) {
       switch (raw.key) {
-        case 'primary':
-          if (primary == null) primary = await raw.value.toList();
+        case Role.primary:
+          primary = await raw.value.toList();
           break;
-        case 'link':
-          if (extLinks == null)
-            extLinks = await raw.value
-                .asyncMap<Uri>((str) => Uri.tryParse(str))
-                .toList();
+        case Role.link:
+          link = await raw.value
+              .asyncMap<Uri>((str) => Uri.tryParse(str))
+              .toList();
           break;
-        default:
-          meta[raw.key] = await raw.value.toList();
+        case Role.meta:
+          meta = await raw.value.toList();
           break;
       }
     }
-    return new InfoItem(primary: primary, extLinks: extLinks, metadata: meta);
+    return new InfoItem(primary: primary, link: link, meta: meta);
   }
 }

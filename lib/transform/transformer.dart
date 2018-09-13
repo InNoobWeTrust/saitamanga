@@ -7,11 +7,11 @@ import 'mixins/converter.dart' show Converter;
 
 class Transformer extends Object with Extractor, Converter {
   @override
-  Map<String, ParserGroup> parserGroups;
+  List<ParserGroup> parserGroups;
 
   Transformer({this.parserGroups});
 
-  Transformer setParserGroups(Map<String, ParserGroup> parserGroups) =>
+  Transformer setParserGroups(List<ParserGroup> parserGroups) =>
       this..parserGroups = parserGroups;
 
   /// Remember to preprocess the data with [PreProcessor]

@@ -1,12 +1,12 @@
 class InfoItem {
   List<String> primary = <String>[];
-  List<Uri> extLinks = <Uri>[];
-  Map<String, Iterable<String>> metadata;
+  List<Uri> link = <Uri>[];
+  List<String> meta;
 
-  InfoItem({this.primary, this.extLinks, this.metadata});
+  InfoItem({this.primary, this.link, this.meta});
 
   @override
   String toString() => "primary: ${this.primary},"
-      " extLinks: ${this.extLinks},"
-      " metaData: ${this.metadata}";
+      " link: ${this.link},"
+      " meta: ${this.meta}";
 }

@@ -1,1 +1,1 @@
-enum Strategy { select, delegate, delegate_select }
+enum Strategy { delegate, html__select, html__delegate_select }

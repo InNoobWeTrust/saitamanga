@@ -3,14 +3,17 @@ import 'dart:async' show Stream;
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, JsonKey;
 
-import './strategy/parser_strategy.dart' show ParserStrategy;
-import './const/amount.dart' show Amount;
-import './const/strategy.dart' show Strategy;
+import 'strategy/parser_strategy.dart' show ParserStrategy;
+import 'const/amount.dart' show Amount;
+import 'const/strategy.dart' show Strategy;
+import 'const/role.dart' show Role;
 
 part 'parser.g.dart';
 
 @JsonSerializable()
 class Parser {
+  @JsonKey(nullable: true)
+  Role role;
   @JsonKey(nullable: false)
   Amount amount;
   @JsonKey(nullable: false)
@@ -19,7 +22,7 @@ class Parser {
   Map<String, String> instructions;
   ParserStrategy _parserStrategy;
 
-  Parser({this.amount, this.strategy, this.instructions});
+  Parser({this.role, this.amount, this.strategy, this.instructions});
 
   factory Parser.fromJson(Map<String, dynamic> json) => _$ParserFromJson(json);
 

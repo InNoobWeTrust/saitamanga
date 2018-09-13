@@ -26,5 +26,6 @@ class SelectParser extends ParserStrategy {
         return Selector.selectAll(data as Document, selector, attribute);
         break;
     }
+    throw Exception("The code shouldn't freaking reach here...😱");
   }
 }

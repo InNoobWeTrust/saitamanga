@@ -22,72 +22,72 @@
         "options": [],
         "default": "1"
       }]
-    },  
-    "parsers": [
-      {
-        "codename": "uri",
-        "conf": [{
+    },
+    "parser_groups": [{
+        "name": "_uri",
+        "parsers": [{
           "role": "link",
-          "use": "html/select_parser",
-          "type": "multiple",
-          "instruction":{
+          "amount": "multiple",
+          "strategy": "html__select",
+          "instructions": {
             "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
             "attribute": "href"
           }
         }]
       },
       {
-        "codename": "pagination",
-        "conf":[{
-          "role": "primary",
-          "use": "html/select_parser",
-          "type": "multiple",
-          "instruction": {
-            "selector": ".pagination.no-margin>li>a",
-            "attribute": ""
+        "name": "_pagination",
+        "parsers": [{
+            "role": "primary",
+            "amount": "multiple",
+            "strategy": "html__select",
+            "instructions": {
+              "selector": ".pagination.no-margin>li>a",
+              "attribute": ""
+            }
+          },
+          {
+            "role": "link",
+            "amount": "multiple",
+            "strategy": "html__select",
+            "instructions": {
+              "selector": ".pagination.no-margin>li>a",
+              "attribute": "href"
+            }
           }
-        },
-        {
-          "role": "link",
-          "use": "html/select_parser",
-          "type":"multiple",
-          "instruction":{
-            "selector": ".pagination.no-margin>li>a",
-            "attribute": "href"
-          }
-        }]
+        ]
       },
       {
-        "codename": "prev",
-        "conf": [{
+        "name": "_prev",
+        "parsers": [{
           "role": "link",
-          "use": "html/select_parser",
-          "type":"single",
-          "instruction":{
+          "amount": "single",
+          "strategy": "html__select",
+          "instructions": {
             "selector": ".pagination.no-margin>li>a[rel=prev]",
             "attribute": "href"
           }
         }]
       },
       {
-        "codename": "next",
-        "conf": [{
+        "name": "_next",
+        "parsers": [{
           "role": "link",
-          "use": "html/select_parser",
-          "type":"single",
-          "instruction":{
+          "amount": "single",
+          "strategy": "html__select",
+          "instructions": {
             "selector": ".pagination.no-margin>li>a[rel=next]",
             "attribute": "href"
           }
         }]
       },
       {
-        "codename": "img",
-        "conf": [{
+        "name": "_img",
+        "parsers": [{
           "role": "link",
-          "use": "html/select_parser",
-          "type":"single",
-          "instruction": {
+          "amount": "single",
+          "strategy": "html__select",
+          "instructions": {
             "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
             "attribute": "data-thumbnail"
           }
@@ -95,11 +95,11 @@
       },
       {
         "name": "title",
-        "conf": [{
+        "parsers": [{
           "role": "primary",
-          "use": "html/select_parser",
-          "type":"single",
-          "instruction":{
+          "amount": "single",
+          "strategy": "html__select",
+          "instructions": {
             "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
             "attribute": "title"
           }

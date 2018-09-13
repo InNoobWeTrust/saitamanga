@@ -13,7 +13,7 @@ class ParserStrategyGenerator {
 
   void injectStrategy(Parser parser) {
     switch (parser.strategy) {
-      case Strategy.select:
+      case Strategy.html__select:
         ParserStrategy parserStrategy = SelectParser(
             amount: parser.amount, instructions: parser.instructions);
         parser.injectParserStrategy(parserStrategy);
@@ -25,7 +25,7 @@ class ParserStrategyGenerator {
             processor: this.processor);
         parser.injectParserStrategy(parserStrategy);
         break;
-      case Strategy.delegate_select:
+      case Strategy.html__delegate_select:
         ParserStrategy parserStrategy = DelegateSelectParser(
             amount: parser.amount,
             instructions: parser.instructions,

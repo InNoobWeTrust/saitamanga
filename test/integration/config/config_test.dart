@@ -7,13 +7,8 @@ import 'package:html/dom.dart' show Document;
 
 import '../../../lib/domain/info/info_item.dart' show InfoItem;
 import '../../../lib/parse/parser_group.dart' show ParserGroup;
-import '../../../lib/config/load/mixins/parser_loader.dart' show ParserLoader;
 import '../../../lib/preprocess/helper/dom_creator.dart' show DomCreator;
 import '../../../lib/transform/transformer.dart' show Transformer;
-
-class ParserLoaderImpl extends ParserLoader {
-  ParserLoaderImpl();
-}
 
 void main() {
   test(
@@ -23,14 +18,13 @@ void main() {
     final String source = await (new Resource('./test/test_data/source.json'))
         .readAsString(encoding: utf8);
     final Map sourceMap = json.decode(source);
-    final Iterable<MapEntry> groupConfigs =
-        (sourceMap["categories"][0]["parsers"] as Map).entries;
+    final List groupConfigs =
+        sourceMap["categories"][0]["parser_groups"] as List;
     expect(groupConfigs, isNotEmpty);
-    final loader = new ParserLoaderImpl();
-    final Map<String, ParserGroup> groups = <String, ParserGroup>{};
-    for (MapEntry config in groupConfigs) {
-      final ParserGroup group = loader.loadParserGroup(config.value);
-      groups[config.key] = group;
+    final List<ParserGroup> groups = <ParserGroup>[];
+    for (Map config in groupConfigs) {
+      final ParserGroup group = ParserGroup.fromJson(config);
+      groups.add(group);
       // print(group);
       expect(group, isNotNull);
     }
