@@ -1,0 +1,1 @@
+enum Amount { single, multiple }

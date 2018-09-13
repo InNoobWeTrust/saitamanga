@@ -1,1 +1,0 @@
-enum ParseType { SINGLE, MULTIPLE }

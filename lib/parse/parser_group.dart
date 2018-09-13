@@ -1,24 +1,29 @@
 import 'dart:async' show Stream;
 
-import 'parser.dart';
+import 'package:json_annotation/json_annotation.dart'
+    show JsonSerializable, JsonKey;
 
+import 'parser.dart' show Parser;
+
+part 'parser_group.g.dart';
+
+@JsonSerializable()
 class ParserGroup {
+  @JsonKey(nullable: true)
+  String codename;
+  @JsonKey(nullable: false)
+  String name;
+  @JsonKey(nullable: true)
+  String icon;
+  @JsonKey(nullable: false)
   Map<String, Parser> parsers;
 
-  ParserGroup({this.parsers});
+  ParserGroup({this.codename, this.name, this.icon, this.parsers});
 
-  ParserGroup setParsers(Map<String, Parser> parsers) =>
-      this..parsers = parsers;
+  factory ParserGroup.fromJson(Map<String, dynamic> json) =>
+      _$ParserGroupFromJson(json);
 
-  ParserGroup addParsers(Map<String, Parser> parsers) {
-    if (this.parsers == null) this.parsers = <String, Parser>{};
-    return this..parsers.addAll(parsers);
-  }
-
-  ParserGroup addParser(String name, Parser parser) {
-    if (this.parsers == null) this.parsers = <String, Parser>{};
-    return this..parsers[name] = parser;
-  }
+  Map<String, dynamic> toJson() => _$ParserGroupToJson(this);
 
   /// The type of [data] varies in different sources
   ///
@@ -27,7 +32,7 @@ class ParserGroup {
     assert(this.parsers != null && this.parsers.isNotEmpty);
     for (MapEntry<String, Parser> entry in this.parsers.entries) {
       yield new MapEntry<String, Stream<String>>(
-          entry.key, entry.value.findIn(data));
+          entry.key, entry.value.streamParse(data));
     }
   }
 
