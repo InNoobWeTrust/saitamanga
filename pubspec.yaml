@@ -7,7 +7,6 @@ environment:
 
 dependencies:
   html: any
-  tuple: any
   yaml: any
   json_annotation: ^1.0.0
 

@@ -1,24 +1,21 @@
+import '../../parse/parse_product.dart' show ParseProduct;
 import '../source/source.dart' show Source;
 import 'manga_segment.dart' show MangaSegment;
-import '../info/info_item.dart' show InfoItem;
 
 class Manga {
   Source source;
-  Map<String, InfoItem> info = <String, InfoItem>{};
+  List<ParseProduct> elements = <ParseProduct>[];
   List<MangaSegment> segments = <MangaSegment>[];
 
-  Manga({this.source, this.info, this.segments});
+  Manga({this.source, this.elements, this.segments});
 
-  Manga addAllInfo(Map<String, InfoItem> info) => this
-    ..info ??= <String, InfoItem>{}
-    ..info.addAll(info);
+  Manga addElements(List<ParseProduct> elements) => this
+    ..elements ??= <ParseProduct>[]
+    ..elements.addAll(elements);
 
-  Manga addInfoEntry(MapEntry<String, InfoItem> infoEntry) => this
-    ..info ??= <String, InfoItem>{}
-    ..info.addEntries([infoEntry]);
-
-  Manga addInfo(String name, InfoItem infoItem) =>
-      this..addInfoEntry(new MapEntry(name, infoItem));
+  Manga addElement(ParseProduct element) => this
+  ..elements ??= <ParseProduct>[]
+    ..elements.add(element);
 
   Manga addSegments(List<MangaSegment> mangas) => this
     ..segments ??= <MangaSegment>[]

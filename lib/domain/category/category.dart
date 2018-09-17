@@ -1,13 +1,13 @@
+import '../../parse/parse_product.dart' show ParseProduct;
 import 'category_segment.dart' show CategorySegment;
-import '../info/info_item.dart' show InfoItem;
 
 class Category {
-  Map<String, InfoItem> info;
+  List<ParseProduct> elements;
   List<CategorySegment> segments = <CategorySegment>[];
 
   Category();
 
-  Category setInfo(Map<String, InfoItem> info) => this..info = info;
+  Category setElements(List<ParseProduct> elements) => this..elements = elements;
 
   Category addSegments(List<CategorySegment> segments) => this
     ..segments ??= <CategorySegment>[]

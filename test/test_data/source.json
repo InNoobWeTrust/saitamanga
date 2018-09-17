@@ -23,7 +23,7 @@
         "default": "1"
       }]
     },
-    "parser_groups": [{
+    "elements": [{
         "name": "_uri",
         "parsers": [{
           "role": "link",

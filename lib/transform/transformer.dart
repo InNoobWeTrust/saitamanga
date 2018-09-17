@@ -1,23 +1,21 @@
-import 'dart:async' show Future, Stream;
+import 'dart:async' show Stream;
 
-import '../parse/parser_group.dart' show ParserGroup;
-import '../domain/info/info_item.dart' show InfoItem;
-import 'mixins/extractor.dart' show Extractor;
-import 'mixins/converter.dart' show Converter;
+import '../parse/parse_element.dart' show ParseElement;
+import '../parse/parse_product.dart' show ParseProduct;
 
-class Transformer extends Object with Extractor, Converter {
-  @override
-  List<ParserGroup> parserGroups;
+class Transformer {
+  List<ParseElement> parseElements;
 
-  Transformer({this.parserGroups});
+  Transformer({this.parseElements});
 
-  Transformer setParserGroups(List<ParserGroup> parserGroups) =>
-      this..parserGroups = parserGroups;
+  Transformer setParseElements(List<ParseElement> parserElements) =>
+      this..parseElements = parserElements;
 
   /// Remember to preprocess the data with [PreProcessor]
   /// before feeding into this
-  Stream<MapEntry<String, Future<InfoItem>>> transform(
-          dynamic preprocessedData) =>
-      extract(preprocessedData).asyncMap<MapEntry<String, Future<InfoItem>>>(
-          (entry) => new MapEntry(entry.key, convertEntry(entry.value)));
+  /// 
+  /// TODO: try to think of a way to inject parseStrategy niccely into parsers
+  Stream<ParseProduct> transform(dynamic preprocessedData) =>
+      Stream.fromIterable(this.parseElements)
+          .asyncMap((e) => e.parse(preprocessedData));
 }

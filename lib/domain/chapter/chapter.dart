@@ -1,18 +1,17 @@
+import '../../parse/parse_product.dart' show ParseProduct;
 import '../manga/manga.dart' show Manga;
 import 'chapter_segment.dart' show ChapterSegment;
 
-import '../info/info_item.dart' show InfoItem;
-
 class Chapter {
   Manga manga;
-  Map<String, InfoItem> info = <String, InfoItem>{};
+  List<ParseProduct> elements = <ParseProduct>[];
   List<ChapterSegment> segments = <ChapterSegment>[];
 
-  Chapter({this.manga, this.info, this.segments});
+  Chapter({this.manga, this.elements, this.segments});
 
   Chapter setManga(Manga manga) => this..manga = manga;
 
-  Chapter setInfo(Map<String, InfoItem> info) => this..info = info;
+  Chapter setElements(List<ParseProduct> elements) => this..elements = elements;
 
   Chapter addSegments(List<ChapterSegment> segments) => this
     ..segments ??= <ChapterSegment>[]

@@ -35,7 +35,10 @@ class Parser {
   ///
   ///   - [Document]      for HTML sources'
   ///   - [String]        for other sources
-  Stream<String> streamParse(dynamic data) => _parserStrategy.streamParse(data);
+  Stream<String> streamParse(dynamic data) {
+    assert(_parserStrategy != null);
+    return _parserStrategy.streamParse(data);
+  }
 
   @override
   String toString() {

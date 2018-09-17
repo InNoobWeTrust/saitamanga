@@ -1,52 +1,89 @@
-apiVersion: 1
+apiVersion: 0.0.1
 info:
-    ECMAScriptVersion: ECMAScript 5
     name: Hoc Vien Truyen Tranh
+    shortname: HVTT
+    icon: 'http://hocvientruyentranh.net/favicon.ico'
     lang: Vietnamese
     origins:
         - 'http://hocvientruyentranh.com'
-    cookies: true
+    loginRequired: false
+    headers:
+        user-agent: Mozilla/5.0 (Windows NT 6.3; WOW64)
 categories:
     - 
         info:
-            name: All Manga
-            originIndex: 0
+            name: Manga List
             path: /manga/all
-            type: plain
-            params:
+            queryParams:
                 - 
                     name: page
                     options: []
                     default: '1'
-        parsers:
-            uri:
-                selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
-                attribute: href
-                postProcess: ''
-            companion:
-                title:
-                    selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
-                    attribute: title
-                    postProcess: ''
-                cover:
-                    selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
-                    attribute: data-thumbnail
-                    postProcess: ''
-            pagination:
-                label:
-                    selector: '.pagination.no-margin>li>a'
-                    attribute: ''
-                    postProcess: ''
-                uri:
-                    selector: '.pagination.no-margin>li>a'
-                    attribute: href
-                    postProcess: ''
-            prev:
-                selector: '.pagination.no-margin>li>a[rel=prev]'
-                attribute: href
-                postProcess: ''
-            next:
-                id: nextPage
-                selector: '.pagination.no-margin>li>a[rel=next]'
-                attribute: href
-                postProcess: ''
+        elements:
+            - 
+                name: _uri
+                parsers:
+                    - 
+                        role: link
+                        amount: multiple
+                        strategy: html__select
+                        instructions:
+                            selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
+                            attribute: href
+            - 
+                name: _pagination
+                parsers:
+                    - 
+                        role: primary
+                        amount: multiple
+                        strategy: html__select
+                        instructions:
+                            selector: '.pagination.no-margin>li>a'
+                            attribute: ''
+                    - 
+                        role: link
+                        amount: multiple
+                        strategy: html__select
+                        instructions:
+                            selector: '.pagination.no-margin>li>a'
+                            attribute: href
+            - 
+                name: _prev
+                parsers:
+                    - 
+                        role: link
+                        amount: single
+                        strategy: html__select
+                        instructions:
+                            selector: '.pagination.no-margin>li>a[rel=prev]'
+                            attribute: href
+            - 
+                name: _next
+                parsers:
+                    - 
+                        role: link
+                        amount: single
+                        strategy: html__select
+                        instructions:
+                            selector: '.pagination.no-margin>li>a[rel=next]'
+                            attribute: href
+            - 
+                name: _img
+                parsers:
+                    - 
+                        role: link
+                        amount: single
+                        strategy: html__select
+                        instructions:
+                            selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
+                            attribute: data-thumbnail
+            - 
+                name: title
+                parsers:
+                    - 
+                        role: primary
+                        amount: single
+                        strategy: html__select
+                        instructions:
+                            selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
+                            attribute: title

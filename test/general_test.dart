@@ -14,7 +14,7 @@ void main() {
     expect(sourceMap, isNotEmpty);
   });
   test("Test yaml reading", () async {
-    final String source = await (new Resource('./test/test_data/source.json')
+    final String source = await (new Resource('./test/test_data/source.yaml')
         .readAsString(encoding: utf8));
     final YamlMap sourceMap = loadYaml(source);
     print(sourceMap);
