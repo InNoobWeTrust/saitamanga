@@ -6,10 +6,7 @@ class Selector {
   static Stream<String> select(
       Document dom, String selector, String attribute) async* {
     final Element el = dom?.querySelector(selector);
-    if (el == null) {
-      yield "";
-      return;
-    }
+    if (el == null) return;
     yield attribute.isNotEmpty ? el.attributes[attribute] : el.text;
   }
 

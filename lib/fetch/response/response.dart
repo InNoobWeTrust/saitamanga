@@ -21,7 +21,7 @@ class Response {
     ..headers.addEntries([headerEntry]);
 
   Response addHeader(String name, String value) =>
-      this..addHeaderEntry(new MapEntry(name, value));
+      this..addHeaderEntry(MapEntry(name, value));
 
   Response setMetadata(Map<String, dynamic> metadata) =>
       this..metadata = metadata;
@@ -35,5 +35,5 @@ class Response {
     ..metadata.addEntries([metadataEntry]);
 
   Response addMetadata(String name, dynamic value) =>
-      this..addMetadataEntry(new MapEntry<String, dynamic>(name, value));
+      this..addMetadataEntry(MapEntry<String, dynamic>(name, value));
 }

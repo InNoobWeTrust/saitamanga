@@ -14,10 +14,12 @@ import '../response/response.dart' show Response;
 class NetFetcher extends http.BaseClient {
   static const String _defaultUserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64)";
   final String userAgent;
-  final http.Client _inner = new http.Client();
-  final Map<String, dynamic> cookies = <String, dynamic>{};
+  final http.Client _inner = http.Client();
+  final Map<String, dynamic> cookies;
 
-  NetFetcher({this.userAgent = _defaultUserAgent});
+  NetFetcher(
+      {this.userAgent = _defaultUserAgent,
+      this.cookies = const <String, dynamic>{}});
 
   Future<http.StreamedResponse> send(http.BaseRequest request) =>
       _inner.send(request);
@@ -36,19 +38,20 @@ class NetFetcher extends http.BaseClient {
   http.BaseRequest _netRequestFromRequest(Request request) {
     if (request.metadata["method"] == "POST") {
       final http.StreamedRequest streamedRequest =
-          new http.StreamedRequest("POST", request.rawLink)
+          http.StreamedRequest("POST", request.rawLink)
             ..headers.addAll(request.headers);
-      (request.data ?? Stream.fromIterable<List<int>>([request.link.query.codeUnits]))
+      (request.data ??
+              Stream.fromIterable<List<int>>([request.link.query.codeUnits]))
           .listen(streamedRequest.sink.add, onDone: streamedRequest.sink.close);
       return streamedRequest;
     }
-    return new http.Request(request.metadata["method"], request.link)
+    return http.Request(request.metadata["method"], request.link)
       ..headers.addAll(request.headers);
   }
 
   Response _responseFromStream(
           Request request, http.StreamedResponse streamedResponse) =>
-      new Response(request, streamedResponse.stream,
+      Response(request, streamedResponse.stream,
           headers: streamedResponse.headers);
 
   Future<Response> fetch(Request request) async {

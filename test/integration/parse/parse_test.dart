@@ -28,7 +28,7 @@ void main() {
       "[Integration - parse/parse_element.dart] "
       "Test parsing real data", () async {
     // First create the loader
-    final String source = await (new Resource('./test/test_data/source.json'))
+    final String source = await (Resource('./test/test_data/source.json'))
         .readAsString(encoding: utf8);
     final Map sourceMap = json.decode(source);
     final List elementConfigs = sourceMap["categories"][0]["elements"] as List;
@@ -41,22 +41,22 @@ void main() {
     // Then load data from the web
     final String uri =
         "http://hocvientruyentranh.net/manga/all?filter_type=latest-chapter";
-    final Client client = new Client();
+    final Client client = Client();
     final Response response = await client.get(uri);
     // print(response.body.substring(
     //     0, response.contentLength > 100 ? 100 : response.contentLength - 1));
     expect(response.contentLength, greaterThan(0));
     // Preprocess data
-    final DomCreator domCreator = new DomCreator(
+    final DomCreator domCreator = DomCreator(
         baseUri: "http://hocvientruyentranh.com/manga/all",
         encoding: utf8.name);
     final Document dom = await domCreator.generateDOM(response.body);
     // print(dom.outerHtml.substring(0, 100));
     // Then transform the data
-    final ProcessorImpl processor = new ProcessorImpl();
+    final ProcessorImpl processor = ProcessorImpl();
     final ParserStrategyGenerator strategyGenerator =
         ParserStrategyGenerator(processor: processor);
-    final Transformer transformer = new Transformer(
+    final Transformer transformer = Transformer(
         parseElements: elements, strategyGenerator: strategyGenerator);
     await for (var item in await transformer.transform(dom)) {
       print("${item}\n");

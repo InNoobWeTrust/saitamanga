@@ -10,16 +10,18 @@ import 'const/role.dart' show Role;
 
 part 'parse_element.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class ParseElement {
-  @JsonKey(nullable: false)
+  @JsonKey(nullable: true)
+  String id;
+  @JsonKey(nullable: true)
   String name;
   @JsonKey(nullable: true)
   String icon;
   @JsonKey(nullable: false)
   List<Parser> parsers;
 
-  ParseElement({this.name, this.icon, this.parsers});
+  ParseElement({this.id, this.name, this.icon, this.parsers});
 
   factory ParseElement.fromJson(Map<String, dynamic> json) =>
       _$ParseElementFromJson(json);
@@ -29,7 +31,8 @@ class ParseElement {
   /// The type of [data] varies in different sources.
   /// Refer to [Parser.streamParse()] for more information
   Future<ParseProduct> parse(dynamic data) async {
-    ParseProduct product = ParseProduct(name: this.name, icon: this.icon);
+    ParseProduct product =
+        ParseProduct(id: this.id, name: this.name, icon: this.icon);
     for (Parser parser in this.parsers) {
       switch (parser.role) {
         case Role.primary:

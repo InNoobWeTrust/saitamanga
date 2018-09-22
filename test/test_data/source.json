@@ -24,87 +24,87 @@
       }]
     },
     "elements": [{
-        "name": "_uri",
-        "parsers": [{
-          "role": "link",
-          "amount": "multiple",
-          "strategy": "html__select",
-          "instructions": {
-            "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-            "attribute": "href"
-          }
-        }]
+      "id": "uri",
+      "parsers": [{
+        "role": "link",
+        "amount": "multiple",
+        "strategy": "html__select",
+        "instructions": {
+          "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+          "attribute": "href"
+        }
+      }]
+    },
+    {
+      "id": "pagination",
+      "parsers": [{
+        "role": "primary",
+        "amount": "multiple",
+        "strategy": "html__select",
+        "instructions": {
+          "selector": ".pagination.no-margin>li>a",
+          "attribute": ""
+        }
       },
       {
-        "name": "_pagination",
-        "parsers": [{
-            "role": "primary",
-            "amount": "multiple",
-            "strategy": "html__select",
-            "instructions": {
-              "selector": ".pagination.no-margin>li>a",
-              "attribute": ""
-            }
-          },
-          {
-            "role": "link",
-            "amount": "multiple",
-            "strategy": "html__select",
-            "instructions": {
-              "selector": ".pagination.no-margin>li>a",
-              "attribute": "href"
-            }
-          }
-        ]
-      },
-      {
-        "name": "_prev",
-        "parsers": [{
-          "role": "link",
-          "amount": "single",
-          "strategy": "html__select",
-          "instructions": {
-            "selector": ".pagination.no-margin>li>a[rel=prev]",
-            "attribute": "href"
-          }
-        }]
-      },
-      {
-        "name": "_next",
-        "parsers": [{
-          "role": "link",
-          "amount": "single",
-          "strategy": "html__select",
-          "instructions": {
-            "selector": ".pagination.no-margin>li>a[rel=next]",
-            "attribute": "href"
-          }
-        }]
-      },
-      {
-        "name": "_img",
-        "parsers": [{
-          "role": "link",
-          "amount": "single",
-          "strategy": "html__select",
-          "instructions": {
-            "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-            "attribute": "data-thumbnail"
-          }
-        }]
-      },
-      {
-        "name": "title",
-        "parsers": [{
-          "role": "primary",
-          "amount": "single",
-          "strategy": "html__select",
-          "instructions": {
-            "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
-            "attribute": "title"
-          }
-        }]
+        "role": "link",
+        "amount": "multiple",
+        "strategy": "html__select",
+        "instructions": {
+          "selector": ".pagination.no-margin>li>a",
+          "attribute": "href"
+        }
       }
+      ]
+    },
+    {
+      "id": "prev",
+      "parsers": [{
+        "role": "link",
+        "amount": "single",
+        "strategy": "html__select",
+        "instructions": {
+          "selector": ".pagination.no-margin>li>a[rel=prev]",
+          "attribute": "href"
+        }
+      }]
+    },
+    {
+      "id": "next",
+      "parsers": [{
+        "role": "link",
+        "amount": "single",
+        "strategy": "html__select",
+        "instructions": {
+          "selector": ".pagination.no-margin>li>a[rel=next]",
+          "attribute": "href"
+        }
+      }]
+    },
+    {
+      "id": "img",
+      "parsers": [{
+        "role": "link",
+        "amount": "single",
+        "strategy": "html__select",
+        "instructions": {
+          "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+          "attribute": "data-thumbnail"
+        }
+      }]
+    },
+    {
+      "id": "title",
+      "parsers": [{
+        "role": "primary",
+        "amount": "single",
+        "strategy": "html__select",
+        "instructions": {
+          "selector": "table.table-hover>tbody>tr>td:nth-child(1)>a",
+          "attribute": "title"
+        }
+      }]
+    }
     ]
   }]
 }

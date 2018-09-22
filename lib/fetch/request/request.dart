@@ -9,7 +9,7 @@ class Request {
   /// to get this
   Uri get link => rawLink == null
       ? rawLink
-      : new Uri(
+      : Uri(
           scheme: rawLink.scheme,
           userInfo: rawLink.userInfo,
           host: rawLink.host,
@@ -35,7 +35,7 @@ class Request {
     ..headers.addEntries([headerEntry]);
 
   Request addHeader(String name, String value) =>
-      this..addHeaderEntry(new MapEntry(name, value));
+      this..addHeaderEntry(MapEntry(name, value));
 
   Request setMetadata(Map<String, dynamic> metadata) =>
       this..metadata = metadata;
@@ -49,5 +49,5 @@ class Request {
     ..metadata.addEntries([metadataEntry]);
 
   Request addMetadata(String name, dynamic value) =>
-      this..addMetadataEntry(new MapEntry<String, dynamic>(name, value));
+      this..addMetadataEntry(MapEntry<String, dynamic>(name, value));
 }

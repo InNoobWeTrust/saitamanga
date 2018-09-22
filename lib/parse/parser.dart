@@ -2,7 +2,7 @@ import 'dart:async' show Stream;
 import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
-show JsonSerializable, JsonKey;
+    show JsonSerializable, JsonKey;
 
 import 'strategy/parser_strategy.dart' show ParserStrategy;
 import 'const/amount.dart' show Amount;
@@ -11,7 +11,7 @@ import 'const/role.dart' show Role;
 
 part 'parser.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class Parser {
   @JsonKey(nullable: true)
   Role role;

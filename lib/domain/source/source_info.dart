@@ -26,5 +26,5 @@ class SourceInfo {
     ..metadata.addEntries([metadataEntry]);
 
   SourceInfo addMetadata(String name, String value) =>
-      this..addMetadataEntry(new MapEntry(name, value));
+      this..addMetadataEntry(MapEntry(name, value));
 }

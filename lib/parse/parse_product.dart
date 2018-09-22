@@ -5,9 +5,11 @@ import 'package:json_annotation/json_annotation.dart'
 
 part 'parse_product.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class ParseProduct {
-  @JsonKey(nullable: false)
+  @JsonKey(nullable: true)
+  String id;
+  @JsonKey(nullable: true)
   String name;
   @JsonKey(nullable: true)
   String icon;
@@ -15,7 +17,8 @@ class ParseProduct {
   List<Uri> link;
   List<String> meta;
 
-  ParseProduct({this.name, this.icon, this.primary, this.link, this.meta});
+  ParseProduct(
+      {this.id, this.name, this.icon, this.primary, this.link, this.meta});
 
   factory ParseProduct.fromJson(Map<String, dynamic> json) =>
       _$ParseProductFromJson(json);

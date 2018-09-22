@@ -1,3 +1,5 @@
+import 'dart:convert' show JsonEncoder;
+
 import 'package:test/test.dart';
 
 import '../../../../lib/fetch/request/request.dart' show Request;
@@ -15,14 +17,15 @@ void main() {
   test(
       "[Unit - fetch/net/net_fetcher.dart] "
       "Test net_fetcher.dart", () async {
-    final NetFetcher netFetcher = new NetFetcher();
+    final NetFetcher netFetcher = NetFetcher();
+    JsonEncoder encoder = JsonEncoder.withIndent('  ');
     for (Uri site in testSites) {
-      final Request request = new Request(site);
-      print("\nBefore: ${request.headers}");
+      final Request request = Request(site);
+      print("\nBefore: ${encoder.convert(request.headers)}");
       final Response response = await netFetcher.fetch(request);
       expect(response.headers, isNotEmpty);
-      print("After autofill: ${request.headers}");
-      print("Response headers: ${response.headers}");
+      print("After autofill: ${encoder.convert(request.headers)}");
+      print("Response headers: ${encoder.convert(response.headers)}");
     }
   });
 }

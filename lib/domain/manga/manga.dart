@@ -14,7 +14,7 @@ class Manga {
     ..elements.addAll(elements);
 
   Manga addElement(ParseProduct element) => this
-  ..elements ??= <ParseProduct>[]
+    ..elements ??= <ParseProduct>[]
     ..elements.add(element);
 
   Manga addSegments(List<MangaSegment> mangas) => this

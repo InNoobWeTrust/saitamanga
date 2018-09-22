@@ -7,7 +7,8 @@ class Category {
 
   Category();
 
-  Category setElements(List<ParseProduct> elements) => this..elements = elements;
+  Category setElements(List<ParseProduct> elements) =>
+      this..elements = elements;
 
   Category addSegments(List<CategorySegment> segments) => this
     ..segments ??= <CategorySegment>[]

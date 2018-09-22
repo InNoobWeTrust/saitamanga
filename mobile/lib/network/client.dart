@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 class UserAgentClient extends BaseClient {
   static const String _defaultUserAgent = "Mozilla/5.0 (Windows NT 6.3; WOW64)";
   final String userAgent;
-  final Client _inner = new Client();
+  final Client _inner = Client();
 
   UserAgentClient([this.userAgent = _defaultUserAgent]);
 
