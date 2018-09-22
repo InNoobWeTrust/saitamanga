@@ -1,4 +1,4 @@
-import 'dart:convert' show json;
+import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, JsonKey;
@@ -23,5 +23,5 @@ class ParseProduct {
   Map<String, dynamic> toJson() => _$ParseProductToJson(this);
 
   @override
-  String toString() => json.encode(toJson());
+  String toString() => JsonEncoder.withIndent('  ').convert(toJson());
 }

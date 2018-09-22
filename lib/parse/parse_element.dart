@@ -1,5 +1,5 @@
 import 'dart:async' show Future;
-import 'dart:convert' show json;
+import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, JsonKey;
@@ -51,6 +51,6 @@ class ParseElement {
 
   @override
   String toString() {
-    return json.encode(toJson());
+    return JsonEncoder.withIndent('  ').convert(toJson());
   }
 }

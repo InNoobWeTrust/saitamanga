@@ -19,6 +19,7 @@ class ProcessorImpl implements DelegateParseProcessor {
   Stream<String> process(Stream<String> preprocessed,
       {Map<String, String> instructions}) {
     UnimplementedError("This should never be called on this test");
+    return null;
   }
 }
 
@@ -58,7 +59,7 @@ void main() {
     final Transformer transformer = new Transformer(
         parseElements: elements, strategyGenerator: strategyGenerator);
     await for (var item in await transformer.transform(dom)) {
-      print("${json.encode(item)}\n");
+      print("${item}\n");
     }
   });
 }

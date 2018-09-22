@@ -1,7 +1,8 @@
 import 'dart:async' show Stream;
+import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
-    show JsonSerializable, JsonKey;
+show JsonSerializable, JsonKey;
 
 import 'strategy/parser_strategy.dart' show ParserStrategy;
 import 'const/amount.dart' show Amount;
@@ -41,11 +42,5 @@ class Parser {
   }
 
   @override
-  String toString() {
-    return """{
-      amount: ${this.amount},
-      strategy: ${this.strategy},
-      instructions: ${this.instructions}
-      }""";
-  }
+  String toString() => JsonEncoder.withIndent('  ').convert(this.toJson());
 }
