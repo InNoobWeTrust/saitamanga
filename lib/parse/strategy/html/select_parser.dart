@@ -11,7 +11,7 @@ class SelectParser extends ParserStrategy {
   final String selector;
   final String attribute;
 
-  SelectParser({this.amount, instructions})
+  SelectParser(this.amount, instructions)
       : this.selector = instructions['selector'],
         this.attribute = instructions['attribute'];
 

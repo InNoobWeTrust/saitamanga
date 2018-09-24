@@ -11,27 +11,20 @@ class ParserStrategyGenerator {
 
   ParserStrategyGenerator({this.processor});
 
-  void injectStrategy(Parser parser) {
+  ParserStrategy generateStrategy(Parser parser) {
     switch (parser.strategy) {
       case Strategy.html__select:
-        ParserStrategy parserStrategy = SelectParser(
-            amount: parser.amount, instructions: parser.instructions);
-        parser.injectParserStrategy(parserStrategy);
+        return SelectParser(parser.amount, parser.instructions);
         break;
       case Strategy.delegate:
-        ParserStrategy parserStrategy = DelegateParser(
-            amount: parser.amount,
-            instructions: parser.instructions,
-            processor: this.processor);
-        parser.injectParserStrategy(parserStrategy);
+        return DelegateParser(
+            parser.amount, parser.instructions, this.processor);
         break;
       case Strategy.html__delegate_select:
-        ParserStrategy parserStrategy = DelegateSelectParser(
-            amount: parser.amount,
-            instructions: parser.instructions,
-            processor: this.processor);
-        parser.injectParserStrategy(parserStrategy);
+        return DelegateSelectParser(
+            parser.amount, parser.instructions, this.processor);
         break;
     }
+    return null;
   }
 }

@@ -14,7 +14,7 @@ class DelegateSelectParser extends ParserStrategy {
   final String selector;
   final String attribute;
 
-  DelegateSelectParser({this.amount, this.instructions, this.processor})
+  DelegateSelectParser(this.amount, this.instructions, this.processor)
       : this.selector = instructions['selector'],
         this.attribute = instructions['attribute'];
 

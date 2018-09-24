@@ -4,7 +4,7 @@ import 'dart:convert' show JsonEncoder;
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, JsonKey;
 
-import 'strategy/parser_strategy.dart' show ParserStrategy;
+import 'strategy/parser_strategy_generator.dart' show ParserStrategyGenerator;
 import 'const/amount.dart' show Amount;
 import 'const/strategy.dart' show Strategy;
 import 'const/role.dart' show Role;
@@ -14,31 +14,27 @@ part 'parser.g.dart';
 @JsonSerializable(includeIfNull: false)
 class Parser {
   @JsonKey(nullable: true)
-  Role role;
+  final Role role;
   @JsonKey(nullable: false)
-  Amount amount;
+  final Amount amount;
   @JsonKey(nullable: false)
-  Strategy strategy;
+  final Strategy strategy;
   @JsonKey(nullable: false)
-  Map<String, String> instructions;
-  ParserStrategy _parserStrategy;
+  final Map<String, String> instructions;
 
-  Parser({this.role, this.amount, this.strategy, this.instructions});
+  Parser(this.role, this.amount, this.strategy, this.instructions);
 
   factory Parser.fromJson(Map<String, dynamic> json) => _$ParserFromJson(json);
 
   Map<String, dynamic> toJson() => _$ParserToJson(this);
 
-  void injectParserStrategy(ParserStrategy parserStrategy) =>
-      this._parserStrategy = parserStrategy;
-
   /// The type of [data] varies in different sources
   ///
   ///   - [Document]      for HTML sources'
   ///   - [String]        for other sources
-  Stream<String> streamParse(dynamic data) {
-    assert(_parserStrategy != null);
-    return _parserStrategy.streamParse(data);
+  Stream<String> streamParse(
+      dynamic data, ParserStrategyGenerator parserStrategyGenerator) {
+    return parserStrategyGenerator.generateStrategy(this)?.streamParse(data);
   }
 
   @override

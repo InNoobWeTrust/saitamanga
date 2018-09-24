@@ -48,7 +48,7 @@ void main() {
     expect(response.contentLength, greaterThan(0));
     // Preprocess data
     final DomCreator domCreator = DomCreator(
-        baseUri: "http://hocvientruyentranh.com/manga/all",
+        "http://hocvientruyentranh.com/manga/all",
         encoding: utf8.name);
     final Document dom = await domCreator.generateDOM(response.body);
     // print(dom.outerHtml.substring(0, 100));
@@ -56,8 +56,7 @@ void main() {
     final ProcessorImpl processor = ProcessorImpl();
     final ParserStrategyGenerator strategyGenerator =
         ParserStrategyGenerator(processor: processor);
-    final Transformer transformer = Transformer(
-        parseElements: elements, strategyGenerator: strategyGenerator);
+    final Transformer transformer = Transformer(elements, strategyGenerator);
     await for (var item in await transformer.transform(dom)) {
       print("${item}\n");
     }

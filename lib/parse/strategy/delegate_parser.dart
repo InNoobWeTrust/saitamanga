@@ -11,7 +11,7 @@ class DelegateParser extends ParserStrategy {
   final Map<String, String> instructions;
   final DelegateParseProcessor processor;
 
-  DelegateParser({this.amount, this.instructions, this.processor});
+  DelegateParser(this.amount, this.instructions, this.processor);
 
   /// The type of [data] here is [Document]
   ///

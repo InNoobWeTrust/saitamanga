@@ -8,17 +8,17 @@ part 'parse_product.g.dart';
 @JsonSerializable(includeIfNull: false)
 class ParseProduct {
   @JsonKey(nullable: true)
-  String id;
+  final String id;
   @JsonKey(nullable: true)
-  String name;
+  final String name;
   @JsonKey(nullable: true)
-  String icon;
-  List<String> primary;
-  List<Uri> link;
-  List<String> meta;
+  final String icon;
+  final List<String> primary;
+  final List<Uri> link;
+  final List<String> meta;
 
   ParseProduct(
-      {this.id, this.name, this.icon, this.primary, this.link, this.meta});
+      this.id, this.name, this.icon, this.primary, this.link, this.meta);
 
   factory ParseProduct.fromJson(Map<String, dynamic> json) =>
       _$ParseProductFromJson(json);

@@ -7,21 +7,22 @@ import 'package:json_annotation/json_annotation.dart'
 import 'parser.dart' show Parser;
 import 'parse_product.dart' show ParseProduct;
 import 'const/role.dart' show Role;
+import 'strategy/parser_strategy_generator.dart' show ParserStrategyGenerator;
 
 part 'parse_element.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class ParseElement {
   @JsonKey(nullable: true)
-  String id;
+  final String id;
   @JsonKey(nullable: true)
-  String name;
+  final String name;
   @JsonKey(nullable: true)
-  String icon;
+  final String icon;
   @JsonKey(nullable: false)
-  List<Parser> parsers;
+  final List<Parser> parsers;
 
-  ParseElement({this.id, this.name, this.icon, this.parsers});
+  ParseElement(this.id, this.name, this.icon, this.parsers);
 
   factory ParseElement.fromJson(Map<String, dynamic> json) =>
       _$ParseElementFromJson(json);
@@ -30,26 +31,30 @@ class ParseElement {
 
   /// The type of [data] varies in different sources.
   /// Refer to [Parser.streamParse()] for more information
-  Future<ParseProduct> parse(dynamic data) async {
-    ParseProduct product =
-        ParseProduct(id: this.id, name: this.name, icon: this.icon);
+  Future<ParseProduct> parse(
+      dynamic data, ParserStrategyGenerator parserStrategyGenerator) async {
+    List<String> primary;
+    List<Uri> link;
+    List<String> meta;
     for (Parser parser in this.parsers) {
       switch (parser.role) {
         case Role.primary:
-          product.primary = await parser.streamParse(data).toList();
+          primary =
+              await parser.streamParse(data, parserStrategyGenerator).toList();
           break;
         case Role.link:
-          product.link = await parser
-              .streamParse(data)
+          link = await parser
+              .streamParse(data, parserStrategyGenerator)
               .map((s) => Uri.tryParse(s))
               .toList();
           break;
         case Role.meta:
-          product.meta = await parser.streamParse(data).toList();
+          meta =
+              await parser.streamParse(data, parserStrategyGenerator).toList();
           break;
       }
     }
-    return product;
+    return ParseProduct(this.id, this.name, this.icon, primary, link, meta);
   }
 
   @override

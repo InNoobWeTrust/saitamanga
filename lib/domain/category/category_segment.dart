@@ -1,7 +1,9 @@
+import '../../parse/parse_product.dart' show ParseProduct;
 import '../manga/manga.dart' show Manga;
 
 class CategorySegment {
   final Uri uri;
+  List<ParseProduct> elements;
   List<Manga> mangas = <Manga>[];
 
   CategorySegment(this.uri);

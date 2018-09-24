@@ -15,8 +15,8 @@ class PreProcessor {
       case SourceType.HTML:
         String encoding = source.info.metadata["encoding"];
         DomCreator domCreator = encoding == null
-            ? DomCreator(baseUri: baseUri)
-            : DomCreator(encoding: encoding, baseUri: baseUri);
+            ? DomCreator(baseUri)
+            : DomCreator(baseUri, encoding: encoding);
         return await domCreator.generateDOM(data);
         break;
       default:
