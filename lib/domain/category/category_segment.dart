@@ -3,19 +3,17 @@ import '../manga/manga.dart' show Manga;
 
 class CategorySegment {
   final Uri uri;
-  List<ParseProduct> elements;
-  List<Manga> mangas = <Manga>[];
+  final List<Manga> _mangas = <Manga>[];
+  List<Manga> get mangas => this._mangas;
 
-  CategorySegment(this.uri);
+  CategorySegment(this.uri, List<ParseProduct> elements) {
+    _processMangas(elements);
+  }
 
-  CategorySegment addMangas(List<Manga> mangas) => this
-    ..mangas ??= <Manga>[]
-    ..mangas.addAll(mangas);
-
-  CategorySegment addManga(Manga manga) => this
-    ..mangas ??= <Manga>[]
-    ..mangas.add(manga);
-
-  CategorySegment removeMangas(bool condition(Manga manga)) =>
-      this..mangas.removeWhere(condition);
+  void _processMangas(List<ParseProduct> elements) {
+    _mangas.addAll(elements
+        .firstWhere((e) => e.id == 'uri')
+        .link
+        .map((l) => Manga(this, l)));
+  }
 }

@@ -1,16 +1,19 @@
 import '../chapter/chapter.dart' show Chapter;
+import '../../parse/parse_product.dart' show ParseProduct;
 
 class MangaSegment {
   final Uri uri;
-  List<Chapter> chapters = <Chapter>[];
+  final List<Chapter> _chapters = <Chapter>[];
+  List<Chapter> get chapters => this._chapters;
 
-  MangaSegment(this.uri, {this.chapters});
+  MangaSegment(this.uri, List<ParseProduct> elements) {
+    _processChapters(elements);
+  }
 
-  MangaSegment addChapters(List<Chapter> chapters) => this
-    ..chapters ??= <Chapter>[]
-    ..chapters.addAll(chapters);
-
-  MangaSegment addChapter(Chapter chapter) => this
-    ..chapters ??= <Chapter>[]
-    ..chapters.add(chapter);
+  void _processChapters(List<ParseProduct> elements) {
+    _chapters.addAll(elements
+        .firstWhere((e) => e.id == 'uri')
+        .link
+        .map((l) => Chapter(this, l)));
+  }
 }

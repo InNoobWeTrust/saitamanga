@@ -1,16 +1,19 @@
 import '../page/page.dart' show Page;
+import '../../parse/parse_product.dart' show ParseProduct;
 
 class ChapterSegment {
   final Uri uri;
-  List<Page> pages = <Page>[];
+  final List<Page> _pages = <Page>[];
+  List<Page> get pages => this._pages;
 
-  ChapterSegment(this.uri, {this.pages});
+  ChapterSegment(this.uri, List<ParseProduct> elements) {
+    _processPages(elements);
+  }
 
-  ChapterSegment addPages(List<Page> pages) => this
-    ..pages ??= <Page>[]
-    ..pages.addAll(pages);
-
-  ChapterSegment addPage(Page page) => this
-    ..pages ??= <Page>[]
-    ..pages.add(page);
+  void _processPages(List<ParseProduct> elements) {
+    _pages.addAll(elements
+        .firstWhere((e) => e.id == 'uri')
+        .link
+        .map((l) => Page(this, l)));
+  }
 }

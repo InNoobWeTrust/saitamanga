@@ -1,8 +1,8 @@
-import '../chapter/chapter.dart' show Chapter;
+import '../chapter/chapter_segment.dart' show ChapterSegment;
 
 class Page {
+  final ChapterSegment chapterSegment;
   final Uri uri;
-  Chapter chapter;
 
-  Page(this.uri, {this.chapter});
+  Page(this.chapterSegment, this.uri);
 }

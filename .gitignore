@@ -4,7 +4,6 @@
 .idea/
 .DS_Store
 .atom/
-.vscode/
 doc/api
 packages
 .packages

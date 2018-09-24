@@ -1,15 +1,9 @@
 import 'category_segment.dart' show CategorySegment;
 
+/// TODO: Add CategoryInfo class
 class Category {
-  List<CategorySegment> segments = <CategorySegment>[];
+  final Uri initUri;
+  final List<CategorySegment> segments = <CategorySegment>[];
 
-  Category();
-
-  Category addSegments(List<CategorySegment> segments) => this
-    ..segments ??= <CategorySegment>[]
-    ..segments.addAll(segments);
-
-  Category addSegment(CategorySegment segment) => this
-    ..segments ??= <CategorySegment>[]
-    ..segments.add(segment);
+  Category(this.initUri);
 }
