@@ -16,7 +16,8 @@ class DelegateSelectParser extends ParserStrategy {
 
   DelegateSelectParser(this.amount, this.instructions, this.processor)
       : this.selector = instructions['selector'],
-        this.attribute = instructions['attribute'];
+        this.attribute =
+            instructions['attribute'] != null ? instructions['attribute'] : "";
 
   /// The type of [data] here is [Document]
   ///

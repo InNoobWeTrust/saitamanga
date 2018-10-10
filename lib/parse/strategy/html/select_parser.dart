@@ -13,7 +13,8 @@ class SelectParser extends ParserStrategy {
 
   SelectParser(this.amount, instructions)
       : this.selector = instructions['selector'],
-        this.attribute = instructions['attribute'];
+        this.attribute =
+            instructions['attribute'] != null ? instructions['attribute'] : "";
 
   /// The type of [data] here is [Document]
   @override

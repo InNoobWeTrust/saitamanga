@@ -8,11 +8,15 @@ import './html/delegate_select_parser.dart' show DelegateSelectParser;
 
 class ParserStrategyGenerator {
   final DelegateParseProcessor processor;
+  final Strategy default_strategy;
 
-  ParserStrategyGenerator({this.processor});
+  ParserStrategyGenerator({this.processor, this.default_strategy = null});
 
   ParserStrategy generateStrategy(Parser parser) {
-    switch (parser.strategy) {
+    final chosen_strategy =
+        parser.strategy != null ? parser.strategy : default_strategy;
+    if (chosen_strategy == null) return null;
+    switch (chosen_strategy) {
       case Strategy.html__select:
         return SelectParser(parser.amount, parser.instructions);
         break;
