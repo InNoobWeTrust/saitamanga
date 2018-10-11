@@ -6,13 +6,13 @@ import 'delegate_parser.dart' show DelegateParser;
 import './html/select_parser.dart' show SelectParser;
 import './html/delegate_select_parser.dart' show DelegateSelectParser;
 
-class ParserStrategyGenerator {
+class ParserStrategist {
   final DelegateParseProcessor processor;
   final Strategy default_strategy;
 
-  ParserStrategyGenerator({this.processor, this.default_strategy = null});
+  ParserStrategist({this.processor, this.default_strategy = null});
 
-  ParserStrategy generateStrategy(Parser parser) {
+  ParserStrategy provideStrategy(Parser parser) {
     final chosen_strategy =
         parser.strategy != null ? parser.strategy : default_strategy;
     if (chosen_strategy == null) return null;

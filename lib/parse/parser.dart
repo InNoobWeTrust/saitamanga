@@ -4,7 +4,7 @@ import 'dart:convert' show JsonEncoder;
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, JsonKey;
 
-import 'strategy/parser_strategy_generator.dart' show ParserStrategyGenerator;
+import 'strategy/parser_strategist.dart' show ParserStrategist;
 import 'const/amount.dart' show Amount;
 import 'const/strategy.dart' show Strategy;
 import 'const/role.dart' show Role;
@@ -33,8 +33,8 @@ class Parser {
   ///   - [Document]      for HTML sources'
   ///   - [String]        for other sources
   Stream<String> streamParse(
-      dynamic data, ParserStrategyGenerator parserStrategyGenerator) {
-    return parserStrategyGenerator.generateStrategy(this)?.streamParse(data);
+      dynamic data, ParserStrategist parserStrategist) {
+    return parserStrategist.provideStrategy(this)?.streamParse(data);
   }
 
   @override
