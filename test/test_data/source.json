@@ -6,7 +6,7 @@
         "icon": "http://hocvientruyentranh.net/frontend/images/favicon.png",
         "lang": "Vietnamese",
         "origins": [
-            "http://hocvientruyentranh.com"
+            "http://hocvientruyentranh.net"
         ],
         "headers": {
             "user-agent": "Mozilla/5.0 (Windows NT 6.3; WOW64)"
