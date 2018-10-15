@@ -10,8 +10,8 @@ import '../../../lib/parse/parse_element.dart' show ParseElement;
 import '../../../lib/preprocess/helper/dom_creator.dart' show DomCreator;
 import '../../../lib/parse/strategy/delegate_parse_processor.dart'
     show DelegateParseProcessor;
-import '../../../lib/parse/strategy/parser_strategy_generator.dart'
-    show ParserStrategyGenerator;
+import '../../../lib/parse/strategy/parser_strategist.dart'
+    show ParserStrategist;
 import '../../../lib/transform/transformer.dart' show Transformer;
 
 class ProcessorImpl implements DelegateParseProcessor {
@@ -54,9 +54,8 @@ void main() {
     // print(dom.outerHtml.substring(0, 100));
     // Then transform the data
     final ProcessorImpl processor = ProcessorImpl();
-    final ParserStrategyGenerator strategyGenerator =
-        ParserStrategyGenerator(processor: processor);
-    final Transformer transformer = Transformer(elements, strategyGenerator);
+    final ParserStrategist strategist = ParserStrategist(processor: processor);
+    final Transformer transformer = Transformer(elements, strategist);
     await for (var item in await transformer.transform(dom)) {
       print("${item}\n");
     }
