@@ -5,6 +5,9 @@ description: A new cross-platform project
 environment:
   sdk: '>=2.0.0-dev.58 <3.0.0'
 
+executables:
+  manga: main
+
 dependencies:
   html: any
   yaml: any

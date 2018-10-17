@@ -1,9 +1,10 @@
 import 'category_segment.dart' show CategorySegment;
+import '../info/info.dart' show Info;
 
-/// TODO: Add CategoryInfo class
 class Category {
   final Uri initUri;
+  Info info;
   final List<CategorySegment> segments = <CategorySegment>[];
 
-  Category(this.initUri);
+  Category(this.initUri, {this.info});
 }

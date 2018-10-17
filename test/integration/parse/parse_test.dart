@@ -3,7 +3,7 @@ import 'dart:convert' show json, utf8;
 
 import 'package:test/test.dart';
 import 'package:http/http.dart';
-import 'package:resource/resource.dart';
+import 'package:resource/resource.dart' show Resource;
 import 'package:html/dom.dart' show Document;
 
 import '../../../lib/parse/parse_element.dart' show ParseElement;
