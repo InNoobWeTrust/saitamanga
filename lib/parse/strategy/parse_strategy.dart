@@ -1,6 +1,6 @@
 import 'dart:async' show Stream;
 
-abstract class ParserStrategy {
+abstract class ParseStrategy {
   /// The type of [data] varies in different sources
   ///
   ///   - [Document]      for HTML sources'

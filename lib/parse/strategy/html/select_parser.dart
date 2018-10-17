@@ -2,11 +2,11 @@ import 'dart:async' show Stream;
 
 import 'package:html/dom.dart' show Document;
 
-import '../parser_strategy.dart' show ParserStrategy;
+import '../parse_strategy.dart' show ParseStrategy;
 import '../../const/amount.dart' show Amount;
 import 'utils/selector.dart' show Selector;
 
-class SelectParser extends ParserStrategy {
+class SelectParser extends ParseStrategy {
   final Amount amount;
   final String selector;
   final String attribute;

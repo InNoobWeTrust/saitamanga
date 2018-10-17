@@ -4,7 +4,7 @@ import 'dart:convert' show JsonEncoder;
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, JsonKey;
 
-import 'strategy/parser_strategist.dart' show ParserStrategist;
+import 'strategy/parse_strategist.dart' show ParseStrategist;
 import 'const/amount.dart' show Amount;
 import 'const/strategy.dart' show Strategy;
 import 'const/role.dart' show Role;
@@ -15,14 +15,16 @@ part 'parser.g.dart';
 class Parser {
   @JsonKey(nullable: true)
   final Role role;
+  @JsonKey(nullable: true)
+  final String name;
   @JsonKey(nullable: false)
   final Amount amount;
-  @JsonKey(nullable: false)
+  @JsonKey(nullable: true)
   final Strategy strategy;
   @JsonKey(nullable: false)
   final Map<String, String> instructions;
 
-  Parser(this.role, this.amount, this.strategy, this.instructions);
+  Parser(this.role, this.name, this.amount, this.strategy, this.instructions);
 
   factory Parser.fromJson(Map<String, dynamic> json) => _$ParserFromJson(json);
 
@@ -32,9 +34,8 @@ class Parser {
   ///
   ///   - [Document]      for HTML sources'
   ///   - [String]        for other sources
-  Stream<String> streamParse(
-      dynamic data, ParserStrategist parserStrategist) {
-    return parserStrategist.provideStrategy(this)?.streamParse(data);
+  Stream<String> streamParse(dynamic data, ParseStrategist strategist) {
+    return strategist.provideStrategy(this)?.streamParse(data);
   }
 
   @override

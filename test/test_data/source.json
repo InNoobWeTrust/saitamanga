@@ -197,9 +197,9 @@
                     "default": [
                         "1"
                     ]
-                }],
-                "defaultStrategy": "html__select"
+                }]
             },
+            "defaultStrategy": "html__select",
             "elements": [{
                     "id": "title",
                     "parsers": [{
@@ -287,9 +287,9 @@
         },
         {
             "info": {
-                "name": "New chapter",
-                "defaultStrategy": "html__select"
+                "name": "New chapter"
             },
+            "defaultStrategy": "html__select",
             "elements": [{
                     "id": "title",
                     "parsers": [{
@@ -323,9 +323,9 @@
         },
         {
             "info": {
-                "name": "New manga",
-                "defaultStrategy": "html__select"
+                "name": "New manga"
             },
+            "defaultStrategy": "html__select",
             "elements": [{
                     "id": "title",
                     "parsers": [{
@@ -370,9 +370,9 @@
         },
         {
             "info": {
-                "name": "Most viewed",
-                "defaultStrategy": "html__select"
+                "name": "Most viewed"
             },
+            "defaultStrategy": "html__select",
             "elements": [{
                     "id": "title",
                     "parsers": [{
@@ -417,9 +417,9 @@
         },
         {
             "info": {
-                "name": "Most followed",
-                "defaultStrategy": "html__select"
+                "name": "Most followed"
             },
+            "defaultStrategy": "html__select",
             "elements": [{
                     "id": "title",
                     "parsers": [{
@@ -464,9 +464,9 @@
         },
         {
             "info": {
-                "name": "Top day",
-                "defaultStrategy": "html__select"
+                "name": "Top day"
             },
+            "defaultStrategy": "html__select",
             "elements": [{
                 "id": "title",
                 "parsers": [{
@@ -489,9 +489,9 @@
         },
         {
             "info": {
-                "name": "Top week",
-                "defaultStrategy": "html__select"
+                "name": "Top week"
             },
+            "defaultStrategy": "html__select",
             "elements": [{
                 "id": "title",
                 "parsers": [{
@@ -514,9 +514,9 @@
         },
         {
             "info": {
-                "name": "Top month",
-                "defaultStrategy": "html__select"
+                "name": "Top month"
             },
+            "defaultStrategy": "html__select",
             "elements": [{
                 "id": "title",
                 "parsers": [{
@@ -551,90 +551,98 @@
                         "name": "type",
                         "displayName": "Loại",
                         "input": "radio",
-                        "optionParsers": [{
-                                "role": "primary",
-                                "amount": "multiple",
-                                "instructions": {
-                                    "selector": "#type > option",
-                                    "attribute": "value"
+                        "preload": [{
+                            "parsers": [{
+                                    "role": "primary",
+                                    "amount": "multiple",
+                                    "instructions": {
+                                        "selector": "#type > option",
+                                        "attribute": "value"
+                                    }
+                                },
+                                {
+                                    "role": "meta",
+                                    "amount": "multiple",
+                                    "instructions": {
+                                        "selector": "#type > option"
+                                    }
                                 }
-                            },
-                            {
-                                "role": "meta",
-                                "amount": "multiple",
-                                "instructions": {
-                                    "selector": "#type > option"
-                                }
-                            }
-                        ]
+                            ]
+                        }]
                     },
                     {
                         "name": "author",
                         "displayName": "Tác giả",
                         "input": "radio",
-                        "optionParsers": [{
-                                "role": "primary",
-                                "amount": "multiple",
-                                "instructions": {
-                                    "selector": "#author > option",
-                                    "attribute": "value"
+                        "preload": [{
+                            "parsers": [{
+                                    "role": "primary",
+                                    "amount": "multiple",
+                                    "instructions": {
+                                        "selector": "#author > option",
+                                        "attribute": "value"
+                                    }
+                                },
+                                {
+                                    "role": "meta",
+                                    "amount": "multiple",
+                                    "instructions": {
+                                        "selector": "#author > option"
+                                    }
                                 }
-                            },
-                            {
-                                "role": "meta",
-                                "amount": "multiple",
-                                "instructions": {
-                                    "selector": "#author > option"
-                                }
-                            }
-                        ]
+                            ]
+                        }]
                     },
                     {
                         "name": "genres[]",
                         "displayName": "Thể loại",
                         "input": "checkbox",
-                        "optionParsers": [{
-                                "role": "primary",
-                                "amount": "multiple",
-                                "instructions": {
-                                    "selector": "div.genre-item label"
+                        "preload": [{
+                            "parsers": [{
+                                    "role": "primary",
+                                    "amount": "multiple",
+                                    "instructions": {
+                                        "selector": "div.genre-item label"
+                                    }
+                                },
+                                {
+                                    "role": "meta",
+                                    "amount": "multiple",
+                                    "instructions": {
+                                        "selector": "div.genre-item input",
+                                        "attribute": "value"
+                                    }
                                 }
-                            },
-                            {
-                                "role": "meta",
-                                "amount": "multiple",
-                                "instructions": {
-                                    "selector": "div.genre-item input",
-                                    "attribute": "value"
-                                }
-                            }
-                        ]
+                            ]
+                        }]
                     },
                     {
                         "name": "status",
                         "displayName": "Tình trạng",
                         "input": "radio",
-                        "optionParsers": [{
-                                "role": "primary",
-                                "amount": "multiple",
-                                "instructions": {
-                                    "selector": "#status > option"
+                        "preload": [{
+                            "parsers": [{
+                                    "role": "primary",
+                                    "amount": "multiple",
+                                    "instructions": {
+                                        "selector": "#status > option"
+                                    }
+                                },
+                                {
+                                    "role": "meta",
+                                    "amount": "multiple",
+                                    "instructions": {
+                                        "selector": "#status > option",
+                                        "attribute": "value"
+                                    }
                                 }
-                            },
-                            {
-                                "role": "meta",
-                                "amount": "multiple",
-                                "instructions": {
-                                    "selector": "#status > option",
-                                    "attribute": "value"
-                                }
-                            }
-                        ]
+                            ]
+                        }]
                     }
-                ],
-                "defaultPreloadStrategy": "html__select",
-                "defaultStrategy": "html__select"
+                ]
             },
+            "defaultPreloadStrategy": "html__select",
+            "defaultStrategy": "html__select",
             "elements": [{
                     "id": "title",
                     "parsers": [{

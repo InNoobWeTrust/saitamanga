@@ -1,11 +1,11 @@
-apiVersion: '0.0.1'
+apiVersion: "0.0.1"
 info:
   name: Hoc Vien Truyen Tranh
   shortname: HVTT
-  icon: 'http://hocvientruyentranh.net/frontend/images/favicon.png'
+  icon: "http://hocvientruyentranh.net/frontend/images/favicon.png"
   lang: Vietnamese
   origins:
-    - 'http://hocvientruyentranh.net'
+    - "http://hocvientruyentranh.net"
   headers:
     user-agent: Mozilla/5.0 (Windows NT 6.3; WOW64)
 chapter:
@@ -16,7 +16,7 @@ chapter:
         - role: link
           amount: multiple
           instructions:
-            selector: '.manga-container>img'
+            selector: ".manga-container>img"
             attribute: src
 manga:
   defaultStrategy: html__select
@@ -26,45 +26,45 @@ manga:
         - role: primary
           amount: single
           instructions:
-            selector: '.__name'
+            selector: ".__name"
     - id: img
       parsers:
         - role: link
           amount: single
           instructions:
-            selector: '.__image>img'
+            selector: ".__image>img"
             attribute: src
     - id: description
       parsers:
         - role: primary
           amount: single
           instructions:
-            selector: '.__description>p'
+            selector: ".__description>p"
     - id: chapter
       parsers:
         - role: link
           amount: multiple
           instructions:
-            selector: 'div.table-scroll>table.table.table-hover>tbody>tr>td>a'
+            selector: "div.table-scroll>table.table.table-hover>tbody>tr>td>a"
             attribute: href
         - role: primary
           amount: multiple
           instructions:
-            selector: 'div.table-scroll>table.table.table-hover>tbody>tr>td>a'
+            selector: "div.table-scroll>table.table.table-hover>tbody>tr>td>a"
         - role: meta
           amount: multiple
           instructions:
-            selector: 'div.table-scroll>table.table.table-hover>tbody>tr>td:nth-child(2)'
+            selector: "div.table-scroll>table.table.table-hover>tbody>tr>td:nth-child(2)"
         - role: meta
           amount: multiple
           instructions:
-            selector: 'div.table-scroll>table.table.table-hover>tbody>tr>td:nth-child(3)'
+            selector: "div.table-scroll>table.table.table-hover>tbody>tr>td:nth-child(3)"
     - name: Cảnh báo độ tuổi
       parsers:
         - role: primary
           amount: single
           instructions:
-            selector: 'div.alert.alert-warning'
+            selector: "div.alert.alert-warning"
     - name: Tên khác
       parsers:
         - role: primary
@@ -124,210 +124,210 @@ categories:
           input: number
           options: []
           default:
-            - '1'
-      defaultStrategy: html__select
+            - "1"
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
+              selector: "table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
+              selector: "table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: title
       - id: img
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: 'table.table-hover>tbody>tr>td:nth-child(1)>a'
+              selector: "table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: data-thumbnail
       - id: description
         parsers:
           - role: primary
             amount: multiple
             instructions:
-              selector: '.table.table-hover>tbody>tr>td:nth-child(1)>a'
+              selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: data-description
       - id: pagination
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '.pagination.no-margin>li>a'
+              selector: ".pagination.no-margin>li>a"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '.pagination.no-margin>li>a'
+              selector: ".pagination.no-margin>li>a"
       - id: prev
         parsers:
           - role: link
             amount: single
             instructions:
-              selector: '.pagination.no-margin>li>a[rel=prev]'
+              selector: ".pagination.no-margin>li>a[rel=prev]"
               attribute: href
       - id: next
         parsers:
           - role: link
             amount: single
             instructions:
-              selector: '.pagination.no-margin>li>a[rel=next]'
+              selector: ".pagination.no-margin>li>a[rel=next]"
               attribute: href
   - info:
       name: New chapter
-      defaultStrategy: html__select
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '#new-manga-chapter li>div.manga-box>div.__info>h4.__title>a'
+              selector: "#new-manga-chapter li>div.manga-box>div.__info>h4.__title>a"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '#new-manga-chapter li>div.manga-box>div.__info>h4.__title>a'
+              selector: "#new-manga-chapter li>div.manga-box>div.__info>h4.__title>a"
       - id: description
         parsers:
           - role: primary
             amount: multiple
             instructions:
-              selector: '#new-manga-chapter li>div.manga-box>div.__info'
+              selector: "#new-manga-chapter li>div.manga-box>div.__info"
   - info:
       name: New manga
-      defaultStrategy: html__select
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '#new-manga li>div.manga-box>a.__image'
+              selector: "#new-manga li>div.manga-box>a.__image"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '#new-manga li>div.manga-box>div.__info>h4.__title>a'
+              selector: "#new-manga li>div.manga-box>div.__info>h4.__title>a"
       - id: img
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '#new-manga li>div.manga-box>a.__image>img'
+              selector: "#new-manga li>div.manga-box>a.__image>img"
               attribute: data-src
       - id: description
         parsers:
           - role: primary
             amount: multiple
             instructions:
-              selector: '#new-manga li>div.manga-box>div.__info'
+              selector: "#new-manga li>div.manga-box>div.__info"
   - info:
       name: Most viewed
-      defaultStrategy: html__select
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '#most-view-manga li>div.manga-box>a.__image'
+              selector: "#most-view-manga li>div.manga-box>a.__image"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '#most-view-manga li>div.manga-box>div.__info>h4.__title>a'
+              selector: "#most-view-manga li>div.manga-box>div.__info>h4.__title>a"
       - id: img
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '#most-view-manga li>div.manga-box>a.__image>img'
+              selector: "#most-view-manga li>div.manga-box>a.__image>img"
               attribute: data-src
       - id: description
         parsers:
           - role: primary
             amount: multiple
             instructions:
-              selector: '#most-view-manga li>div.manga-box>div.__info'
+              selector: "#most-view-manga li>div.manga-box>div.__info"
   - info:
       name: Most followed
-      defaultStrategy: html__select
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '#most-follow-manga li>div.manga-box>a.__image'
+              selector: "#most-follow-manga li>div.manga-box>a.__image"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '#most-follow-manga li>div.manga-box>div.__info>h4.__title>a'
+              selector: "#most-follow-manga li>div.manga-box>div.__info>h4.__title>a"
       - id: img
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '#most-follow-manga li>div.manga-box>a.__image>img'
+              selector: "#most-follow-manga li>div.manga-box>a.__image>img"
               attribute: data-src
       - id: description
         parsers:
           - role: primary
             amount: multiple
             instructions:
-              selector: '#most-follow-manga li>div.manga-box>div.__info'
+              selector: "#most-follow-manga li>div.manga-box>div.__info"
   - info:
       name: Top day
-      defaultStrategy: html__select
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '.ctd-tabs.ranking>.tab-content>#top-day>table>tbody>tr>td:nth-child(2)>a'
+              selector: ".ctd-tabs.ranking>.tab-content>#top-day>table>tbody>tr>td:nth-child(2)>a"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '.ctd-tabs.ranking>.tab-content>#top-day>table>tbody>tr>td:nth-child(2)>a'
+              selector: ".ctd-tabs.ranking>.tab-content>#top-day>table>tbody>tr>td:nth-child(2)>a"
   - info:
       name: Top week
-      defaultStrategy: html__select
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '.ctd-tabs.ranking>.tab-content>#top-week>table>tbody>tr>td:nth-child(2)>a'
+              selector: ".ctd-tabs.ranking>.tab-content>#top-week>table>tbody>tr>td:nth-child(2)>a"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '.ctd-tabs.ranking>.tab-content>#top-week>table>tbody>tr>td:nth-child(2)>a'
+              selector: ".ctd-tabs.ranking>.tab-content>#top-week>table>tbody>tr>td:nth-child(2)>a"
   - info:
       name: Top month
-      defaultStrategy: html__select
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '.ctd-tabs.ranking>.tab-content>#top-month>table>tbody>tr>td:nth-child(2)>a'
+              selector: ".ctd-tabs.ranking>.tab-content>#top-month>table>tbody>tr>td:nth-child(2)>a"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '.ctd-tabs.ranking>.tab-content>#top-month>table>tbody>tr>td:nth-child(2)>a'
+              selector: ".ctd-tabs.ranking>.tab-content>#top-month>table>tbody>tr>td:nth-child(2)>a"
   - info:
       name: Search
       preloadPath: /searchs
@@ -339,76 +339,80 @@ categories:
         - name: type
           displayName: Loại
           input: radio
-          optionParsers:
-            - role: primary
-              amount: multiple
-              instructions:
-                selector: '#type > option'
-                attribute: value
-            - role: meta
-              amount: multiple
-              instructions:
-                selector: '#type > option'
+          preload:
+            - parsers:
+                - role: primary
+                  amount: multiple
+                  instructions:
+                    selector: "#type > option"
+                    attribute: value
+                - role: meta
+                  amount: multiple
+                  instructions:
+                    selector: "#type > option"
         - name: author
           displayName: Tác giả
           input: radio
-          optionParsers:
-            - role: primary
-              amount: multiple
-              instructions:
-                selector: '#author > option'
-                attribute: value
-            - role: meta
-              amount: multiple
-              instructions:
-                selector: '#author > option'
-        - name: 'genres[]'
+          preload:
+            - parsers:
+                - role: primary
+                  amount: multiple
+                  instructions:
+                    selector: "#author > option"
+                    attribute: value
+                - role: meta
+                  amount: multiple
+                  instructions:
+                    selector: "#author > option"
+        - name: "genres[]"
           displayName: Thể loại
           input: checkbox
-          optionParsers:
-            - role: primary
-              amount: multiple
-              instructions:
-                selector: 'div.genre-item label'
-            - role: meta
-              amount: multiple
-              instructions:
-                selector: 'div.genre-item input'
-                attribute: value
+          preload:
+            - parsers:
+                - role: primary
+                  amount: multiple
+                  instructions:
+                    selector: "div.genre-item label"
+                - role: meta
+                  amount: multiple
+                  instructions:
+                    selector: "div.genre-item input"
+                    attribute: value
         - name: status
           displayName: Tình trạng
           input: radio
-          optionParsers:
-            - role: primary
-              amount: multiple
-              instructions:
-                selector: '#status > option'
-            - role: meta
-              amount: multiple
-              instructions:
-                selector: '#status > option'
-                attribute: value
-      defaultPreloadStrategy: html__select
-      defaultStrategy: html__select
+          preload:
+            - parsers:
+                - role: primary
+                  amount: multiple
+                  instructions:
+                    selector: "#status > option"
+                - role: meta
+                  amount: multiple
+                  instructions:
+                    selector: "#status > option"
+                    attribute: value
+    defaultPreloadStrategy: html__select
+    defaultStrategy: html__select
     elements:
       - id: title
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '.table.table-hover>tbody>tr>td:nth-child(1)>a'
+              selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '.table.table-hover>tbody>tr>td:nth-child(1)>a'
+              selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: title
       - id: img
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '.table.table-hover>tbody>tr>td:nth-child(1)>a'
+              selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: data-thumbnail
       - id: description
         parsers:
@@ -416,29 +420,29 @@ categories:
             amount: multiple
             instructions:
               attribute: data-description
-              selector: '.table.table-hover>tbody>tr>td:nth-child(1)>a'
+              selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
       - id: pagination
         parsers:
           - role: link
             amount: multiple
             instructions:
-              selector: '.pagination.no-margin>li>a'
+              selector: ".pagination.no-margin>li>a"
               attribute: href
           - role: primary
             amount: multiple
             instructions:
-              selector: '.pagination.no-margin>li>a'
+              selector: ".pagination.no-margin>li>a"
       - id: prev
         parsers:
           - role: link
             amount: single
             instructions:
-              selector: '.pagination.no-margin>li>a[rel=prev]'
+              selector: ".pagination.no-margin>li>a[rel=prev]"
               attribute: href
       - id: next
         parsers:
           - role: link
             amount: single
             instructions:
-              selector: '.pagination.no-margin>li>a[rel=next]'
+              selector: ".pagination.no-margin>li>a[rel=next]"
               attribute: href

@@ -41,7 +41,7 @@ class NetFetcher extends http.BaseClient {
           http.StreamedRequest("POST", request.rawLink)
             ..headers.addAll(request.headers);
       (request.data ??
-              Stream.fromIterable<List<int>>([request.link.query.codeUnits]))
+              Stream<List<int>>.fromIterable([request.link.query.codeUnits]))
           .listen(streamedRequest.sink.add, onDone: streamedRequest.sink.close);
       return streamedRequest;
     }

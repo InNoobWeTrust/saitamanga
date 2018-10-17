@@ -2,11 +2,11 @@ import 'dart:async' show Stream;
 
 import 'package:html/dom.dart' show Document;
 
-import 'parser_strategy.dart' show ParserStrategy;
+import 'parse_strategy.dart' show ParseStrategy;
 import '../const/amount.dart' show Amount;
 import 'delegate_parse_processor.dart' show DelegateParseProcessor;
 
-class DelegateParser extends ParserStrategy {
+class DelegateParser extends ParseStrategy {
   final Amount amount;
   final Map<String, String> instructions;
   final DelegateParseProcessor processor;

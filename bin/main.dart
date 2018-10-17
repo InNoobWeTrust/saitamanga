@@ -10,5 +10,6 @@ void main(List<String> args) async {
       .readAsString(encoding: utf8);
   final config = loadYaml(source);
   print(config);
+
   /// TODO: continue implementing a cli program
 }

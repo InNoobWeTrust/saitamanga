@@ -2,11 +2,11 @@ import 'dart:async' show Future, Stream;
 
 import '../parse/parse_element.dart' show ParseElement;
 import '../parse/parse_product.dart' show ParseProduct;
-import '../parse/strategy/parser_strategist.dart' show ParserStrategist;
+import '../parse/strategy/parse_strategist.dart' show ParseStrategist;
 
 class Transformer {
   final List<ParseElement> parseElements;
-  final ParserStrategist strategist;
+  final ParseStrategist strategist;
 
   Transformer(this.parseElements, this.strategist);
 

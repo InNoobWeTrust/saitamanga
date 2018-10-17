@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart'
 import 'parser.dart' show Parser;
 import 'parse_product.dart' show ParseProduct;
 import 'const/role.dart' show Role;
-import 'strategy/parser_strategist.dart' show ParserStrategist;
+import 'strategy/parse_strategist.dart' show ParseStrategist;
 
 part 'parse_element.g.dart';
 
@@ -32,25 +32,24 @@ class ParseElement {
   /// The type of [data] varies in different sources.
   /// Refer to [Parser.streamParse()] for more information
   Future<ParseProduct> parse(
-      dynamic data, ParserStrategist parserStrategist) async {
+      dynamic data, ParseStrategist parseStrategist) async {
     List<String> primary;
     List<Uri> link;
-    List<String> meta;
+    Map<String, List<String>> meta;
     for (Parser parser in this.parsers) {
       switch (parser.role) {
         case Role.primary:
-          primary =
-              await parser.streamParse(data, parserStrategist).toList();
+          primary = await parser.streamParse(data, parseStrategist).toList();
           break;
         case Role.link:
           link = await parser
-              .streamParse(data, parserStrategist)
+              .streamParse(data, parseStrategist)
               .map((s) => Uri.tryParse(s))
               .toList();
           break;
         case Role.meta:
-          meta =
-              await parser.streamParse(data, parserStrategist).toList();
+          meta[parser.name ?? "_"] =
+              await parser.streamParse(data, parseStrategist).toList();
           break;
       }
     }

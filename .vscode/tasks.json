@@ -8,10 +8,5 @@
             "type": "shell",
             "command": "pub run build_runner watch"
         },
-        {
-            "label": "pub upgrade",
-            "type": "shell",
-            "command": "pub upgrade"
-        }
     ]
 }

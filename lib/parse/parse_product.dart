@@ -15,7 +15,7 @@ class ParseProduct {
   final String icon;
   final List<String> primary;
   final List<Uri> link;
-  final List<String> meta;
+  final Map<String, List<String>> meta;
 
   ParseProduct(
       this.id, this.name, this.icon, this.primary, this.link, this.meta);
