@@ -1,12 +1,13 @@
 import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
-    show JsonSerializable, JsonKey;
+    show JsonSerializable, FieldRename, JsonKey;
 import '../parse/parse_element.dart' show ParseElement;
+import 'const/input_type.dart' show InputType;
 
 part 'query_config.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class QueryConfig {
   @JsonKey(nullable: false)
   final String name;
@@ -32,5 +33,3 @@ class QueryConfig {
   @override
   String toString() => JsonEncoder.withIndent('  ').convert(this.toJson());
 }
-
-enum InputType { text, number, radio, checkbox }

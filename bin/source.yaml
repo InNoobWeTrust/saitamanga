@@ -1,448 +1,494 @@
 apiVersion: "0.0.1"
 info:
   name: Hoc Vien Truyen Tranh
-  shortname: HVTT
+  short_name: HVTT
   icon: "http://hocvientruyentranh.net/frontend/images/favicon.png"
   lang: Vietnamese
   origins:
     - "http://hocvientruyentranh.net"
   headers:
     user-agent: Mozilla/5.0 (Windows NT 6.3; WOW64)
-chapter:
-  defaultStrategy: html__select
-  elements:
-    - id: img
-      parsers:
-        - role: link
-          amount: multiple
-          instructions:
-            selector: ".manga-container>img"
-            attribute: src
-manga:
-  defaultStrategy: html__select
-  elements:
-    - id: title
-      parsers:
-        - role: primary
-          amount: single
-          instructions:
-            selector: ".__name"
-    - id: img
-      parsers:
-        - role: link
-          amount: single
-          instructions:
-            selector: ".__image>img"
-            attribute: src
-    - id: description
-      parsers:
-        - role: primary
-          amount: single
-          instructions:
-            selector: ".__description>p"
-    - id: chapter
-      parsers:
-        - role: link
-          amount: multiple
-          instructions:
-            selector: "div.table-scroll>table.table.table-hover>tbody>tr>td>a"
-            attribute: href
-        - role: primary
-          amount: multiple
-          instructions:
-            selector: "div.table-scroll>table.table.table-hover>tbody>tr>td>a"
-        - role: meta
-          amount: multiple
-          instructions:
-            selector: "div.table-scroll>table.table.table-hover>tbody>tr>td:nth-child(2)"
-        - role: meta
-          amount: multiple
-          instructions:
-            selector: "div.table-scroll>table.table.table-hover>tbody>tr>td:nth-child(3)"
-    - name: Cảnh báo độ tuổi
-      parsers:
-        - role: primary
-          amount: single
-          instructions:
-            selector: "div.alert.alert-warning"
-    - name: Tên khác
-      parsers:
-        - role: primary
-          amount: single
-          strategy: delegate
-          instructions:
-            es6: '[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Tên khác")).innerText.substring(10)'
-    - name: Thể loại
-      parsers:
-        - role: link
-          amount: multiple
-          strategy: delegate
-          instructions:
-            es6: 'JSON.stringify([[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Thể loại")).querySelectorAll("a").map(e=>e.href)])JSON.stringify([...[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Thể loại")).querySelectorAll("a")].map(e=>e.href))'
-        - role: primary
-          amount: multiple
-          strategy: delegate
-          instructions:
-            es6: 'JSON.stringify([...[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Thể loại")).querySelectorAll("a")].map(e=>e.innerText))'
-    - name: Tình trạng
-      parsers:
-        - role: primary
-          amount: single
-          strategy: delegate
-          instructions:
-            es6: '[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Tình trạng")).innerText.substring(12)'
-    - name: Tác giả
-      parsers:
-        - role: link
-          amount: multiple
-          strategy: delegate
-          instructions:
-            es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Tác giả")).querySelectorAll("a")].map(e=>e.href))'
-        - role: primary
-          amount: multiple
-          strategy: delegate
-          instructions:
-            es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Tác giả")).querySelectorAll("a")].map(e=>e.innerText))'
-    - name: Nhóm dịch
-      parsers:
-        - role: link
-          amount: multiple
-          strategy: delegate
-          instructions:
-            es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Nhóm dịch")).querySelectorAll("a")].map(e=>e.href))'
-        - role: primary
-          amount: single
-          strategy: delegate
-          instructions:
-            es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Nhóm dịch")).querySelectorAll("a")].map(e=>e.innerText))'
-categories:
-  - info:
+entries:
+  - manga list
+  - search
+  - new chapter
+  - new manga
+  - most viewed
+  - most followed
+  - top day
+  - top week
+  - top month
+views:
+  chapter:
+    view: collage
+    default_strategy: html__css_select
+    elements:
+      - id: collage__picture
+        parsers:
+          - role: link
+            amount: multiple
+            instruction:
+              selector: ".manga-container>img"
+              attribute: src
+  manga:
+    view: album
+    default_strategy: html__css_select
+    elements:
+      - id: album__title
+        parsers:
+          - role: primary
+            amount: single
+            instruction:
+              selector: ".__name"
+      - id: album__cover
+        parsers:
+          - role: link
+            amount: single
+            instruction:
+              selector: ".__image>img"
+              attribute: src
+      - id: album__description
+        parsers:
+          - role: primary
+            amount: single
+            instruction:
+              selector: ".__description>p"
+      - id: collage
+        target: chapter
+        parsers:
+          - role: link
+            amount: multiple
+            instruction:
+              selector: "div.table-scroll>table.table.table-hover>tbody>tr>td>a"
+              attribute: href
+          - role: primary
+            amount: multiple
+            instruction:
+              selector: "div.table-scroll>table.table.table-hover>tbody>tr>td>a"
+          - role: meta
+            name: Update time
+            amount: multiple
+            instruction:
+              selector: "div.table-scroll>table.table.table-hover>tbody>tr>td:nth-child(2)"
+          - role: meta
+            name: Views
+            amount: multiple
+            instruction:
+              selector: "div.table-scroll>table.table.table-hover>tbody>tr>td:nth-child(3)"
+      - name: Cảnh báo độ tuổi
+        parsers:
+          - role: primary
+            amount: single
+            instruction:
+              selector: "div.alert.alert-warning"
+      - name: Tên khác
+        parsers:
+          - role: primary
+            amount: single
+            strategy: html__delegate
+            instruction:
+              es6: '[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Tên khác")).innerText.substring(10)'
+      - name: Thể loại
+        parsers:
+          - role: link
+            amount: multiple
+            strategy: html__delegate
+            instruction:
+              es6: 'JSON.stringify([[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Thể loại")).querySelectorAll("a").map(e=>e.href)])JSON.stringify([...[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Thể loại")).querySelectorAll("a")].map(e=>e.href))'
+          - role: primary
+            amount: multiple
+            strategy: html__delegate
+            instruction:
+              es6: 'JSON.stringify([...[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Thể loại")).querySelectorAll("a")].map(e=>e.innerText))'
+      - name: Tình trạng
+        parsers:
+          - role: primary
+            amount: single
+            strategy: html__delegate
+            instruction:
+              es6: '[...document.querySelectorAll("div.__info>p")].find(e=>e.innerText.includes("Tình trạng")).innerText.substring(12)'
+      - name: Tác giả
+        parsers:
+          - role: link
+            amount: multiple
+            strategy: html__delegate
+            instruction:
+              es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Tác giả")).querySelectorAll("a")].map(e=>e.href))'
+          - role: primary
+            amount: multiple
+            strategy: html__delegate
+            instruction:
+              es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Tác giả")).querySelectorAll("a")].map(e=>e.innerText))'
+      - name: Nhóm dịch
+        parsers:
+          - role: link
+            amount: multiple
+            strategy: html__delegate
+            instruction:
+              es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Nhóm dịch")).querySelectorAll("a")].map(e=>e.href))'
+          - role: primary
+            amount: single
+            strategy: html__delegate
+            instruction:
+              es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Nhóm dịch")).querySelectorAll("a")].map(e=>e.innerText))'
+  manga list:
+    view: category
+    default_strategy: html__css_select
+    info:
       name: Manga List
       path: /manga/all
-      queryParams:
+      query_params:
         - name: page
           input: number
           options: []
           default:
             - "1"
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: title
-      - id: img
+      - id: album__cover
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: data-thumbnail
-      - id: description
+      - id: album__description
         parsers:
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: data-description
       - id: pagination
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: ".pagination.no-margin>li>a"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: ".pagination.no-margin>li>a"
       - id: prev
         parsers:
           - role: link
             amount: single
-            instructions:
+            instruction:
               selector: ".pagination.no-margin>li>a[rel=prev]"
               attribute: href
       - id: next
         parsers:
           - role: link
             amount: single
-            instructions:
+            instruction:
               selector: ".pagination.no-margin>li>a[rel=next]"
               attribute: href
-  - info:
+  new chapter:
+    view: category
+    default_strategy: html__css_select
+    info:
       name: New chapter
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "#new-manga-chapter li>div.manga-box>div.__info>h4.__title>a"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "#new-manga-chapter li>div.manga-box>div.__info>h4.__title>a"
-      - id: description
+      - id: album__description
         parsers:
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "#new-manga-chapter li>div.manga-box>div.__info"
-  - info:
+  new manga:
+    view: category
+    default_strategy: html__css_select
+    info:
       name: New manga
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "#new-manga li>div.manga-box>a.__image"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "#new-manga li>div.manga-box>div.__info>h4.__title>a"
-      - id: img
+      - id: album__cover
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "#new-manga li>div.manga-box>a.__image>img"
               attribute: data-src
-      - id: description
+      - id: album__description
         parsers:
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "#new-manga li>div.manga-box>div.__info"
-  - info:
+  most viewed:
+    view: category
+    default_strategy: html__css_select
+    info:
       name: Most viewed
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "#most-view-manga li>div.manga-box>a.__image"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "#most-view-manga li>div.manga-box>div.__info>h4.__title>a"
-      - id: img
+      - id: album__cover
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "#most-view-manga li>div.manga-box>a.__image>img"
               attribute: data-src
-      - id: description
+      - id: album__description
         parsers:
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "#most-view-manga li>div.manga-box>div.__info"
-  - info:
+  most followed:
+    view: category
+    default_strategy: html__css_select
+    info:
       name: Most followed
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "#most-follow-manga li>div.manga-box>a.__image"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "#most-follow-manga li>div.manga-box>div.__info>h4.__title>a"
-      - id: img
+      - id: album__cover
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: "#most-follow-manga li>div.manga-box>a.__image>img"
               attribute: data-src
-      - id: description
+      - id: album__description
         parsers:
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: "#most-follow-manga li>div.manga-box>div.__info"
-  - info:
+  top day:
+    view: category
+    default_strategy: html__css_select
+    info:
       name: Top day
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: ".ctd-tabs.ranking>.tab-content>#top-day>table>tbody>tr>td:nth-child(2)>a"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: ".ctd-tabs.ranking>.tab-content>#top-day>table>tbody>tr>td:nth-child(2)>a"
-  - info:
+  top week:
+    view: category
+    default_strategy: html__css_select
+    info:
       name: Top week
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: ".ctd-tabs.ranking>.tab-content>#top-week>table>tbody>tr>td:nth-child(2)>a"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: ".ctd-tabs.ranking>.tab-content>#top-week>table>tbody>tr>td:nth-child(2)>a"
-  - info:
+  top month:
+    view: category
+    default_strategy: html__css_select
+    info:
       name: Top month
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: ".ctd-tabs.ranking>.tab-content>#top-month>table>tbody>tr>td:nth-child(2)>a"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: ".ctd-tabs.ranking>.tab-content>#top-month>table>tbody>tr>td:nth-child(2)>a"
-  - info:
+  search:
+    view: category
+    path: /searchs
+    preload_path: /searchs
+    default_strategy: html__css_select
+    default_preload_strategy: html__css_select
+    info:
       name: Search
-      preloadPath: /searchs
-      path: /searchs
-      queryParams:
+      query_params:
         - name: keyword
-          displayName: Từ khoá
+          display_name: Từ khoá
           input: text
         - name: type
-          displayName: Loại
+          display_name: Loại
           input: radio
           preload:
             - parsers:
                 - role: primary
                   amount: multiple
-                  instructions:
+                  instruction:
+                    selector: "#type > option"
+                - role: meta
+                  name: value
+                  amount: multiple
+                  instruction:
                     selector: "#type > option"
                     attribute: value
-                - role: meta
-                  amount: multiple
-                  instructions:
-                    selector: "#type > option"
         - name: author
-          displayName: Tác giả
+          display_name: Tác giả
           input: radio
           preload:
             - parsers:
                 - role: primary
                   amount: multiple
-                  instructions:
+                  instruction:
+                    selector: "#author > option"
+                - role: meta
+                  name: value
+                  amount: multiple
+                  instruction:
                     selector: "#author > option"
                     attribute: value
-                - role: meta
-                  amount: multiple
-                  instructions:
-                    selector: "#author > option"
         - name: "genres[]"
-          displayName: Thể loại
+          display_name: Thể loại
           input: checkbox
           preload:
             - parsers:
                 - role: primary
                   amount: multiple
-                  instructions:
+                  instruction:
                     selector: "div.genre-item label"
                 - role: meta
+                  name: value
                   amount: multiple
-                  instructions:
+                  instruction:
                     selector: "div.genre-item input"
                     attribute: value
         - name: status
-          displayName: Tình trạng
+          display_name: Tình trạng
           input: radio
           preload:
             - parsers:
                 - role: primary
                   amount: multiple
-                  instructions:
+                  instruction:
                     selector: "#status > option"
                 - role: meta
+                  name: value
                   amount: multiple
-                  instructions:
+                  instruction:
                     selector: "#status > option"
                     attribute: value
-    defaultPreloadStrategy: html__select
-    defaultStrategy: html__select
     elements:
-      - id: title
+      - id: album
+        target: manga
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: title
-      - id: img
+      - id: album__cover
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
               attribute: data-thumbnail
-      - id: description
+      - id: album_description
         parsers:
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               attribute: data-description
               selector: ".table.table-hover>tbody>tr>td:nth-child(1)>a"
       - id: pagination
         parsers:
           - role: link
             amount: multiple
-            instructions:
+            instruction:
               selector: ".pagination.no-margin>li>a"
               attribute: href
           - role: primary
             amount: multiple
-            instructions:
+            instruction:
               selector: ".pagination.no-margin>li>a"
       - id: prev
         parsers:
           - role: link
             amount: single
-            instructions:
+            instruction:
               selector: ".pagination.no-margin>li>a[rel=prev]"
               attribute: href
       - id: next
         parsers:
           - role: link
             amount: single
-            instructions:
+            instruction:
               selector: ".pagination.no-margin>li>a[rel=next]"
               attribute: href

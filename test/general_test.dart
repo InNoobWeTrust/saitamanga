@@ -6,13 +6,13 @@ import 'package:resource/resource.dart';
 import 'package:yaml/yaml.dart';
 
 void main() {
-  test("Test json reading", () async {
-    final String source = await (Resource('./test/test_data/source.json'))
-        .readAsString(encoding: utf8);
-    final Map sourceMap = json.decode(source);
-    print(sourceMap);
-    expect(sourceMap, isNotEmpty);
-  });
+  // test("Test json reading", () async {
+  //   final String source = await (Resource('./test/test_data/source.json'))
+  //       .readAsString(encoding: utf8);
+  //   final Map sourceMap = json.decode(source);
+  //   print(sourceMap);
+  //   expect(sourceMap, isNotEmpty);
+  // });
   test("Test yaml reading", () async {
     final String source = await (Resource('./test/test_data/source.yaml')
         .readAsString(encoding: utf8));

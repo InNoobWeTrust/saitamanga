@@ -1,10 +1,11 @@
-import 'parse_strategy.dart' show ParseStrategy;
 import '../parser.dart' show Parser;
 import '../const/strategy.dart' show Strategy;
-import 'delegate_parse_processor.dart' show DelegateParseProcessor;
-import 'delegate_parser.dart' show DelegateParser;
-import './html/select_parser.dart' show SelectParser;
-import './html/delegate_select_parser.dart' show DelegateSelectParser;
+import 'parse_strategy.dart' show ParseStrategy;
+import 'html/delegate/delegate_parse_processor.dart'
+    show DelegateParseProcessor;
+import 'html/delegate/delegate_parser.dart' show DelegateParser;
+import 'html/css_select/select_parser.dart' show SelectParser;
+import 'html/mixed/select_delegate_parser.dart' show SelectDelegateParser;
 
 class ParseStrategist {
   final DelegateParseProcessor processor;
@@ -17,16 +18,16 @@ class ParseStrategist {
         parser.strategy != null ? parser.strategy : default_strategy;
     if (chosen_strategy == null) return null;
     switch (chosen_strategy) {
-      case Strategy.html__select:
-        return SelectParser(parser.amount, parser.instructions);
+      case Strategy.html__css_select:
+        return SelectParser(parser.amount, parser.instruction);
         break;
-      case Strategy.delegate:
+      case Strategy.html__delegate:
         return DelegateParser(
-            parser.amount, parser.instructions, this.processor);
+            parser.amount, parser.instruction, this.processor);
         break;
-      case Strategy.html__delegate_select:
-        return DelegateSelectParser(
-            parser.amount, parser.instructions, this.processor);
+      case Strategy.html__mixed__select_delegate:
+        return SelectDelegateParser(
+            parser.amount, parser.instruction, this.processor);
         break;
     }
     return null;

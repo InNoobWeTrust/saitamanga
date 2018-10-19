@@ -1,23 +1,19 @@
 import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
-    show JsonSerializable, JsonKey;
+    show JsonSerializable, FieldRename, JsonKey;
 import 'query_config.dart' show QueryConfig;
 
 part 'info_config.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class InfoConfig {
   @JsonKey(nullable: false)
   final String name;
-  @JsonKey(nullable: false)
-  final String path;
-  @JsonKey(nullable: true)
-  final String preloadPath;
   @JsonKey(nullable: true)
   final List<QueryConfig> queryParams;
 
-  InfoConfig(this.name, this.path, this.preloadPath, this.queryParams);
+  InfoConfig(this.name, this.queryParams);
 
   factory InfoConfig.fromJson(Map<String, dynamic> json) =>
       _$InfoConfigFromJson(json);

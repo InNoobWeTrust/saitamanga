@@ -2,7 +2,7 @@ import 'dart:async' show Stream;
 import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
-    show JsonSerializable, JsonKey;
+    show JsonSerializable, FieldRename, JsonKey;
 
 import 'strategy/parse_strategist.dart' show ParseStrategist;
 import 'const/amount.dart' show Amount;
@@ -11,7 +11,7 @@ import 'const/role.dart' show Role;
 
 part 'parser.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class Parser {
   @JsonKey(nullable: true)
   final Role role;
@@ -22,9 +22,9 @@ class Parser {
   @JsonKey(nullable: true)
   final Strategy strategy;
   @JsonKey(nullable: false)
-  final Map<String, String> instructions;
+  final Map<String, String> instruction;
 
-  Parser(this.role, this.name, this.amount, this.strategy, this.instructions);
+  Parser(this.role, this.name, this.amount, this.strategy, this.instruction);
 
   factory Parser.fromJson(Map<String, dynamic> json) => _$ParserFromJson(json);
 

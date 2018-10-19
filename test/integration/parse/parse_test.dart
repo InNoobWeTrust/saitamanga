@@ -7,9 +7,9 @@ import 'package:resource/resource.dart' show Resource;
 import 'package:html/dom.dart' show Document;
 import 'package:yaml/yaml.dart' show loadYaml;
 
-import '../../../lib/config/path_config.dart' show PathConfig;
+import '../../../lib/config/view_config.dart' show ViewConfig;
 import '../../../lib/preprocess/helper/dom_creator.dart' show DomCreator;
-import '../../../lib/parse/strategy/delegate_parse_processor.dart'
+import '../../../lib/parse/strategy/html/delegate/delegate_parse_processor.dart'
     show DelegateParseProcessor;
 import '../../../lib/parse/strategy/parse_strategist.dart' show ParseStrategist;
 import '../../../lib/transform/transformer.dart' show Transformer;
@@ -32,7 +32,7 @@ void main() {
         .readAsString(encoding: utf8);
     // final Map sourceMap = json.decode(source);
     final Map sourceMap = json.decode(json.encode(loadYaml(source)));
-    final PathConfig config = PathConfig.fromJson(sourceMap["categories"][0]);
+    final ViewConfig config = ViewConfig.fromJson(sourceMap["views"]["manga list"]);
     // Then load data from the web
     final String uri =
         "http://hocvientruyentranh.net/manga/all?filter_type=latest-chapter";
