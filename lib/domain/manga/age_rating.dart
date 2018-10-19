@@ -11,4 +11,12 @@
 ///   - [OLDER_TEENS]   age 16+
 ///   - [MATURE]       age 18+
 ///   - [WIZARD]       age 30+, reserved for extreme condition
-enum AgeRating { UNKNOWN, EVERYONE, YOUTH, TEENS, OLDER_TEENS, MATURE, WIZARD }
+enum AgeRating {
+  UNKNOWN,
+  EVERYONE,
+  YOUTH,
+  TEENS,
+  OLDER_TEENS,
+  MATURE,
+  WIZARD,
+}

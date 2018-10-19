@@ -1,1 +1,6 @@
-enum InputType { text, number, radio, checkbox }
+enum InputType {
+  text,
+  number,
+  radio,
+  checkbox,
+}

@@ -1,1 +1,5 @@
-enum Role { primary, link, meta }
+enum Role {
+  primary,
+  link,
+  meta,
+}

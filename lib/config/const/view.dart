@@ -1,1 +1,5 @@
-enum View { category, album, collage }
+enum View {
+  category,
+  album,
+  collage,
+}
