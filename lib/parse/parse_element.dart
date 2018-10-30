@@ -8,6 +8,8 @@ import 'parser.dart' show Parser;
 import 'parse_product.dart' show ParseProduct;
 import 'const/role.dart' show Role;
 import 'const/id.dart' show Id;
+import 'const/amount.dart' show Amount;
+import 'const/sort.dart' show Sort;
 import 'strategy/parse_strategist.dart' show ParseStrategist;
 
 part 'parse_element.g.dart';
@@ -20,12 +22,18 @@ class ParseElement {
   final String name;
   @JsonKey(nullable: true)
   final String target;
+  @JsonKey(nullable: false)
+  final Amount amount;
+  @JsonKey(nullable: true)
+  final Sort sort;
   @JsonKey(nullable: true)
   final String icon;
   @JsonKey(nullable: false)
   final List<Parser> parsers;
 
-  ParseElement(this.id, this.name, this.target, this.icon, this.parsers);
+  ParseElement(
+      this.id, this.name, this.target, this.amount, this.icon, this.parsers,
+      {this.sort = Sort.asc});
 
   factory ParseElement.fromJson(Map<String, dynamic> json) =>
       _$ParseElementFromJson(json);
@@ -39,20 +47,22 @@ class ParseElement {
     List<String> primary;
     List<Uri> link;
     Map<String, List<String>> meta;
+    var getStrategyDoParse = (Parser parser, Amount amount, dynamic data) =>
+        parseStrategist.provideStrategy(parser, amount).streamParse(data);
     for (Parser parser in this.parsers) {
       switch (parser.role) {
         case Role.primary:
-          primary = await parser.streamParse(data, parseStrategist).toList();
+          primary =
+              await getStrategyDoParse(parser, this.amount, data).toList();
           break;
         case Role.link:
-          link = await parser
-              .streamParse(data, parseStrategist)
+          link = await getStrategyDoParse(parser, this.amount, data)
               .map((s) => Uri.tryParse(s))
               .toList();
           break;
         case Role.meta:
           meta[parser.name ?? "_"] =
-              await parser.streamParse(data, parseStrategist).toList();
+              await getStrategyDoParse(parser, this.amount, data).toList();
           break;
       }
     }
