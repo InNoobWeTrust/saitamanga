@@ -2,12 +2,15 @@ import 'dart:async' show Stream;
 
 import 'package:html/dom.dart' show Document;
 
-import '../../../const/amount.dart' show Amount;
+import '../../../../config/const/amount.dart' show Amount;
 import '../../parse_strategy.dart' show ParseStrategy;
+import '../../delegate/delegate_parse_processor.dart'
+    show DelegateParseProcessor;
 import '../css_select/selector_instruction.dart' show SelectorInstruction;
 import '../css_select/selector.dart' show Selector;
-import '../delegate/delegate_parse_processor.dart' show DelegateParseProcessor;
 
+/// This strategy first use CSS Selector to filter the data then delegate the
+/// filterd data
 class SelectDelegateParser extends ParseStrategy {
   final Amount amount;
   final SelectorInstruction selectorInstruction;

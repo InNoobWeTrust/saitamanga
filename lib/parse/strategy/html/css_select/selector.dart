@@ -2,9 +2,11 @@ import 'dart:async' show Stream;
 
 import 'package:html/dom.dart' show Document, Element;
 
-import 'selector_instruction.dart' show SelectorInstruction;
+import './selector_instruction.dart' show SelectorInstruction;
 
+/// The functional part of CSS-Selector [ParseStrategy]
 class Selector {
+  /// Select single HTML Node
   static Stream<String> select(
       Document dom, SelectorInstruction instruction) async* {
     final Element el = dom?.querySelector(instruction.selector);
@@ -12,6 +14,7 @@ class Selector {
     yield _firstValid(el, instruction);
   }
 
+  /// Select all satisfying HTML Node
   static Stream<String> selectAll(
       Document dom, SelectorInstruction instruction) {
     final List<Element> elems = dom?.querySelectorAll(instruction.selector);

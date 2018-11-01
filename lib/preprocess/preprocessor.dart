@@ -1,24 +1,30 @@
-import 'dart:async' show Future;
+import 'dart:convert' show json;
 
-import '../domain/source/source.dart' show Source;
-import '../domain/source/source_type.dart' show SourceType;
-import 'helper/dom_creator.dart' show DomCreator;
+import 'package:yaml/yaml.dart' show loadYaml;
 
+import './helper/dom_creator.dart' show DomCreator;
+import './const/preprocess_type.dart' show PreprocessType;
+
+/// Do the preprocessing of raw [String] data into transformable data
 class PreProcessor {
-  Source source;
-
   /// Preprocess the [data] to the desired type before transforming
-  Future<dynamic> preprocess(String data, {String baseUri}) async {
-    if (source.info?.metadata == null)
-      throw Exception("Source info not set properly!");
-    switch (source.info.type) {
-      case SourceType.HTML:
-        String encoding = source.info.metadata["encoding"];
-        DomCreator domCreator = encoding == null
-            ? DomCreator(baseUri)
-            : DomCreator(baseUri, encoding: encoding);
-        return await domCreator.generateDOM(data);
+  static dynamic preprocess(
+      String data, PreprocessType type, Map<String, dynamic> metadata) {
+    switch (type) {
+      case PreprocessType.xml:
+        throw Exception('Unimplemented preprocess target!');
         break;
+      case PreprocessType.json:
+        return json.decode(data);
+        break;
+      case PreprocessType.yaml:
+        return json.decode(
+            json.encode(loadYaml(data, sourceUrl: metadata['base_url'])));
+        break;
+      case PreprocessType.dom:
+        return DomCreator.fromJson(metadata).generateDOM(data);
+        break;
+      case PreprocessType.string:
       default:
         return data;
         break;

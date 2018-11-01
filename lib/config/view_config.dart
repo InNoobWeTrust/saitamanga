@@ -3,13 +3,15 @@ import 'dart:convert' show JsonEncoder;
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, FieldRename, JsonKey;
 
-import '../parse/const/strategy.dart' show Strategy;
-import '../parse/parse_element.dart' show ParseElement;
-import 'info_config.dart' show InfoConfig;
-import 'const/view.dart' show View;
+import '../preprocess/const/preprocess_type.dart' show PreprocessType;
+import './const/strategy.dart' show Strategy;
+import './parse_element_config.dart' show ParseElementConfig;
+import './info_config.dart' show InfoConfig;
+import './const/view.dart' show View;
 
 part 'view_config.g.dart';
 
+/// Represent the behaviour of the [View]
 @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class ViewConfig {
   @JsonKey(nullable: false)
@@ -20,14 +22,14 @@ class ViewConfig {
   final String path;
   @JsonKey(nullable: true)
   final String preloadPath;
-  @JsonKey(nullable: true)
+  @JsonKey(nullable: false)
   final Strategy defaultStrategy;
-  @JsonKey(nullable: true)
-  final Strategy defaultPreloadStrategy;
+  @JsonKey(nullable: false)
+  final PreprocessType defaultPreprocessType;
   @JsonKey(nullable: true)
   final InfoConfig info;
   @JsonKey(nullable: false)
-  final List<ParseElement> elements;
+  final List<ParseElementConfig> elements;
 
   ViewConfig(
       this.name,
@@ -35,7 +37,7 @@ class ViewConfig {
       this.path,
       this.preloadPath,
       this.defaultStrategy,
-      this.defaultPreloadStrategy,
+      this.defaultPreprocessType,
       this.info,
       this.elements);
 

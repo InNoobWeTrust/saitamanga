@@ -1,30 +1,48 @@
-import 'dart:convert' show JsonEncoder;
+import '../config/parse_element_config.dart' show ParseElementConfig;
+import '../config/parser_config.dart' show ParserConfig;
+import '../config/const/role.dart' show Role;
+import './parse_product.dart' show ParseProduct;
+import './strategy/parse_strategist.dart' show ParseStrategist;
 
-import 'package:json_annotation/json_annotation.dart'
-    show JsonSerializable, FieldRename, JsonKey;
-
-import 'const/strategy.dart' show Strategy;
-import 'const/role.dart' show Role;
-
-part 'parser.g.dart';
-
-@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
+/// Do the actual parse from raw data into [ParseProduct]
 class Parser {
-  @JsonKey(nullable: true)
-  final Role role;
-  @JsonKey(nullable: true)
-  final String name;
-  @JsonKey(nullable: true)
-  final Strategy strategy;
-  @JsonKey(nullable: false)
-  final Map<String, String> instruction;
-
-  Parser(this.role, this.name, this.strategy, this.instruction);
-
-  factory Parser.fromJson(Map<String, dynamic> json) => _$ParserFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ParserToJson(this);
-
-  @override
-  String toString() => JsonEncoder.withIndent('  ').convert(this.toJson());
+  /// The type of [preprocessedData] varies in different sources.
+  /// Refer to [Parser.streamParse()] for more information
+  static Future<ParseProduct> parse(ParseElementConfig parseElementConfig,
+      dynamic preprocessedData, ParseStrategist parseStrategist) async {
+    List<String> primary;
+    List<Uri> link;
+    Map<String, List<String>> meta;
+    for (ParserConfig parserConfig in parseElementConfig.parserConfigs) {
+      switch (parserConfig.role) {
+        case Role.primary:
+          primary = await parseStrategist
+              .provideStrategy(parserConfig, parseElementConfig.amount)
+              .streamParse(preprocessedData)
+              .toList();
+          break;
+        case Role.link:
+          link = await parseStrategist
+              .provideStrategy(parserConfig, parseElementConfig.amount)
+              .streamParse(preprocessedData)
+              .map((s) => Uri.tryParse(s))
+              .toList();
+          break;
+        case Role.meta:
+          meta[parserConfig.name ?? "_"] = await parseStrategist
+              .provideStrategy(parserConfig, parseElementConfig.amount)
+              .streamParse(preprocessedData)
+              .toList();
+          break;
+      }
+    }
+    return ParseProduct(
+        parseElementConfig.id,
+        parseElementConfig.name,
+        parseElementConfig.target,
+        parseElementConfig.icon,
+        primary,
+        link,
+        meta);
+  }
 }

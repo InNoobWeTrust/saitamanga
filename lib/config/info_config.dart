@@ -2,10 +2,12 @@ import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, FieldRename, JsonKey;
-import 'query_config.dart' show QueryConfig;
+
+import './query_config.dart' show QueryConfig;
 
 part 'info_config.g.dart';
 
+/// The information of current [View]
 @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class InfoConfig {
   @JsonKey(nullable: false)

@@ -2,11 +2,13 @@ import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, FieldRename, JsonKey;
-import '../parse/parse_element.dart' show ParseElement;
-import 'const/input_type.dart' show InputType;
+
+import './parse_element_config.dart' show ParseElementConfig;
+import './const/input_type.dart' show InputType;
 
 part 'query_config.g.dart';
 
+/// Instruct how to do the query for raw data
 @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class QueryConfig {
   @JsonKey(nullable: false)
@@ -16,7 +18,7 @@ class QueryConfig {
   @JsonKey(nullable: false)
   final InputType input;
   @JsonKey(nullable: true)
-  final ParseElement preload;
+  final ParseElementConfig preload;
   @JsonKey(nullable: true)
   final List<String> options;
   @JsonKey(name: "default", nullable: true)

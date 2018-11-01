@@ -1,9 +1,10 @@
 import 'dart:async' show Stream;
 
-import '../../../const/amount.dart' show Amount;
-import '../../parse_strategy.dart' show ParseStrategy;
-import 'delegate_parse_processor.dart' show DelegateParseProcessor;
+import '../../../config/const/amount.dart' show Amount;
+import '../parse_strategy.dart' show ParseStrategy;
+import './delegate_parse_processor.dart' show DelegateParseProcessor;
 
+/// A strategy that delegate the parsing
 class DelegateParser extends ParseStrategy {
   final Amount amount;
   final Map<String, dynamic> instructions;

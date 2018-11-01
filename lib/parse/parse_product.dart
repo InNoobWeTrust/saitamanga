@@ -3,10 +3,11 @@ import 'dart:convert' show JsonEncoder;
 import 'package:json_annotation/json_annotation.dart'
     show JsonSerializable, FieldRename, JsonKey;
 
-import 'const/id.dart' show Id;
+import '../config/const/id.dart' show Id;
 
 part 'parse_product.g.dart';
 
+/// Represent distinct interested data
 @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class ParseProduct {
   @JsonKey(nullable: true)

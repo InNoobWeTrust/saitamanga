@@ -1,4 +1,0 @@
-enum Amount {
-  single,
-  multiple,
-}

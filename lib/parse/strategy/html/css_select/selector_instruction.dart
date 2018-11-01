@@ -5,6 +5,7 @@ import 'package:json_annotation/json_annotation.dart'
 
 part 'selector_instruction.g.dart';
 
+/// Instruction on how to select the right HTML Node
 @JsonSerializable(includeIfNull: false, nullable: false)
 class SelectorInstruction {
   @JsonKey()

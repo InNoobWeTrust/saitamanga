@@ -22,6 +22,7 @@ views:
   chapter:
     view: collage
     default_strategy: html__css_select
+    default_preprocess_type: dom
     elements:
       - id: collage__picture
         amount: multiple
@@ -33,6 +34,7 @@ views:
   manga:
     view: album
     default_strategy: html__css_select
+    default_preprocess_type: dom
     elements:
       - id: album__title
         amount: single
@@ -129,6 +131,7 @@ views:
   manga list:
     view: category
     default_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: Manga List
       path: /manga/all
@@ -192,6 +195,7 @@ views:
   new chapter:
     view: category
     default_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: New chapter
     elements:
@@ -215,6 +219,7 @@ views:
   new manga:
     view: category
     default_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: New manga
     elements:
@@ -245,6 +250,7 @@ views:
   most viewed:
     view: category
     default_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: Most viewed
     elements:
@@ -275,6 +281,7 @@ views:
   most followed:
     view: category
     default_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: Most followed
     elements:
@@ -305,6 +312,7 @@ views:
   top day:
     view: category
     default_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: Top day
     elements:
@@ -322,6 +330,7 @@ views:
   top week:
     view: category
     default_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: Top week
     elements:
@@ -339,6 +348,7 @@ views:
   top month:
     view: category
     default_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: Top month
     elements:
@@ -358,7 +368,7 @@ views:
     path: /searchs
     preload_path: /searchs
     default_strategy: html__css_select
-    default_preload_strategy: html__css_select
+    default_preprocess_type: dom
     info:
       name: Search
       query_params:

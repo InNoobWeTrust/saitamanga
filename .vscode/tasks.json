@@ -8,5 +8,10 @@
             "type": "shell",
             "command": "pub run build_runner watch"
         },
+        {
+            "label": "dartfmt",
+            "type": "shell",
+            "command": "dartfmt -w ."
+        },
     ]
 }

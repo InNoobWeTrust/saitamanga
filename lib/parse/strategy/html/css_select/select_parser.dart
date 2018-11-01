@@ -3,10 +3,11 @@ import 'dart:async' show Stream;
 import 'package:html/dom.dart' show Document;
 
 import '../../parse_strategy.dart' show ParseStrategy;
-import '../../../const/amount.dart' show Amount;
-import 'selector_instruction.dart' show SelectorInstruction;
-import 'selector.dart' show Selector;
+import '../../../../config/const/amount.dart' show Amount;
+import './selector_instruction.dart' show SelectorInstruction;
+import './selector.dart' show Selector;
 
+/// This strategy use CSS Selector to parse
 class SelectParser extends ParseStrategy {
   final Amount amount;
   final SelectorInstruction instruction;
