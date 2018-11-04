@@ -27,7 +27,6 @@ void main() {
     // First load the path's config
     final String source = await (Resource('./test/test_data/source.yaml'))
         .readAsString(encoding: utf8);
-    // final Map sourceMap = json.decode(source);
     final Map sourceMap = json.decode(json.encode(loadYaml(source)));
     final ViewConfig config =
         ViewConfig.fromJson(sourceMap["views"]["manga list"]);
@@ -36,11 +35,9 @@ void main() {
         "http://hocvientruyentranh.net/manga/all?filter_type=latest-chapter";
     final Client client = Client();
     final Response response = await client.get(uri);
-    // print(response.body.substring(
-    //     0, response.contentLength > 100 ? 100 : response.contentLength - 1));
     expect(response.contentLength, greaterThan(0));
-    final FakeProcessor processor = FakeProcessor();
-    final Transformer transformer = Transformer(config, processor);
+    final FakeProcessor delegateProcessor = FakeProcessor();
+    final Transformer transformer = Transformer(config, delegateProcessor);
     await for (var item in await transformer
         .transform(response.body, {'base_url': response.request.url})) {
       print("${item}\n");

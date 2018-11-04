@@ -9,10 +9,12 @@ part 'dom_creator.g.dart';
 
 @JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
 class DomCreator {
+  @JsonKey(nullable: false)
   final String encoding;
+  @JsonKey(nullable: true, defaultValue: 'utf-8')
   final String baseUri;
 
-  DomCreator(this.baseUri, {this.encoding = 'utf-8'});
+  DomCreator(this.baseUri, this.encoding);
 
   factory DomCreator.fromJson(Map<String, dynamic> json) =>
       _$DomCreatorFromJson(json);
