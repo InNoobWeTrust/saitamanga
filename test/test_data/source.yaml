@@ -130,17 +130,17 @@ views:
               es6: 'JSON.stringify([...[...document.querySelectorAll(".__info>p")].find(e=>e.innerText.includes("Nhóm dịch")).querySelectorAll("a")].map(e=>e.innerText))'
   manga list:
     view: category
+    path: /manga/all
     default_strategy: html__css_select
     default_preprocess_type: dom
     info:
       name: Manga List
-      path: /manga/all
-      query_params:
-        - name: page
-          input: number
-          options: []
-          default:
-            - "1"
+    query_params:
+      - name: page
+        input: number
+        options: []
+        default:
+          - "1"
     elements:
       - id: album
         target: manga
@@ -371,66 +371,66 @@ views:
     default_preprocess_type: dom
     info:
       name: Search
-      query_params:
-        - name: keyword
-          display_name: Từ khoá
-          input: text
-        - name: type
-          display_name: Loại
-          input: radio
-          preload:
-            amount: multiple
-            parsers:
-              - role: primary
-                instruction:
-                  selector: "#type > option"
-              - role: meta
-                name: value
-                instruction:
-                  selector: "#type > option"
-                  attribute: value
-        - name: author
-          display_name: Tác giả
-          input: radio
-          preload:
-            amount: multiple
-            parsers:
-              - role: primary
-                instruction:
-                  selector: "#author > option"
-              - role: meta
-                name: value
-                instruction:
-                  selector: "#author > option"
-                  attribute: value
-        - name: "genres[]"
-          display_name: Thể loại
-          input: checkbox
-          preload:
-            amount: multiple
-            parsers:
-              - role: primary
-                instruction:
-                  selector: "div.genre-item label"
-              - role: meta
-                name: value
-                instruction:
-                  selector: "div.genre-item input"
-                  attribute: value
-        - name: status
-          display_name: Tình trạng
-          input: radio
-          preload:
-            amount: multiple
-            parsers:
-              - role: primary
-                instruction:
-                  selector: "#status > option"
-              - role: meta
-                name: value
-                instruction:
-                  selector: "#status > option"
-                  attribute: value
+    query_params:
+      - name: keyword
+        display_name: Từ khoá
+        input: text
+      - name: type
+        display_name: Loại
+        input: radio
+        preload:
+          amount: multiple
+          parsers:
+            - role: primary
+              instruction:
+                selector: "#type > option"
+            - role: meta
+              name: value
+              instruction:
+                selector: "#type > option"
+                attribute: value
+      - name: author
+        display_name: Tác giả
+        input: radio
+        preload:
+          amount: multiple
+          parsers:
+            - role: primary
+              instruction:
+                selector: "#author > option"
+            - role: meta
+              name: value
+              instruction:
+                selector: "#author > option"
+                attribute: value
+      - name: "genres[]"
+        display_name: Thể loại
+        input: checkbox
+        preload:
+          amount: multiple
+          parsers:
+            - role: primary
+              instruction:
+                selector: "div.genre-item label"
+            - role: meta
+              name: value
+              instruction:
+                selector: "div.genre-item input"
+                attribute: value
+      - name: status
+        display_name: Tình trạng
+        input: radio
+        preload:
+          amount: multiple
+          parsers:
+            - role: primary
+              instruction:
+                selector: "#status > option"
+            - role: meta
+              name: value
+              instruction:
+                selector: "#status > option"
+                attribute: value
     elements:
       - id: album
         target: manga

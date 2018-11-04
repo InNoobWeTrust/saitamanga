@@ -7,6 +7,7 @@ import '../preprocess/const/preprocess_type.dart' show PreprocessType;
 import './const/strategy.dart' show Strategy;
 import './parse_element_config.dart' show ParseElementConfig;
 import './info_config.dart' show InfoConfig;
+import './query_config.dart' show QueryConfig;
 import './const/view.dart' show View;
 
 part 'view_config.g.dart';
@@ -28,6 +29,8 @@ class ViewConfig {
   final PreprocessType defaultPreprocessType;
   @JsonKey(nullable: true)
   final InfoConfig info;
+  @JsonKey(nullable: true)
+  final List<QueryConfig> queryParams;
   @JsonKey(nullable: false)
   final List<ParseElementConfig> elements;
 
@@ -39,6 +42,7 @@ class ViewConfig {
       this.defaultStrategy,
       this.defaultPreprocessType,
       this.info,
+      this.queryParams,
       this.elements);
 
   factory ViewConfig.fromJson(Map<String, dynamic> json) =>
