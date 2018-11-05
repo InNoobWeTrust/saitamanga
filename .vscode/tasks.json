@@ -4,14 +4,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build_runner",
+            "label": "build_runner watch",
             "type": "shell",
-            "command": "pub run build_runner watch"
+            "command": "pub run tool/watch_source.dart"
+        },
+        {
+            "label": "build_runner build",
+            "type": "shell",
+            "command": "pub run tool/build_source.dart"
         },
         {
             "label": "dartfmt",
             "type": "shell",
-            "command": "dartfmt -w ."
+            "command": "pub run tool/format_source.dart"
         },
     ]
 }
