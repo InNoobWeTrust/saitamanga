@@ -6,17 +6,17 @@
         {
             "label": "build_runner watch",
             "type": "shell",
-            "command": "pub run tool/watch_source.dart"
+            "command": "dart tool/watch_source.dart"
         },
         {
             "label": "build_runner build",
             "type": "shell",
-            "command": "pub run tool/build_source.dart"
+            "command": "dart tool/build_source.dart"
         },
         {
             "label": "dartfmt",
             "type": "shell",
-            "command": "pub run tool/format_source.dart"
+            "command": "dart tool/format_source.dart"
         },
     ]
 }
