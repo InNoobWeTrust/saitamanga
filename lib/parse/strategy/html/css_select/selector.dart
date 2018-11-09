@@ -8,7 +8,9 @@ import './selector_instruction.dart' show SelectorInstruction;
 class Selector {
   /// Select single HTML Node
   static Stream<String> select(
-      Document dom, SelectorInstruction instruction) async* {
+    Document dom,
+    SelectorInstruction instruction,
+  ) async* {
     final Element el = dom?.querySelector(instruction.selector);
     if (el == null) return;
     yield _firstValid(el, instruction);
@@ -16,12 +18,17 @@ class Selector {
 
   /// Select all satisfying HTML Node
   static Stream<String> selectAll(
-      Document dom, SelectorInstruction instruction) {
+    Document dom,
+    SelectorInstruction instruction,
+  ) {
     final List<Element> elems = dom?.querySelectorAll(instruction.selector);
     return Stream.fromIterable(elems.map((e) => _firstValid(e, instruction)));
   }
 
-  static String _firstValid(Element elem, SelectorInstruction instruction) {
+  static String _firstValid(
+    Element elem,
+    SelectorInstruction instruction,
+  ) {
     if (instruction.attribute == null) {
       return elem.text;
     } else if (instruction.alternateAttribute == null) {

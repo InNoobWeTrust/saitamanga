@@ -9,23 +9,39 @@ import './const/input_type.dart' show InputType;
 part 'query_config.g.dart';
 
 /// Instruct how to do the query for raw data
-@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
+@JsonSerializable(
+  includeIfNull: false,
+  fieldRename: FieldRename.snake,
+)
 class QueryConfig {
-  @JsonKey(nullable: false)
+  @JsonKey(
+    nullable: false,
+  )
   final String name;
-  @JsonKey(nullable: false)
+  @JsonKey(
+    nullable: false,
+  )
   final String displayName;
-  @JsonKey(nullable: false)
+  @JsonKey(
+    nullable: false,
+  )
   final InputType input;
-  @JsonKey(nullable: true)
   final ParseElementConfig preload;
-  @JsonKey(nullable: true)
   final List<String> options;
-  @JsonKey(name: "default", nullable: true)
+  @JsonKey(
+    nullable: true,
+    name: "default",
+  )
   final List<String> defaultValue;
 
-  QueryConfig(this.name, this.displayName, this.input, this.preload,
-      this.options, this.defaultValue);
+  QueryConfig(
+    this.name,
+    this.displayName,
+    this.input,
+    this.preload,
+    this.options,
+    this.defaultValue,
+  );
 
   factory QueryConfig.fromJson(Map<String, dynamic> json) =>
       _$QueryConfigFromJson(json);

@@ -10,7 +10,11 @@ class DelegateParser extends ParseStrategy {
   final Map<String, dynamic> instructions;
   final DelegateParseProcessor processor;
 
-  DelegateParser(this.amount, this.instructions, this.processor);
+  DelegateParser(
+    this.amount,
+    this.instructions,
+    this.processor,
+  );
 
   /// The type of [data] here is [String]
   ///

@@ -12,8 +12,10 @@ class SelectParser extends ParseStrategy {
   final Amount amount;
   final SelectorInstruction instruction;
 
-  SelectParser(this.amount, Map<String, dynamic> instruction)
-      : this.instruction = SelectorInstruction.fromJson(instruction);
+  SelectParser(
+    this.amount,
+    Map<String, dynamic> instruction,
+  ) : this.instruction = SelectorInstruction.fromJson(instruction);
 
   /// The type of [data] here is [Document]
   @override

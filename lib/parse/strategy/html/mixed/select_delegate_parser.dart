@@ -17,16 +17,24 @@ class SelectDelegateParser extends ParseStrategy {
   final Map<String, dynamic> rawInstruction;
   final DelegateParseProcessor processor;
 
-  SelectDelegateParser(this.amount, this.rawInstruction, this.processor)
-      : this.selectorInstruction = SelectorInstruction.fromJson(rawInstruction);
+  SelectDelegateParser(
+    this.amount,
+    this.rawInstruction,
+    this.processor,
+  ) : this.selectorInstruction = SelectorInstruction.fromJson(rawInstruction);
 
   /// The type of [data] here is [Document]
   ///
   /// Note: Will return null if the [processor] of this object is null
   @override
   Stream<String> streamParse(dynamic data) {
-    final Stream<String> selected =
-        Selector.select(data as Document, this.selectorInstruction);
-    return processor?.process(selected, instructions: rawInstruction);
+    final Stream<String> selected = Selector.select(
+      data as Document,
+      this.selectorInstruction,
+    );
+    return processor?.process(
+      selected,
+      instructions: rawInstruction,
+    );
   }
 }

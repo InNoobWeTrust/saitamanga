@@ -1,12 +1,25 @@
 import 'dart:async' show Stream;
+import 'dart:convert' show JsonEncoder;
 
-import './option/option.dart' show Option;
+import 'package:json_annotation/json_annotation.dart'
+    show JsonSerializable, JsonKey, FieldRename;
 
+import '../metadata/metadata.dart' show Metadata;
+import './query/query.dart' show Query;
+
+part 'request.g.dart';
+
+/// Advanced request object to store more information
+@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake,)
 class Request {
   final Uri rawLink;
+  final Map<String, String> headers;
+  final Query query;
+  final Metadata metadata;
+  @JsonKey(ignore: true,)
+  final Stream<List<int>> data;
 
-  /// Generate the query parameters for [rawLink] using [option] field
-  /// to get this
+  /// Generate the query parameters for [rawLink] using [query] field
   Uri get link => rawLink == null
       ? rawLink
       : Uri(
@@ -15,39 +28,22 @@ class Request {
           host: rawLink.host,
           port: rawLink.port,
           pathSegments: rawLink.pathSegments,
-          queryParameters: option?.queryParams,
+          queryParameters: query?.queryParams,
           fragment: rawLink.fragment);
-  Map<String, String> headers = <String, String>{};
-  Option option;
-  Stream<List<int>> data;
-  Map<String, dynamic> metadata = <String, dynamic>{};
 
-  Request(this.rawLink, {this.headers, this.option, this.data, this.metadata});
+  Request(
+    this.rawLink, {
+    this.headers = const <String, String>{},
+    this.query = null,
+    this.metadata = null,
+    this.data = const Stream.empty(),
+  });
 
-  Request setHeaders(Map<String, String> headers) => this..headers = headers;
+  factory Request.fromJson(Map<String, dynamic> json) =>
+      _$RequestFromJson(json);
 
-  Request addHeaders(Map<String, String> headers) => this
-    ..headers ??= <String, String>{}
-    ..headers.addAll(headers);
+  Map<String, dynamic> toJson() => _$RequestToJson(this);
 
-  Request addHeaderEntry(MapEntry<String, String> headerEntry) => this
-    ..headers ??= <String, String>{}
-    ..headers.addEntries([headerEntry]);
-
-  Request addHeader(String name, String value) =>
-      this..addHeaderEntry(MapEntry(name, value));
-
-  Request setMetadata(Map<String, dynamic> metadata) =>
-      this..metadata = metadata;
-
-  Request addAllMetadata(Map<String, dynamic> metadata) => this
-    ..metadata ??= <String, dynamic>{}
-    ..metadata.addAll(metadata);
-
-  Request addMetadataEntry(MapEntry<String, dynamic> metadataEntry) => this
-    ..metadata ??= <String, dynamic>{}
-    ..metadata.addEntries([metadataEntry]);
-
-  Request addMetadata(String name, dynamic value) =>
-      this..addMetadataEntry(MapEntry<String, dynamic>(name, value));
+  @override
+  String toString() => JsonEncoder.withIndent('  ').convert(this.toJson());
 }

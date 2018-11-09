@@ -13,20 +13,36 @@ class ParseStrategist {
   final DelegateParseProcessor processor;
   final ViewConfig viewConfig;
 
-  ParseStrategist(this.processor, this.viewConfig);
+  ParseStrategist(
+    this.processor,
+    this.viewConfig,
+  );
 
   /// Give strategy's worker to do the parse
-  ParseStrategy provideStrategy(ParserConfig parserConfig, Amount amount) {
+  ParseStrategy provideStrategy(
+    ParserConfig parserConfig,
+    Amount amount,
+  ) {
     switch (parserConfig.strategy ?? viewConfig.defaultStrategy) {
       case Strategy.html__css_select:
-        return SelectParser(amount, parserConfig.instruction);
+        return SelectParser(
+          amount,
+          parserConfig.instruction,
+        );
         break;
       case Strategy.html__delegate:
-        return DelegateParser(amount, parserConfig.instruction, this.processor);
+        return DelegateParser(
+          amount,
+          parserConfig.instruction,
+          this.processor,
+        );
         break;
       case Strategy.html__mixed__select_delegate:
         return SelectDelegateParser(
-            amount, parserConfig.instruction, this.processor);
+          amount,
+          parserConfig.instruction,
+          this.processor,
+        );
         break;
     }
     return null;

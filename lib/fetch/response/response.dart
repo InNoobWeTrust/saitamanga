@@ -1,39 +1,40 @@
 import 'dart:async' show Stream;
+import 'dart:convert' show JsonEncoder;
+
+import 'package:json_annotation/json_annotation.dart'
+    show JsonSerializable, JsonKey, FieldRename;
 
 import '../request/request.dart' show Request;
+import '../metadata/metadata.dart' show Metadata;
 
+part 'response.g.dart';
+
+/// Advanced response object to store more information
+@JsonSerializable(
+  includeIfNull: false,
+  fieldRename: FieldRename.snake,
+)
 class Response {
   final Request request;
-  Map<String, String> headers;
-  Stream<List<int>> data;
-  Map<String, dynamic> metadata;
+  final Map<String, String> headers;
+  final Metadata metadata;
+  @JsonKey(
+    ignore: true,
+  )
+  final Stream<List<int>> data;
 
-  Response(this.request, this.data, {this.headers, this.metadata});
+  Response(
+    this.request, {
+    this.headers = const <String, String>{},
+    this.metadata = null,
+    this.data = const Stream.empty(),
+  });
 
-  Response setHeaders(Map<String, String> headers) => this..headers = headers;
+  factory Response.fromJson(Map<String, dynamic> json) =>
+      _$ResponseFromJson(json);
 
-  Response addHeaders(Map<String, String> headers) => this
-    ..headers ??= <String, String>{}
-    ..headers.addAll(headers);
+  Map<String, dynamic> toJson() => _$ResponseToJson(this);
 
-  Response addHeaderEntry(MapEntry<String, String> headerEntry) => this
-    ..headers ??= <String, String>{}
-    ..headers.addEntries([headerEntry]);
-
-  Response addHeader(String name, String value) =>
-      this..addHeaderEntry(MapEntry(name, value));
-
-  Response setMetadata(Map<String, dynamic> metadata) =>
-      this..metadata = metadata;
-
-  Response addAllMetadata(Map<String, dynamic> metadata) => this
-    ..metadata ??= <String, dynamic>{}
-    ..metadata.addAll(metadata);
-
-  Response addMetadataEntry(MapEntry<String, dynamic> metadataEntry) => this
-    ..metadata ??= <String, dynamic>{}
-    ..metadata.addEntries([metadataEntry]);
-
-  Response addMetadata(String name, dynamic value) =>
-      this..addMetadataEntry(MapEntry<String, dynamic>(name, value));
+  @override
+  String toString() => JsonEncoder.withIndent('  ').convert(this.toJson());
 }

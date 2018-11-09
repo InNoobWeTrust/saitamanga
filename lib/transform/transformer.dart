@@ -23,16 +23,23 @@ class Transformer {
   /// on runtime with low memory when use parsers with alot distinct
   /// [PreprocessType]
   Stream<ParseProduct> transform(
-      String rawData, Map<String, dynamic> metadata) async* {
+    String rawData,
+    Map<String, dynamic> metadata,
+  ) async* {
     final Map<PreprocessType, dynamic> cache = <PreprocessType, dynamic>{};
     for (ParseElementConfig element in viewConfig.elements) {
       final dynamic preprocessed = cache.putIfAbsent(
           element.preprocessType,
           () => PreProcessor.preprocess(
-              rawData,
-              element.preprocessType ?? viewConfig.defaultPreprocessType,
-              metadata));
-      yield await Parser.parse(element, preprocessed, strategist);
+                rawData,
+                element.preprocessType ?? viewConfig.defaultPreprocessType,
+                metadata,
+              ));
+      yield await Parser.parse(
+        element,
+        preprocessed,
+        strategist,
+      );
     }
   }
 }

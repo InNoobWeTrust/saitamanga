@@ -7,14 +7,24 @@ import 'package:json_annotation/json_annotation.dart'
 
 part 'dom_creator.g.dart';
 
-@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
+@JsonSerializable(
+  includeIfNull: false,
+  fieldRename: FieldRename.snake,
+)
 class DomCreator {
-  @JsonKey(nullable: false)
+  @JsonKey(
+    nullable: false,
+  )
   final String encoding;
-  @JsonKey(nullable: true, defaultValue: 'utf-8')
+  @JsonKey(
+    defaultValue: 'utf-8',
+  )
   final String baseUri;
 
-  DomCreator(this.baseUri, this.encoding);
+  DomCreator(
+    this.baseUri,
+    this.encoding,
+  );
 
   factory DomCreator.fromJson(Map<String, dynamic> json) =>
       _$DomCreatorFromJson(json);
@@ -23,7 +33,11 @@ class DomCreator {
 
   Document generateDOM(String html) {
     if (!(html is String) || html.isEmpty) return null;
-    return parse(html, encoding: this.encoding, sourceUrl: this.baseUri);
+    return parse(
+      html,
+      encoding: this.encoding,
+      sourceUrl: this.baseUri,
+    );
   }
 
   @override

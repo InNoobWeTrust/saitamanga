@@ -6,16 +6,23 @@ import 'package:json_annotation/json_annotation.dart'
 part 'selector_instruction.g.dart';
 
 /// Instruction on how to select the right HTML Node
-@JsonSerializable(includeIfNull: false, nullable: false)
+@JsonSerializable(
+  includeIfNull: false,
+  nullable: false,
+)
 class SelectorInstruction {
-  @JsonKey()
   final String selector;
-  @JsonKey()
   final String attribute;
-  @JsonKey(name: "alternate_attribute")
+  @JsonKey(
+    name: "alternate_attribute",
+  )
   final String alternateAttribute;
 
-  SelectorInstruction(this.selector, this.attribute, this.alternateAttribute);
+  SelectorInstruction(
+    this.selector,
+    this.attribute,
+    this.alternateAttribute,
+  );
 
   factory SelectorInstruction.fromJson(Map<String, dynamic> json) =>
       _$SelectorInstructionFromJson(json);

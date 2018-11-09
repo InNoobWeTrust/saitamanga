@@ -9,7 +9,10 @@ import './const/preprocess_type.dart' show PreprocessType;
 class PreProcessor {
   /// Preprocess the [data] to the desired type before transforming
   static dynamic preprocess(
-      String data, PreprocessType type, Map<String, dynamic> metadata) {
+    String data,
+    PreprocessType type,
+    Map<String, dynamic> metadata,
+  ) {
     switch (type) {
       case PreprocessType.xml:
         throw Exception('Unimplemented preprocess target!');
@@ -19,7 +22,13 @@ class PreProcessor {
         break;
       case PreprocessType.yaml:
         return json.decode(
-            json.encode(loadYaml(data, sourceUrl: metadata['base_url'])));
+          json.encode(
+            loadYaml(
+              data,
+              sourceUrl: metadata['base_url'],
+            ),
+          ),
+        );
         break;
       case PreprocessType.dom:
         return DomCreator.fromJson(metadata).generateDOM(data);

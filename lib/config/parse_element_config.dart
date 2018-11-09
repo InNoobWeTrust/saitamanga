@@ -12,28 +12,37 @@ import './const/sort.dart' show Sort;
 part 'parse_element_config.g.dart';
 
 /// The single element to represent distinct interested data
-@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
+@JsonSerializable(
+  includeIfNull: false,
+  fieldRename: FieldRename.snake,
+)
 class ParseElementConfig {
-  @JsonKey(nullable: true)
   final Id id;
-  @JsonKey(nullable: true)
   final String name;
-  @JsonKey(nullable: true)
   final String target;
-  @JsonKey(nullable: true)
   final PreprocessType preprocessType;
-  @JsonKey(nullable: false)
+  @JsonKey(
+    nullable: false,
+  )
   final Amount amount;
-  @JsonKey(nullable: true)
   final Sort sort;
-  @JsonKey(nullable: true)
   final String icon;
-  @JsonKey(nullable: false, name: 'parsers')
+  @JsonKey(
+    nullable: false,
+    name: 'parsers',
+  )
   final List<ParserConfig> parserConfigs;
 
-  ParseElementConfig(this.id, this.name, this.target, this.preprocessType,
-      this.amount, this.icon, this.parserConfigs,
-      {this.sort = Sort.asc});
+  ParseElementConfig(
+    this.id,
+    this.name,
+    this.target,
+    this.preprocessType,
+    this.amount,
+    this.icon,
+    this.parserConfigs, {
+    this.sort = Sort.asc,
+  });
 
   factory ParseElementConfig.fromJson(Map<String, dynamic> json) =>
       _$ParseElementConfigFromJson(json);
@@ -41,7 +50,5 @@ class ParseElementConfig {
   Map<String, dynamic> toJson() => _$ParseElementConfigToJson(this);
 
   @override
-  String toString() {
-    return JsonEncoder.withIndent('  ').convert(toJson());
-  }
+  String toString() => JsonEncoder.withIndent('  ').convert(toJson());
 }

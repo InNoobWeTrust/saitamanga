@@ -6,9 +6,14 @@ import 'package:json_annotation/json_annotation.dart'
 part 'info_config.g.dart';
 
 /// The information of current [View]
-@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake)
+@JsonSerializable(
+  includeIfNull: false,
+  fieldRename: FieldRename.snake,
+)
 class InfoConfig {
-  @JsonKey(nullable: false)
+  @JsonKey(
+    nullable: false,
+  )
   final String name;
 
   InfoConfig(this.name);
