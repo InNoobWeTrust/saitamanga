@@ -1,5 +1,5 @@
 /// The HTTP request method
-/// 
+///
 /// Currently only popular methods are allowed:
 ///   - GET
 ///   - PUT

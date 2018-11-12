@@ -1,7 +1,7 @@
 import 'dart:io' show Process, stdout, stderr;
 
-void main() {
-  Process.start(
+void main() async {
+  await Process.start(
     'pub',
     [
       'run',

@@ -10,13 +10,18 @@ import './query/query.dart' show Query;
 part 'request.g.dart';
 
 /// Advanced request object to store more information
-@JsonSerializable(includeIfNull: false, fieldRename: FieldRename.snake,)
+@JsonSerializable(
+  includeIfNull: false,
+  fieldRename: FieldRename.snake,
+)
 class Request {
   final Uri rawLink;
   final Map<String, String> headers;
   final Query query;
   final Metadata metadata;
-  @JsonKey(ignore: true,)
+  @JsonKey(
+    ignore: true,
+  )
   final Stream<List<int>> data;
 
   /// Generate the query parameters for [rawLink] using [query] field

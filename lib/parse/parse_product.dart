@@ -1,7 +1,7 @@
 import 'dart:convert' show JsonEncoder;
 
 import 'package:json_annotation/json_annotation.dart'
-    show JsonSerializable, FieldRename, JsonKey;
+    show JsonSerializable, FieldRename;
 
 import '../config/const/id.dart' show Id;
 

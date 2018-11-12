@@ -1,11 +1,12 @@
-import 'dart:io' show Process, stdout, stderr, Directory;
+import 'dart:io' show Process, stdout, stderr, Directory, Platform;
 
-void main() {
-  Process.start(
+void main() async {
+  await Process.start(
     'dartfmt',
     [
       '-w',
-      Directory.current.parent.absolute.path,
+      '--fix',
+      Directory.fromUri(Platform.script).parent.parent.absolute.path
     ],
   ).then(
     (process) {

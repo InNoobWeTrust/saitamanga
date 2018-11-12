@@ -1,4 +1,4 @@
-import 'dart:convert' show json, utf8;
+import 'dart:convert' show utf8;
 
 import 'package:test/test.dart';
 import 'package:http/http.dart';
@@ -6,20 +6,23 @@ import 'package:resource/resource.dart';
 import 'package:yaml/yaml.dart';
 
 void main() {
-  // test("Test json reading", () async {
-  //   final String source = await (Resource('./test/test_data/source.json'))
-  //       .readAsString(encoding: utf8);
-  //   final Map sourceMap = json.decode(source);
-  //   print(sourceMap);
-  //   expect(
-  //     sourceMap,
-  //     isNotEmpty,
-  //   );
-  // });
+  test("Test json reading", () async {
+    final String source = await Resource(
+      './test/test_data/source.json',
+    ).readAsString(encoding: utf8);
+    final YamlMap sourceMap = loadYaml(
+      source,
+    );
+    print(sourceMap);
+    expect(
+      sourceMap,
+      isNotEmpty,
+    );
+  });
   test("Test yaml reading", () async {
-    final String source = await (Resource(
+    final String source = await Resource(
       './test/test_data/source.yaml',
-    ).readAsString(encoding: utf8));
+    ).readAsString(encoding: utf8);
     final YamlMap sourceMap = loadYaml(
       source,
     );
