@@ -2,21 +2,20 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "tasks": [
-        {
+    "tasks": [{
             "label": "build_runner watch",
             "type": "shell",
-            "command": "dart tool/watch_source.dart"
+            "command": "pub run build_runner watch --delete-conflicting-outputs --low-resources-mode",
         },
         {
             "label": "build_runner build",
             "type": "shell",
-            "command": "dart tool/build_source.dart"
+            "command": "pub run build_runner build --delete-conflicting-outputs --low-resources-mode"
         },
         {
             "label": "dartfmt",
             "type": "shell",
-            "command": "dart tool/format_source.dart"
+            "command": "dartfmt -w --fix ."
         },
     ]
 }
