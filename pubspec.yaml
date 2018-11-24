@@ -1,7 +1,7 @@
-name: saitamanga_core.dart
+name: saitamanga_core
 version: 0.0.1
 author: InNoobWeTrust <InNoobWeTrust@gmail.com>
-description: A new cross-platform project
+description: Core library for SAITAMAnga project, a cross-platform & performance focused manga-reader.
 
 environment:
   sdk: '>=2.0.0-dev.58 <3.0.0'
